@@ -37,11 +37,12 @@
 
 #ifndef ARQUIVO
 	#define ARQUIVO
-	typedef struct Arquivo
+	struct Arquivo
 	{
 		char **linha;
 		int linhas;
-	}arquivo;
+	};
+	typedef struct Arquivo arquivo;
 #endif
 
 typedef enum BOOL{false=0,true=1}bool;
@@ -50,31 +51,36 @@ typedef unsigned char uchar;
 
 typedef unsigned long long int lint;
 
-typedef struct PONTO{
+struct PONTO{
 	int x, y;
-}ponto;
+};
+typedef struct PONTO ponto;
 
-typedef struct RGB
+struct RGB
 {
 	uchar r,g,b;
-}rgb;
+};
+typedef struct RGB rgb;
 
-typedef struct Arvbin{
+struct Arvbin{
 	int x;
 	struct Arvbin *e,*d;
-}arvb;
+};
+typedef struct Arvbin arvb;
 
-typedef struct LISTA_PONTO
+struct LISTA_PONTO
 {
 	ponto p;
 	struct LISTA_PONTO *prox;
-}lista_p;
+};
+typedef struct LISTA_PONTO lista_p;
 
-typedef struct LISTA_PONTO_DUPLA
+struct LISTA_PONTO_DUPLA
 {
 	ponto p;
 	struct LISTA_PONTO_DUPLA *prox, *ant;
-}lista_p2;
+};
+typedef struct LISTA_PONTO_DUPLA lista_p2;
 
 struct LINHA
 {
@@ -83,45 +89,50 @@ struct LINHA
 
 typedef struct LINHA * linha;
 
-typedef struct nodecor{
+struct nodecor{
 	rgb cor;
 	struct nodecor *prox, *ant;
-}nocor;
+};
+typedef struct nodecor nocor;
 
-typedef struct listcor{
+struct listcor{
     nocor *fim,*ini;
     int n;
-}lista_cor;
+};
+typedef struct listcor lista_cor;
 
 typedef lista_cor* listacor;
 
-typedef struct cabecalhoPPM{
+struct cabecalhoPPM{
 	int largura, altura, max;
 	char key[3];
-}*cppm;
+};
+typedef struct cabecalhoPPM *cppm;
 
-typedef struct QT{
-	struct QT *raiz;
-	int x,y;
-	struct QT *lft,*rgt,*up,*dwn;
-}qt;
+// typedef struct QT{
+// 	struct QT *raiz;
+// 	int x,y;
+// 	struct QT *lft,*rgt,*up,*dwn;
+// }qt;
 
-typedef struct QUADTREE{
-	qt *raiz;
-	rgb cor;
-}quadtree;
+// typedef struct QUADTREE{
+// 	qt *raiz;
+// 	rgb cor;
+// }quadtree;
 
-typedef struct PPM
+struct PPM
 {
 	cppm cab;
 	rgb **cor;
-}*ppm;
+};
+typedef struct PPM *ppm;
 
-typedef struct poligono
+struct poligono
 {
 	lista_p2 *prim;
 	ponto *centro;
-}poligon;
+};
+typedef struct poligono poligon;
 
 //manipulacao basica
 int pot(int x, int e);
@@ -189,14 +200,14 @@ void libera_lista_p2(lista_p2 *l);
 	void rmv_poligono(poligon *pol, ponto p);
 	void libera_poligono(poligon *pol);
 	//quadtree
-	quadtree cria_quadtree(rgb cor, int x, int y);
-	qt *cria_raiz_qt(int x, int y);
-	qt *cria_ramo_qt(int x, int y, qt *lft,qt *rgt,qt *up,qt *dwn);
-	qt *busca_no_qt(int x, int y, qt *raiz);
-	qt *bfqt(int x, int y, qt *ramo);
-	void merge_ramo_qt(qt *ramo1, qt *ramo2,char dir);
-	void libera_qt(qt *a);
-	void libera_quadtree(quadtree q);
+	// quadtree cria_quadtree(rgb cor, int x, int y);
+	// qt *cria_raiz_qt(int x, int y);
+	// qt *cria_ramo_qt(int x, int y, qt *lft,qt *rgt,qt *up,qt *dwn);
+	// qt *busca_no_qt(int x, int y, qt *raiz);
+	// qt *bfqt(int x, int y, qt *ramo);
+	// void merge_ramo_qt(qt *ramo1, qt *ramo2,char dir);
+	// void libera_qt(qt *a);
+	// void libera_quadtree(quadtree q);
 
 //manipulacao com efeitos
 ppm decomp(ppm cab, bool r, bool g, bool b);

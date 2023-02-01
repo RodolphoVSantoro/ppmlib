@@ -3,18 +3,20 @@
 
 #ifndef ARQUIVO
 	#define ARQUIVO
-	typedef struct Arquivo
+	struct Arquivo
 	{
 		char **linha;
 		int linhas;
-	}arquivo;
+	};
+	typedef struct Arquivo arquivo;
 #endif
 
-typedef struct list_char
+struct list_char
 {
 	char c;
 	struct list_char *prox;
-}lchar;
+};
+typedef struct list_char lchar;
 
 struct FILACHAR
 {
