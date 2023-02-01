@@ -124,6 +124,7 @@ typedef struct poligono
 }poligon;
 
 //manipulacao basica
+int pot(int x, int e);
 void strcop(char *dest, char *ori);
 int strcomp(char *s1, char *s2);
 int aprox(float val);
@@ -209,7 +210,7 @@ ppm blurgauss(ppm img, int tamanhokernel);
 int **mint(int tamanhokernel);
 ppm blurmint(ppm img, int tamanhokernel);
 ppm amplia(ppm imagem, int zoom);
-ppm espelhar(ppm img);
+// ppm espelhar(ppm img);
 ppm join(ppm img, ppm img2);
 ppm merge(ppm img, ppm img2);
 ppm overlay(ppm img, ppm img2);

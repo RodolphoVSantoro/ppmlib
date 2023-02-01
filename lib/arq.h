@@ -16,15 +16,19 @@ typedef struct list_char
 	struct list_char *prox;
 }lchar;
 
-typedef struct FILACHAR
+struct FILACHAR
 {
 	lchar *ini,*fim;
-}*fchar;
+};
 
-typedef struct PILHACHAR
+typedef struct FILACHAR *fchar;
+
+struct PILHACHAR
 {
 	lchar *top;
-}*pchar;
+};
+
+typedef struct PILHACHAR *pchar;
 
 arquivo cria_arq(int Numlinhas);
 arquivo leitura_arq(char nome[]);
