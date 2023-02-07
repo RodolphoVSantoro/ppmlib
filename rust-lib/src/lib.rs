@@ -15,7 +15,7 @@ pub struct Image {
 }
 
 #[no_mangle]
-pub fn load_image(path: *const u8) -> Image {
+pub extern "C" fn load_image(path: *const u8) -> Image {
     let path = unsafe { std::ffi::CStr::from_ptr(path as *const i8) };
     let path = path.to_str().unwrap();
 
