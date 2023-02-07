@@ -70,7 +70,7 @@ arquivo leitura_arq(char nome[]){
 }
 
 void escrita(char fname[], arquivo f){
-	int x,y;
+	int x;
 	FILE *arq=s_fopen(fname,"w");
 	for(x=0;x<f.linhas-1;x++)
 		fprintf(arq, "%s\n", f.linha[x]);

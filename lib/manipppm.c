@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "ppmlib.h"
+#include "arq.h"
 
 static FILE* fopen_s(char fname[], char modo[])
 {
@@ -212,17 +213,17 @@ ppm amplia(ppm imagem, int zoom)
 	return r;
 }
 
-ppm espelhar(ppm img)
-{
-	ppm r;
-	r->cab = copia_cab(img->cab);
-	int i, j;
-	r->cor = rgb_malloc(r->cab);
-	for (i = 0; i< img->cab->altura; i++)
-		for (j = 0; j < img->cab->largura; j++)
-			r->cor[i][j] = img->cor[i][img->cab->largura - j - 1];
-	return r;
-}
+// ppm espelhar(ppm img)
+// {
+// 	ppm r = cria_ppm(100, 100, verde2);
+// 	r->cab = copia_cab(img->cab);
+// 	int i, j;
+// 	r->cor = rgb_malloc(r->cab);
+// 	for (i = 0; i< img->cab->altura; i++)
+// 		for (j = 0; j < img->cab->largura; j++)
+// 			r->cor[i][j] = img->cor[i][img->cab->largura - j - 1];
+// 	return r;
+// }
 
 ppm join(ppm img, ppm img2)
 {
@@ -384,7 +385,6 @@ void grava_blur(char fname[], ppm img, int **ker, int tamanhokernel)
 	int i, j, a, b, n, k;
 	rgb c;
     float mediar, mediag, mediab;
-	int val = 0;
 	fprintf(arq, "P3\n%d %d %d\n", img->cab->largura, img->cab->altura, img->cab->max);
     for (i = 0; i < img->cab->altura; i++)
     {
@@ -520,9 +520,9 @@ void mod_blurmint(ppm *img, int tamanhokernel)
 	*img = tmp;
 }
 
-void mod_espelha(ppm *img)
-{
-	ppm tmp = espelhar(*img);
-	libera_ppm(*img);
-	*img = tmp;
-}
+// void mod_espelha(ppm *img)
+// {
+// 	ppm tmp = espelhar(*img);
+// 	libera_ppm(*img);
+// 	*img = tmp;
+// }

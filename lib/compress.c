@@ -72,46 +72,46 @@ void cria_ramos(int x, int y, qt *ramo, qt ***raizes, ppm img){
 
 }
 
-void cria_raizes(qt ***raizes, ppm img, int x, int y){
-	qt *raiz = cria_raiz_qt(x,y);
-	raizes[x][y]=raiz;
-	if(corcmp(img->cor[x][y],img->cor[x][y-1])){
-		if(y-1>0 && raizes[x][y-1]==NULL){
-				qt *r=cria_ramo_qt(x, y-1, NULL, raiz, NULL, NULL);
-				raizes[x][y-1]=raiz;
-				cria_ramos(x,y-1,r,raizes,img);
-		}
-		else{
-			if(raizes[x][y-1]==raizes[x][y]){
+// void cria_raizes(qt ***raizes, ppm img, int x, int y){
+// 	qt *raiz = cria_raiz_qt(x,y);
+// 	raizes[x][y]=raiz;
+// 	if(corcmp(img->cor[x][y],img->cor[x][y-1])){
+// 		if(y-1>0 && raizes[x][y-1]==NULL){
+// 				qt *r=cria_ramo_qt(x, y-1, NULL, raiz, NULL, NULL);
+// 				raizes[x][y-1]=raiz;
+// 				cria_ramos(x,y-1,r,raizes,img);
+// 		}
+// 		else{
+// 			if(raizes[x][y-1]==raizes[x][y]){
 
-			}
-			else{
-				if()
-			}
-		}
-	}
-	if(y+1<img->cab->altura && raizes[x][y+1]==NULL){
-		if(img->cor[x][y]==raizes[x][y+1]){
-			qt *r=cria_ramo_qt(x, y+1, NULL, raiz, NULL, NULL);
-			raizes[x][y+1]=raiz;
-			cria_ramos(x,y+1,r,raizes,img);
-		}
-	}
-	if(x-1>0 && raizes[x-1][y]==NULL){
-		if(img->cor[x][y]==raizes[x-1][y]){
-			qt *r=cria_ramo_qt(x-1, y, NULL, raiz, NULL, NULL);
-			raizes[x-1][y]=raiz;
-			cria_ramos(x-1,y,r,raizes,img);
-		}
-	}
-	if(x+1<img->cab->largura && raizes[x+1][y]==NULL){
-		if(img->cor[x][y]==raizes[x+1][y]){
-			qt *r=cria_ramo_qt(x+1, y, NULL, raiz, NULL, NULL);
-			raizes[x+1][y]=raiz;
-			cria_ramos(x+1,y,r,raizes,img);
-		}
-	}
-}
+// 			}
+// 			else{
+// 				if()
+// 			}
+// 		}
+// 	}
+// 	if(y+1<img->cab->altura && raizes[x][y+1]==NULL){
+// 		if(img->cor[x][y]==raizes[x][y+1]){
+// 			qt *r=cria_ramo_qt(x, y+1, NULL, raiz, NULL, NULL);
+// 			raizes[x][y+1]=raiz;
+// 			cria_ramos(x,y+1,r,raizes,img);
+// 		}
+// 	}
+// 	if(x-1>0 && raizes[x-1][y]==NULL){
+// 		if(img->cor[x][y]==raizes[x-1][y]){
+// 			qt *r=cria_ramo_qt(x-1, y, NULL, raiz, NULL, NULL);
+// 			raizes[x-1][y]=raiz;
+// 			cria_ramos(x-1,y,r,raizes,img);
+// 		}
+// 	}
+// 	if(x+1<img->cab->largura && raizes[x+1][y]==NULL){
+// 		if(img->cor[x][y]==raizes[x+1][y]){
+// 			qt *r=cria_ramo_qt(x+1, y, NULL, raiz, NULL, NULL);
+// 			raizes[x+1][y]=raiz;
+// 			cria_ramos(x+1,y,r,raizes,img);
+// 		}
+// 	}
+// }
 
 void ppmTorppm(char fname[], ppm img){
 	int mx=img->cab->altura/2;
@@ -120,7 +120,7 @@ void ppmTorppm(char fname[], ppm img){
 	qt ***raizes = (qt***)malloc(sizeof(qt**)*img->cab->altura);
 	for(i=0;i<img->cab->altura;i++){
 		raizes[i]=(qt**)malloc(sizeof(qt*)*img->cab->largura);
-		for(j=0;j<img->cab->largura){
+		for(j=0; j<img->cab->largura; j++){
 			raizes[i][j]=NULL;
 		}
 	}

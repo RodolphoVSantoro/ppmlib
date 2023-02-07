@@ -203,7 +203,6 @@ cppm copia_cab(cppm cab)
 
 void libera_ppm(ppm img)
 {
-	int i;
 	libera_rgb2d(img);
 	free(img->cab);
 	img->cab=NULL;
@@ -374,8 +373,9 @@ int cores_dif(ppm img){
 	for(i=0;i<img->cab->altura;i++)
     	for(j=0;j<img->cab->largura;j++)
     		cores[rgb2num(img->cor[i][j])] = 1;
-    for(i=0;i<16777216;i++)
+    for(i=0;i<16777216;i++) {
     	total+=cores[i];
+	}
 	free(cores);
 	return total;
 }
