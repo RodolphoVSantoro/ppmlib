@@ -7,6 +7,7 @@
 # Unignore all dirs
 !*/
 
+/imgs
 Cargo.lock
 target
 .vscode
