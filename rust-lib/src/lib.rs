@@ -1,6 +1,7 @@
 use image::GenericImageView;
 use std::{
     ffi::{c_uchar, c_uint},
+    mem,
     os::raw::c_char,
 };
 #[repr(C)]
@@ -47,18 +48,18 @@ pub extern "C" fn load_image(path: *const c_char) -> Image {
     }
     pixels.shrink_to_fit();
 
-    let mut pixels = pixels
-        .into_iter()
-        .map(|row| {
-            let mut row = row.into_boxed_slice();
-            let ptr = row.as_mut_ptr();
-            std::mem::forget(row);
-            ptr
-        })
-        .collect::<Vec<_>>();
+    let mut pixels = mem::ManuallyDrop::new(
+        pixels
+            .into_iter()
+            .map(|row| {
+                let mut row = mem::ManuallyDrop::new(row.into_boxed_slice());
+                let ptr = row.as_mut_ptr();
+                ptr
+            })
+            .collect::<Vec<_>>(),
+    );
 
     let ptr = pixels.as_mut_ptr();
-    std::mem::forget(pixels);
 
     Image {
         pixels: ptr,
