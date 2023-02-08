@@ -1,23 +1,27 @@
 use image::GenericImageView;
-
+use std::{
+    ffi::{c_uchar, c_uint},
+    os::raw::c_char,
+};
 #[repr(C)]
 pub struct RGB {
-    pub red: u8,
-    pub green: u8,
-    pub blue: u8,
+    pub red: c_uchar,
+    pub green: c_uchar,
+    pub blue: c_uchar,
 }
 
 #[repr(C)]
 pub struct Image {
     pub pixels: *mut *mut RGB,
-    pub width: u32,
-    pub height: u32,
+    pub width: c_uint,
+    pub height: c_uint,
 }
 
 #[no_mangle]
-pub extern "C" fn load_image(path: *const u8) -> Image {
-    let path = unsafe { std::ffi::CStr::from_ptr(path as *const i8) };
-    let path = path.to_str().unwrap();
+pub extern "C" fn load_image(path: *const c_char) -> Image {
+    let path = unsafe { std::ffi::CStr::from_ptr(path) };
+    println!("{:?}", path);
+    let path = path.to_str().expect("Invalid path");
 
     let image = image::open(path).unwrap();
 
@@ -38,6 +42,11 @@ pub extern "C" fn load_image(path: *const u8) -> Image {
         }
         pixels.push(row);
     }
+
+    for row in pixels.iter_mut() {
+        row.shrink_to_fit();
+    }
+    pixels.shrink_to_fit();
 
     let mut pixels = pixels
         .into_iter()
@@ -60,17 +69,23 @@ pub extern "C" fn load_image(path: *const u8) -> Image {
 }
 
 #[no_mangle]
-pub fn add_numbers(a: i32, b: i32) -> i32 {
-    a + b
-}
+pub extern "C" fn drop_image(image: Image) {
+    let pixels: *mut *mut RGB = image.pixels;
+    let height = image.height as usize;
+    let width = image.width as usize;
 
-// #[no_mangle]
-// pub extern "C" fn add(name: *mut *mut u8, age: u8) -> Person {
-//     unsafe {
-//         println!("Hello, world! {:#?} {}", **name, age);
-//     }
-//     Person { name, age }
-// }
+    let rows = unsafe { Vec::from_raw_parts(pixels, height, height) };
+
+    for row in rows {
+        unsafe {
+            let vec = Vec::from_raw_parts(row, width, width);
+
+            std::mem::drop(vec);
+        }
+    }
+
+    println!("Dropped image");
+}
 
 // #[cfg(test)]
 // mod tests {
