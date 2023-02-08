@@ -20,7 +20,6 @@ pub struct Image {
 #[no_mangle]
 pub extern "C" fn load_image(path: *const c_char) -> Image {
     let path = unsafe { std::ffi::CStr::from_ptr(path) };
-    println!("{:?}", path);
     let path = path.to_str().expect("Invalid path");
 
     let image = image::open(path).unwrap();
