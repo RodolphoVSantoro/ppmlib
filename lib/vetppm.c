@@ -3,57 +3,57 @@
 void vetorial_retangulo(Poligono *poligono, Ponto centro, int altura, int largura) {
     poligono_esvazia(poligono);
     *(poligono->centro) = centro;
-    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y - largura / 2));
-    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y + largura / 2));
-    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y + largura / 2));
-    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y - largura / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x - altura / 2, centro.y - largura / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x - altura / 2, centro.y + largura / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x + altura / 2, centro.y + largura / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x + altura / 2, centro.y - largura / 2));
 }
 
 void vetorial_triangulo(Poligono *poligono, Ponto centro, int altura, int base) {
     poligono_esvazia(poligono);
     *(poligono->centro) = centro;
-    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y - base / 2));
-    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y));
-    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y + base / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x + altura / 2, centro.y - base / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x - altura / 2, centro.y));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x + altura / 2, centro.y + base / 2));
 }
 
 void vetorial_losango(Poligono *poligono, Ponto centro, int altura, int largura) {
     poligono_esvazia(poligono);
     *(poligono->centro) = centro;
-    poligono_insere(poligono, ponto_cria(centro.x, centro.y - largura / 2));
-    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y));
-    poligono_insere(poligono, ponto_cria(centro.x, centro.y + largura / 2));
-    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x, centro.y - largura / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x - altura / 2, centro.y));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x, centro.y + largura / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x + altura / 2, centro.y));
 }
 
 void vetorial_trapezio(Poligono *poligono, Ponto centro, int base1, int base2, int altura) {
     poligono_esvazia(poligono);
     *(poligono->centro) = centro;
-    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y - base1 / 2));
-    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y + base1 / 2));
-    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y + base2 / 2));
-    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y - base2 / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x - altura / 2, centro.y - base1 / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x - altura / 2, centro.y + base1 / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x + altura / 2, centro.y + base2 / 2));
+    poligono_insere(poligono, Ponto_cria_estatico(centro.x + altura / 2, centro.y - base2 / 2));
 }
 
 void vetorial_estrela(Poligono *poligono, Ponto ponto, int x, int y) {
     poligono_esvazia(poligono);
     *(poligono->centro) = ponto;
-    poligono_insere(poligono, ponto_cria(ponto.x - x, ponto.y));
-    poligono_insere(poligono, ponto_cria(ponto.x - x / 2, ponto.y - y / 3));
-    poligono_insere(poligono, ponto_cria(ponto.x - x / 2, ponto.y - y));
-    poligono_insere(poligono, ponto_cria(ponto.x, ponto.y - 2 * y / 3));
-    poligono_insere(poligono, ponto_cria(ponto.x + x / 2, ponto.y - y));
-    poligono_insere(poligono, ponto_cria(ponto.x + x / 2, ponto.y - y / 3));
-    poligono_insere(poligono, ponto_cria(ponto.x + x, ponto.y));
-    poligono_insere(poligono, ponto_cria(ponto.x + x / 2, ponto.y + y / 3));
-    poligono_insere(poligono, ponto_cria(ponto.x + x / 2, ponto.y + y));
-    poligono_insere(poligono, ponto_cria(ponto.x, ponto.y + 2 * y / 3));
-    poligono_insere(poligono, ponto_cria(ponto.x - x / 2, ponto.y + y));
-    poligono_insere(poligono, ponto_cria(ponto.x - x / 2, ponto.y + y / 3));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x - x, ponto.y));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x - x / 2, ponto.y - y / 3));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x - x / 2, ponto.y - y));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x, ponto.y - 2 * y / 3));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x + x / 2, ponto.y - y));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x + x / 2, ponto.y - y / 3));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x + x, ponto.y));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x + x / 2, ponto.y + y / 3));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x + x / 2, ponto.y + y));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x, ponto.y + 2 * y / 3));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x - x / 2, ponto.y + y));
+    poligono_insere(poligono, Ponto_cria_estatico(ponto.x - x / 2, ponto.y + y / 3));
 }
 
 void vetorial_translada(Poligono *poligono, int vertical, int horizontal) {
-    *(poligono->centro) = ponto_cria(poligono->centro->x + vertical, poligono->centro->y + horizontal);
+    *(poligono->centro) = Ponto_cria_estatico(poligono->centro->x + vertical, poligono->centro->y + horizontal);
     ListaDuplaPonto *cursor = poligono->primeiro;
     while (cursor != NULL) {
         cursor->ponto.x += vertical;

@@ -1,581 +1,611 @@
 #include "ppmlib.h"
 
-void escreve_strCor(ppm img, char s[], ponto o, int font_size, rgb cor){
-	int i;
-	ponto per=o;
-	for(i=0;s[i]!=0;i++){
-		escreve_charCor(img,s[i],per,font_size, cor);
-		if(per.y+font_size*10>img->cab->largura){
-			if(s[i+1]!=0 && s[i+1]!=' '){
-				per.y+=font_size*4;
-				escreve_hifenCor(img,per,font_size,cor);
-			}
-			per.y=o.y;
-			per.x+=font_size*8;
+void fonte_escreve_string_cor(PPM imagem, char string[], Ponto origem, int tamanho_fonte, rgb cor) {
+    Ponto cursor = origem;
+    for (int i = 0; string[i] != 0; i++) {
+        fonte_escreve_char_cor(imagem, string[i], cursor, tamanho_fonte, cor);
 
-		}
-		else
-			per.y+=font_size*4;
-	}
+        if (cursor.y + tamanho_fonte * 10 > imagem->cabecalho->tamanho->largura) {
+            if (string[i + 1] != 0 && string[i + 1] != ' ') {
+                cursor.y += tamanho_fonte * 4;
+                escreve_hifen_cor(imagem, cursor, tamanho_fonte, cor);
+            }
+            cursor.y = origem.y;
+            cursor.x += tamanho_fonte * 8;
+
+        } else {
+            cursor.y += tamanho_fonte * 4;
+        }
+    }
 }
 
-void escreve_charCor(ppm img, char c, ponto o, int size, rgb cor){
-	switch(c){
-		case 'a':
-		escreve_aCor(img,o,size,cor);
-		break;
-		case 'b':
-		escreve_bCor(img,o,size,cor);
-		break;
-		case 'c':
-		escreve_cCor(img,o,size,cor);
-		break;
-		case 'd':
-		escreve_dCor(img,o,size,cor);
-		break;
-		case 'e':
-		escreve_eCor(img,o,size,cor);
-		break;
-		case 'f':
-		escreve_fCor(img,o,size,cor);
-		break;
-		case 'g':
-		escreve_gCor(img,o,size,cor);
-		break;
-		case 'h':
-		escreve_hCor(img,o,size,cor);
-		break;
-		case 'i':
-		escreve_iCor(img,o,size,cor);
-		break;
-		case 'j':
-		escreve_jCor(img,o,size,cor);
-		break;
-		case 'k':
-		escreve_kCor(img,o,size,cor);
-		break;
-		case 'l':
-		escreve_lCor(img,o,size,cor);
-		break;
-		case 'm':
-		escreve_mCor(img,o,size,cor);
-		break;
-		case 'n':
-		escreve_nCor(img,o,size,cor);
-		break;
-		case 'o':
-		escreve_oCor(img,o,size,cor);
-		break;
-		case 'p':
-		escreve_pCor(img,o,size,cor);
-		break;
-		case 'q':
-		escreve_qCor(img,o,size,cor);
-		break;
-		case 'r':
-		escreve_rCor(img,o,size,cor);
-		break;
-		case 's':
-		escreve_sCor(img,o,size,cor);
-		break;
-		case 't':
-		escreve_tCor(img,o,size,cor);
-		break;
-		case 'u':
-		escreve_uCor(img,o,size,cor);
-		break;
-		case 'v':
-		escreve_vCor(img,o,size,cor);
-		break;
-		case 'x':
-		escreve_xCor(img,o,size,cor);
-		break;
-		case 'z':
-		escreve_zCor(img,o,size,cor);
-		break;
-		case 'S':
-		escreve_SCor(img,o,size,cor);
-		break;
-		case 'V':
-		escreve_VCor(img,o,size,cor);
-		break;
-	}
+void fonte_escreve_char_cor(PPM imagem, char c, Ponto origem, int tamanho_fonte, rgb cor) {
+    switch (c) {
+        case 'a':
+            escreve_a_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'b':
+            escreve_b_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'c':
+            escreve_c_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'd':
+            escreve_d_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'e':
+            escreve_e_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'f':
+            escreve_f_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'g':
+            escreve_g_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'h':
+            escreve_h_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'i':
+            escreve_i_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'j':
+            escreve_j_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'k':
+            escreve_k_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'l':
+            escreve_l_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'm':
+            escreve_m_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'n':
+            escreve_n_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'o':
+            escreve_o_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'p':
+            escreve_p_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'q':
+            escreve_q_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'r':
+            escreve_r_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 's':
+            escreve_s_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 't':
+            escreve_t_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'u':
+            escreve_u_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'v':
+            escreve_v_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'x':
+            escreve_x_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'z':
+            escreve_z_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'S':
+            escreve_S_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+        case 'V':
+            escreve_V_cor(imagem, origem, tamanho_fonte, cor);
+            break;
+    }
 }
 
 /*Minusculas*/
 
-//cor
+// cor
 
-void escreve_aCor(ppm img, ponto o, int size, rgb cor){
-	int t = 5*size;
-	ponto p[6];
-	p[0]=cria_ponto(o.x,o.y+2*t/5);
-	p[1]=cria_ponto(o.x+2*t/5,o.y+t/5);
-	p[2]=cria_ponto(o.x+t,o.y+2*t/5);
-	p[3]=cria_ponto(o.x+2*t/5,o.y+7*t/10);
-	p[4]=cria_ponto(o.x+4*t/5,o.y+4*t/5);
-	p[5]=cria_ponto(o.x+3*t/5,o.y+t+t/10);
-	desCurvaCor(img,p[1],p[0],p[3],cor);
-	desCurvaCor(img,p[1],p[2],p[3],cor);
-	desCurvaCor(img,p[3],p[4],p[5],cor);
+void fonte_escreve_a_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = 5 * tamanho_fonte;
+    Ponto ponto[] = {
+        Ponto_cria(origem.x, origem.y + 2 * escala / 5),
+        Ponto_cria(origem.x + 2 * escala / 5, origem.y + escala / 5),
+        Ponto_cria(origem.x + escala, origem.y + 2 * escala / 5),
+        Ponto_cria(origem.x + 2 * escala / 5, origem.y + 7 * escala / 10),
+        Ponto_cria(origem.x + 4 * escala / 5, origem.y + 4 * escala / 5),
+        Ponto_cria(origem.x + 3 * escala / 5, origem.y + escala + escala / 10),
+    };
+    desenha_curva_cor(imagem, ponto[1], ponto[0], ponto[3], cor);
+    desenha_curva_cor(imagem, ponto[1], ponto[2], ponto[3], cor);
+    desenha_curva_cor(imagem, ponto[3], ponto[4], ponto[5], cor);
 }
 
-void escreve_bCor(ppm img, ponto o, int size, rgb cor){
-	int t=4*size;
-	ponto p[11];
-	o.y+=t/5;
-	p[0]=cria_ponto(o.x+4*t/5,o.y);
-	p[1]=cria_ponto(o.x+t,o.y+t/10);
-	p[2]=cria_ponto(o.x+4*t/5,o.y+3*t/10);
-	p[3]=cria_ponto(o.x+t/5,o.y+3*t/5);
-	p[4]=cria_ponto(o.x,o.y+3*t/10);
-	p[5]=cria_ponto(o.x+t/5,o.y+t/10);
-	p[6]=cria_ponto(o.x+t,o.y+t/5);
-	p[7]=cria_ponto(o.x+4*t/5,o.y+4*t/5);
-	p[8]=cria_ponto(o.x+11*t/20,o.y+17*t/20);
-	p[9]=cria_ponto(o.x+t/2,o.y+7*t/10);
-	p[10]=cria_ponto(o.x+t/2,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[2],cor);
-	desCurvaCor(img,p[2],p[6],p[7],cor);
-	desCurvaCor(img,p[7],p[8],p[9],cor);
-	desCurvaCor(img,p[9],p[8],p[10],cor);
+void fonte_escreve_b_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = 4 * tamanho_fonte;
+    origem.y += escala / 5;
+    Ponto ponto[] = {
+        Ponto_cria(origem.x + 4 * escala / 5, origem.y),
+        Ponto_cria(origem.x + escala, origem.y + escala / 10),
+        Ponto_cria(origem.x + 4 * escala / 5, origem.y + 3 * escala / 10),
+        Ponto_cria(origem.x + escala / 5, origem.y + 3 * escala / 5),
+        Ponto_cria(origem.x, origem.y + 3 * escala / 10),
+        Ponto_cria(origem.x + escala / 5, origem.y + escala / 10),
+        Ponto_cria(origem.x + escala, origem.y + escala / 5),
+        Ponto_cria(origem.x + 4 * escala / 5, origem.y + 4 * escala / 5),
+        Ponto_cria(origem.x + 11 * escala / 20, origem.y + 17 * escala / 20),
+        Ponto_cria(origem.x + escala / 2, origem.y + 7 * escala / 10),
+        Ponto_cria(origem.x + escala / 2, origem.y + escala),
+    };
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[6], ponto[7], cor);
+    desenha_curva_cor(imagem, ponto[7], ponto[8], ponto[9], cor);
+    desenha_curva_cor(imagem, ponto[9], ponto[8], ponto[10], cor);
 }
 
-void escreve_cCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[8];
-	p[0]=cria_ponto(o.x+3*t/5,o.y-t/20);
-	p[1]=cria_ponto(o.x+t-t/5,o.y+t/20);
-	p[2]=cria_ponto(o.x+3*t/5,o.y+t/10);
-	p[3]=cria_ponto(o.x+t/5,o.y+5*t/10);
-	p[4]=cria_ponto(o.x,o.y+19*t/20);
-	p[5]=cria_ponto(o.x+3*t/5,o.y+5*t/10);
-	p[6]=cria_ponto(o.x+4*t/5,o.y+4*t/5);
-	p[7]=cria_ponto(o.x+7*t/10,o.y+9*t/10);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[3],p[5],cor);
-	desCurvaCor(img,p[5],p[6],p[7],cor);
+void fonte_escreve_c_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+        Ponto_cria(origem.x + 3 * escala / 5, origem.y - escala / 20),
+        Ponto_cria(origem.x + escala - escala / 5, origem.y + escala / 20),
+        Ponto_cria(origem.x + 3 * escala / 5, origem.y + escala / 10),
+        Ponto_cria(origem.x + escala / 5, origem.y + 5 * escala / 10),
+        Ponto_cria(origem.x, origem.y + 19 * escala / 20),
+        Ponto_cria(origem.x + 3 * escala / 5, origem.y + 5 * escala / 10),
+        Ponto_cria(origem.x + 4 * escala / 5, origem.y + 4 * escala / 5),
+        Ponto_cria(origem.x + 7 * escala / 10, origem.y + 9 * escala / 10),
+    };
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[3], ponto[5], cor);
+    desenha_curva_cor(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-
-void escreve_dCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[11];
-	o.x-=t/10;
-	o.y-=t/5;
-	p[0]=cria_ponto(o.x+4*t/5,o.y+t/5);
-	p[1]=cria_ponto(o.x+7*t/10,o.y+t/10);
-	p[2]=cria_ponto(o.x+7*t/10,o.y+4*t/10);
-	p[3]=cria_ponto(o.x+2*t/5,o.y+t/2);
-	p[4]=cria_ponto(o.x+2*t/5,o.y+8*t/10);
-	p[5]=cria_ponto(o.x+t/5,o.y+15*t/20);
-	p[6]=cria_ponto(o.x,o.y+9*t/10);
-	p[7]=cria_ponto(o.x+7*t/10,o.y+7*t/10);
-	p[8]=cria_ponto(o.x+4*t/5,o.y+t);
-	p[9]=cria_ponto(o.x+t,o.y+t/2);
-	p[10]=cria_ponto(o.x+7*t/10,o.y+8*t/10);
-	desCurvaCor(img,p[0],p[1],p[4],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
-	desCurvaCor(img,p[4],p[7],p[8],cor);
-	desCurvaCor(img,p[2],p[9],p[10],cor);
+void fonte_escreve_d_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala / 10;
+    origem.y -= escala / 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + escala / 5),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + escala / 10),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + 4 * escala / 10),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + escala / 2),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 8 * escala / 10),
+		Ponto_cria(origem.x + escala / 5, origem.y + 15 * escala / 20),
+		Ponto_cria(origem.x, origem.y + 9 * escala / 10),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + 7 * escala / 10),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + escala),
+		Ponto_cria(origem.x + escala, origem.y + escala / 2),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + 8 * escala / 10),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[7], ponto[8], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[9], ponto[10], cor);
 }
 
-void escreve_eCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[8];
-	p[0]=cria_ponto(o.x+7*t/10,o.y);
-	p[1]=cria_ponto(o.x+9*t/10,o.y+t/5);
-	p[2]=cria_ponto(o.x+7*t/10,o.y+t/2);
-	p[3]=cria_ponto(o.x+t/10,o.y+9*t/10);
-	p[4]=cria_ponto(o.x+t/10,o.y+7*t/10);
-	p[5]=cria_ponto(o.x+t/10,o.y+3*t/10);
-	p[6]=cria_ponto(o.x+11*t/10,o.y+4*t/5);
-	p[7]=cria_ponto(o.x+7*t/10,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[2],cor);
-	desCurvaCor(img,p[2],p[6],p[7],cor);
+void fonte_escreve_e_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + escala / 5),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + escala / 2),
+		Ponto_cria(origem.x + escala / 10, origem.y + 9 * escala / 10),
+		Ponto_cria(origem.x + escala / 10, origem.y + 7 * escala / 10),
+		Ponto_cria(origem.x + escala / 10, origem.y + 3 * escala / 10),
+		Ponto_cria(origem.x + 11 * escala / 10, origem.y + 4 * escala / 5),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[6], ponto[7], cor);
 }
 
-void escreve_fCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[11];
-	o.x-=t/10;
-	p[0]=cria_ponto(o.x+t,o.y);
-	p[1]=cria_ponto(o.x+17*t/20,o.y+5*t/18);
-	p[2]=cria_ponto(o.x+6*t/10,o.y+t/2);
-	p[3]=cria_ponto(o.x+3*t/10,o.y+7*t/9);
-	p[4]=cria_ponto(o.x+t/10,o.y+2*t/3);
-	p[5]=cria_ponto(o.x+2*t/10,o.y+4*t/9);
-	p[6]=cria_ponto(o.x+11*t/10,o.y+7*t/18);
-	p[7]=cria_ponto(o.x+15*t/10,o.y+2*t/3);
-	p[8]=cria_ponto(o.x+10*t/10,o.y+8*t/9);
-	p[9]=cria_ponto(o.x+9*t/10,o.y+5*t/9);
-	p[10]=cria_ponto(o.x+5*t/10,o.y+4*t/5);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[2],cor);
-	desCurvaCor(img,p[2],p[6],p[7],cor);
-	desCurvaCor(img,p[7],p[8],p[2],cor);
-	desCurvaCor(img,p[2],p[9],p[10],cor);
+void fonte_escreve_f_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y),
+		Ponto_cria(origem.x + 17 * escala / 20, origem.y + 5 * escala / 18),
+		Ponto_cria(origem.x + 6 * escala / 10, origem.y + escala / 2),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + 7 * escala / 9),
+		Ponto_cria(origem.x + escala / 10, origem.y + 2 * escala / 3),
+		Ponto_cria(origem.x + 2 * escala / 10, origem.y + 4 * escala / 9),
+		Ponto_cria(origem.x + 11 * escala / 10, origem.y + 7 * escala / 18),
+		Ponto_cria(origem.x + 15 * escala / 10, origem.y + 2 * escala / 3),
+		Ponto_cria(origem.x + 10 * escala / 10, origem.y + 8 * escala / 9),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + 5 * escala / 9),
+		Ponto_cria(origem.x + 5 * escala / 10, origem.y + 4 * escala / 5),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[6], ponto[7], cor);
+    desenha_curva_cor(imagem, ponto[7], ponto[8], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[9], ponto[10], cor);
 }
 
-void escreve_gCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[8];
-	o.x-=t/10;
-	p[0]=cria_ponto(o.x+3*t/10,o.y+7*t/9);
-	p[1]=cria_ponto(o.x+t/10,o.y+3*t/9);
-	p[2]=cria_ponto(o.x+8*t/10,o.y+2*t/9);
-	p[3]=cria_ponto(o.x+7*t/10,o.y+5*t/9);
-	p[4]=cria_ponto(o.x+13*t/10,o.y+6*t/9);
-	p[5]=cria_ponto(o.x+14*t/10,o.y+3*t/9);
-	p[6]=cria_ponto(o.x+9*t/10,o.y+4*t/9);
-	p[7]=cria_ponto(o.x+3*t/10,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[0],cor);
-	desCurvaCor(img,p[0],p[4],p[5],cor);
-	desCurvaCor(img,p[5],p[6],p[7],cor);
+void fonte_escreve_g_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + 7 * escala / 9),
+		Ponto_cria(origem.x + escala / 10, origem.y + 3 * escala / 9),
+		Ponto_cria(origem.x + 8 * escala / 10, origem.y + 2 * escala / 9),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + 5 * escala / 9),
+		Ponto_cria(origem.x + 13 * escala / 10, origem.y + 6 * escala / 9),
+		Ponto_cria(origem.x + 14 * escala / 10, origem.y + 3 * escala / 9),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + 4 * escala / 9),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[0], cor);
+    desenha_curva_cor(imagem, ponto[0], ponto[4], ponto[5], cor);
+    desenha_curva_cor(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-void escreve_hCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[10];
-	o.x-=t/10;
-	p[0]=cria_ponto(o.x+19*t/20,o.y);
-	p[1]=cria_ponto(o.x+t,o.y+t/8);
-	p[2]=cria_ponto(o.x+7*t/10,o.y+2*t/8);
-	p[3]=cria_ponto(o.x+t,o.y+3*t/16);
-	p[4]=cria_ponto(o.x+t/2,o.y+3*t/8);
-	p[5]=cria_ponto(o.x+t/10,o.y+6*t/8);
-	p[6]=cria_ponto(o.x+2*t/5,o.y+5*t/8);
-	p[7]=cria_ponto(o.x+4*t/5,o.y+6*t/8);
-	p[8]=cria_ponto(o.x+t,o.y+7*t/8);
-	p[9]=cria_ponto(o.x+9*t/10,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[3],p[4],p[5],cor);
-	desCurvaCor(img,p[2],p[6],p[7],cor);
-	desCurvaCor(img,p[7],p[8],p[9],cor);
+void fonte_escreve_h_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 19 * escala / 20, origem.y),
+		Ponto_cria(origem.x + escala, origem.y + escala / 8),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + 2 * escala / 8),
+		Ponto_cria(origem.x + escala, origem.y + 3 * escala / 16),
+		Ponto_cria(origem.x + escala / 2, origem.y + 3 * escala / 8),
+		Ponto_cria(origem.x + escala / 10, origem.y + 6 * escala / 8),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 5 * escala / 8),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 6 * escala / 8),
+		Ponto_cria(origem.x + escala, origem.y + 7 * escala / 8),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[3], ponto[4], ponto[5], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[6], ponto[7], cor);
+    desenha_curva_cor(imagem, ponto[7], ponto[8], ponto[9], cor);
 }
 
-void escreve_iCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[6];
-	o.x-=3*t/10;
-	p[0]=cria_ponto(o.x+t,o.y);
-	p[1]=cria_ponto(o.x+9*t/10,o.y+t/5);
-	p[2]=cria_ponto(o.x+2*t/5,o.y+t/2);
-	p[3]=cria_ponto(o.x+4*t/5,o.y+3*t/5);
-	p[4]=cria_ponto(o.x+9*t/10,o.y+9*t/10);
-	p[5]=cria_ponto(o.x+t/5,o.y+t/2);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCirculoCorprn(img,p[5],size/100+1,cor);
+void fonte_escreve_i_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= 3 * escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + escala / 5),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + escala / 2),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 3 * escala / 5),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + 9 * escala / 10),
+		Ponto_cria(origem.x + escala / 5, origem.y + escala / 2),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_circulo_cor_preenchido(imagem, ponto[5], tamanho_fonte / 100 + 1, cor);
 }
 
-void escreve_jCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[10];
-	o.x-=t/10;
-	p[0]=cria_ponto(o.x+8*t/10,o.y);
-	p[1]=cria_ponto(o.x+4*t/5,o.y+3*t/8);
-	p[2]=cria_ponto(o.x+2*t/5,o.y+9*t/16);
-	p[3]=cria_ponto(o.x+7*t/10,o.y+4*t/8);
-	p[4]=cria_ponto(o.x+t,o.y+5*t/8);
-	p[5]=cria_ponto(o.x+7*t/5,o.y+11*t/16);
-	p[6]=cria_ponto(o.x+8*t/5,o.y+4*t/8);
-	p[7]=cria_ponto(o.x+13*t/10,o.y+t/6);
-	p[8]=cria_ponto(o.x+2*t/5,o.y+7*t/8);
-	p[9]=cria_ponto(o.x+t/5,o.y+9*t/16);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
-	desCurvaCor(img,p[6],p[7],p[3],cor);
-	desLinhaCor(img,p[3],p[8],cor);
-	desCirculoCorprn(img,p[9],size/100+1,cor);
+void fonte_escreve_j_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 8 * escala / 10, origem.y),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 3 * escala / 8),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 9 * escala / 16),
+		Ponto_cria(origem.x + 7 * escala / 10, origem.y + 4 * escala / 8),
+		Ponto_cria(origem.x + escala, origem.y + 5 * escala / 8),
+		Ponto_cria(origem.x + 7 * escala / 5, origem.y + 11 * escala / 16),
+		Ponto_cria(origem.x + 8 * escala / 5, origem.y + 4 * escala / 8),
+		Ponto_cria(origem.x + 13 * escala / 10, origem.y + escala / 6),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 7 * escala / 8),
+		Ponto_cria(origem.x + escala / 5, origem.y + 9 * escala / 16),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
+    desenha_curva_cor(imagem, ponto[6], ponto[7], ponto[3], cor);
+    desenha_linha_Cor(imagem, ponto[3], ponto[8], cor);
+    desenha_circulo_cor_preenchido(imagem, ponto[9], tamanho_fonte / 100 + 1, cor);
 }
 
-void escreve_kCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*4;
-	ponto p[7];
-	p[0]=cria_ponto(o.x+t,o.y);
-	p[1]=cria_ponto(o.x+3*t/5,o.y+t/5);
-	p[2]=cria_ponto(o.x,o.y);
-	p[3]=cria_ponto(o.x+4*t/5,o.y+7*t/10);
-	p[4]=cria_ponto(o.x+t,o.y+t);
-	p[5]=cria_ponto(o.x+3*t/5,o.y+2*t/5);
-	p[6]=cria_ponto(o.x,o.y+t);
-	ponto l=cria_ponto(o.x+3*t/5,o.y+t/10);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,l,p[3],p[4],cor);
-	desCurvaCor(img,l,p[5],p[6],cor);
+void fonte_escreve_k_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 4;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + escala / 5),
+		Ponto_cria(origem.x, origem.y),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 7 * escala / 10),
+		Ponto_cria(origem.x + escala, origem.y + escala),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + 2 * escala / 5),
+		Ponto_cria(origem.x, origem.y + escala),
+	};
+    Ponto l = Ponto_cria(origem.x + 3 * escala / 5, origem.y + escala / 10);
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, l, ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, l, ponto[5], ponto[6], cor);
 }
 
-void escreve_lCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[8];
-	o.x-=t/20;
-	p[0]=cria_ponto(o.x+8*t/10,o.y);
-	p[1]=cria_ponto(o.x+t,o.y+t/5);
-	p[2]=cria_ponto(o.x+8*t/10,o.y+t/2);
-	p[3]=cria_ponto(o.x+t/10,o.y+8*t/10);
-	p[4]=cria_ponto(o.x-t/10,o.y+6*t/10);
-	p[5]=cria_ponto(o.x+t/10,o.y+2*t/10);
-	p[6]=cria_ponto(o.x+12*t/10,o.y+4*t/5);
-	p[7]=cria_ponto(o.x+8*t/10,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[2],cor);
-	desCurvaCor(img,p[2],p[6],p[7],cor);
+void fonte_escreve_l_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala / 20;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 8 * escala / 10, origem.y),
+		Ponto_cria(origem.x + escala, origem.y + escala / 5),
+		Ponto_cria(origem.x + 8 * escala / 10, origem.y + escala / 2),
+		Ponto_cria(origem.x + escala / 10, origem.y + 8 * escala / 10),
+		Ponto_cria(origem.x - escala / 10, origem.y + 6 * escala / 10),
+		Ponto_cria(origem.x + escala / 10, origem.y + 2 * escala / 10),
+		Ponto_cria(origem.x + 12 * escala / 10, origem.y + 4 * escala / 5),
+		Ponto_cria(origem.x + 8 * escala / 10, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[6], ponto[7], cor);
 }
 
-void escreve_mCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[7];
-	o.x-=3*t/10;
-	p[0]=cria_ponto(o.x+t,o.y-t/10);
-	p[1]=cria_ponto(o.x,o.y+t/6);
-	p[2]=cria_ponto(o.x+t,o.y+2*t/6);
-	p[3]=cria_ponto(o.x,o.y+3*t/6+t/10);
-	p[4]=cria_ponto(o.x+t,o.y+4*t/6);
-	p[5]=cria_ponto(o.x,o.y+5*t/6+t/10);
-	p[6]=cria_ponto(o.x+t,o.y+9*t/10);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
+void fonte_escreve_m_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= 3 * escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y - escala / 10),
+		Ponto_cria(origem.x, origem.y + escala / 6),
+		Ponto_cria(origem.x + escala, origem.y + 2 * escala / 6),
+		Ponto_cria(origem.x, origem.y + 3 * escala / 6 + escala / 10),
+		Ponto_cria(origem.x + escala, origem.y + 4 * escala / 6),
+		Ponto_cria(origem.x, origem.y + 5 * escala / 6 + escala / 10),
+		Ponto_cria(origem.x + escala, origem.y + 9 * escala / 10),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
 }
 
-void escreve_nCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[5];
-	o.x-=3*t/10;
-	p[0]=cria_ponto(o.x+t,o.y);
-	p[1]=cria_ponto(o.x+t/4,o.y+7*t/20);
-	p[2]=cria_ponto(o.x+9*t/10,o.y+9*t/20);
-	p[3]=cria_ponto(o.x+2*t/5,o.y+8*t/10);
-	p[4]=cria_ponto(o.x+t,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
+void fonte_escreve_n_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= 3 * escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y),
+		Ponto_cria(origem.x + escala / 4, origem.y + 7 * escala / 20),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + 9 * escala / 20),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 8 * escala / 10),
+		Ponto_cria(origem.x + escala, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
 }
 
-void escreve_oCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*4;
-	ponto p[8];
-	o.x+=t/10;
-	o.y+=t/10;
-	p[0]=cria_ponto(o.x,o.y+4*t/5);
-	p[1]=cria_ponto(o.x,o.y);
-	p[2]=cria_ponto(o.x+4*t/5,o.y+t/10);
-	p[3]=cria_ponto(o.x+t,o.y+4*t/5);
-	p[4]=cria_ponto(o.x-t/14,o.y+t/5);
-	p[5]=cria_ponto(o.x+2*t/5,o.y+t/2);
-	p[6]=cria_ponto(o.x+t/2,o.y+4*t/5);
-	p[7]=cria_ponto(o.x+t/5,o.y+t+t/10);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[0],cor);
-	desCurvaCor(img,p[0],p[4],p[5],cor);
-	desCurvaCor(img,p[5],p[6],p[7],cor);
+void fonte_escreve_o_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 4;
+    origem.x += escala / 10;
+    origem.y += escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x, origem.y + 4 * escala / 5),
+		Ponto_cria(origem.x, origem.y),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + escala / 10),
+		Ponto_cria(origem.x + escala, origem.y + 4 * escala / 5),
+		Ponto_cria(origem.x - escala / 14, origem.y + escala / 5),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + escala / 2),
+		Ponto_cria(origem.x + escala / 2, origem.y + 4 * escala / 5),
+		Ponto_cria(origem.x + escala / 5, origem.y + escala + escala / 10),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[0], cor);
+    desenha_curva_cor(imagem, ponto[0], ponto[4], ponto[5], cor);
+    desenha_curva_cor(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-void escreve_pCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[9];
-	p[0]=cria_ponto(o.x+13*t/20,o.y+2*t/13);
-	p[1]=cria_ponto(o.x+5*t/10,o.y+5*t/13);
-	p[2]=cria_ponto(o.x+t/5,o.y+7*t/13);
-	p[3]=cria_ponto(o.x+7*t/5,o.y+t/13);
-	p[4]=cria_ponto(o.x+2*t/5,o.y+6*t/13);
-	p[5]=cria_ponto(o.x+3*t/5,o.y+11*t/13);
-	p[6]=cria_ponto(o.x+4*t/5,o.y+5*t/13);
-	p[7]=cria_ponto(o.x+9*t/10,o.y+10*t/13);
-	p[8]=cria_ponto(o.x+3*t/5,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desLinhaCor(img,p[2],p[3],cor);
-	desCurvaCor(img,p[2],p[6],p[3],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
-	desCurvaCor(img,p[6],p[7],p[8],cor);
+void fonte_escreve_p_or(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 13 * escala / 20, origem.y + 2 * escala / 13),
+		Ponto_cria(origem.x + 5 * escala / 10, origem.y + 5 * escala / 13),
+		Ponto_cria(origem.x + escala / 5, origem.y + 7 * escala / 13),
+		Ponto_cria(origem.x + 7 * escala / 5, origem.y + escala / 13),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 6 * escala / 13),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + 11 * escala / 13),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 5 * escala / 13),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + 10 * escala / 13),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_linha_cor(imagem, ponto[2], ponto[3], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[6], ponto[3], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
+    desenha_curva_cor(imagem, ponto[6], ponto[7], ponto[8], cor);
 }
 
-void escreve_qCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[9];
-	o.x-=3*t/10;
-	p[0]=cria_ponto(o.x+2*t/5,o.y+6*t/8);
-	p[1]=cria_ponto(o.x+3*t/5,o.y+t/8);
-	p[2]=cria_ponto(o.x+t,o.y+4*t/8);
-	p[3]=cria_ponto(o.x+6*t/5,o.y+2*t/8);
-	p[4]=cria_ponto(o.x+8*t/5,o.y+5*t/8);
-	p[5]=cria_ponto(o.x+6*t/5,o.y+t);
-	p[6]=cria_ponto(o.x+9*t/10,o.y+9*t/16);
-	p[7]=cria_ponto(o.x+t,o.y+7*t/8);
-	p[8]=cria_ponto(o.x+4*t/5,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[0],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
-	desCurvaCor(img,p[2],p[7],p[8],cor);
+void fonte_escreve_q_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= 3 * escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 6 * escala / 8),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + escala / 8),
+		Ponto_cria(origem.x + escala, origem.y + 4 * escala / 8),
+		Ponto_cria(origem.x + 6 * escala / 5, origem.y + 2 * escala / 8),
+		Ponto_cria(origem.x + 8 * escala / 5, origem.y + 5 * escala / 8),
+		Ponto_cria(origem.x + 6 * escala / 5, origem.y + escala),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + 9 * escala / 16),
+		Ponto_cria(origem.x + escala, origem.y + 7 * escala / 8),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[0], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[7], ponto[8], cor);
 }
 
-void escreve_rCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[7];
-	p[0]=cria_ponto(o.x+t,o.y);
-	p[1]=cria_ponto(o.x+3*t/5,o.y+t/4);
-	p[2]=cria_ponto(o.x+t/10,o.y+t/4);
-	p[3]=cria_ponto(o.x+2*t/5,o.y+t/2);
-	p[4]=cria_ponto(o.x+t/5,o.y+7*t/8);
-	p[5]=cria_ponto(o.x+3*t/5,o.y+5*t/8);
-	p[6]=cria_ponto(o.x+t,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
+void fonte_escreve_r_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + escala / 4),
+		Ponto_cria(origem.x + escala / 10, origem.y + escala / 4),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + escala / 2),
+		Ponto_cria(origem.x + escala / 5, origem.y + 7 * escala / 8),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + 5 * escala / 8),
+		Ponto_cria(origem.x + escala, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
 }
 
-void escreve_sCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[5];
-	o.x-=t/5;
-	p[0]=cria_ponto(o.x+t,o.y);
-	p[1]=cria_ponto(o.x+4*t/5,o.y+t/2);
-	p[2]=cria_ponto(o.x+3*t/10,o.y+2*t/5);
-	p[3]=cria_ponto(o.x+t,o.y+t);
-	p[4]=cria_ponto(o.x+t,o.y+3*t/5);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
+void fonte_escreve_s_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala / 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + escala / 2),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + 2 * escala / 5),
+		Ponto_cria(origem.x + escala, origem.y + escala),
+		Ponto_cria(origem.x + escala, origem.y + 3 * escala / 5),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
 }
 
-void escreve_tCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[8];
-	p[0]=cria_ponto(o.x+t,o.y);
-	p[1]=cria_ponto(o.x+4*t/5,o.y+4*t/7);
-	p[2]=cria_ponto(o.x+t/5,o.y+5*t/14);
-	p[3]=cria_ponto(o.x+4*t/5,o.y+3*t/14);
-	p[4]=cria_ponto(o.x+t,o.y+t);
-	p[5]=cria_ponto(o.x+3*t/10,o.y+t/14);
-	p[6]=cria_ponto(o.x+5*t/10,o.y+4*t/7);
-	p[7]=cria_ponto(o.x+t/5,o.y+6*t/7);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[5],p[6],p[7],cor);
+void fonte_escreve_t_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 4 * escala / 7),
+		Ponto_cria(origem.x + escala / 5, origem.y + 5 * escala / 14),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 3 * escala / 14),
+		Ponto_cria(origem.x + escala, origem.y + escala),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + escala / 14),
+		Ponto_cria(origem.x + 5 * escala / 10, origem.y + 4 * escala / 7),
+		Ponto_cria(origem.x + escala / 5, origem.y + 6 * escala / 7),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-void escreve_uCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[7];
-	p[0]=cria_ponto(o.x+t,o.y);
-	p[1]=cria_ponto(o.x+9*t/10,o.y+t/7);
-	p[2]=cria_ponto(o.x+t/5,o.y+5*t/14);
-	p[3]=cria_ponto(o.x+3*t/2,o.y+t/2);
-	p[4]=cria_ponto(o.x+t/5,o.y+5*t/7);
-	p[5]=cria_ponto(o.x+8*t/10,o.y+6*t/7);
-	p[6]=cria_ponto(o.x+9*t/10,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
+void fonte_escreve_u_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala, origem.y),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + escala / 7),
+		Ponto_cria(origem.x + escala / 5, origem.y + 5 * escala / 14),
+		Ponto_cria(origem.x + 3 * escala / 2, origem.y + escala / 2),
+		Ponto_cria(origem.x + escala / 5, origem.y + 5 * escala / 7),
+		Ponto_cria(origem.x + 8 * escala / 10, origem.y + 6 * escala / 7),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
 }
 
-void escreve_vCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[8];
-	o.x+=t/10;
-	p[0]=cria_ponto(o.x+3*t/5,o.y);
-	p[1]=cria_ponto(o.x+t/5,o.y+t/10);
-	p[2]=cria_ponto(o.x+3*t/10,o.y+3*t/10);
-	p[3]=cria_ponto(o.x+6*t/5,o.y+6*t/10);
-	p[4]=cria_ponto(o.x+3*t/10,o.y+8*t/10);
-	p[5]=cria_ponto(o.x+t/10,o.y+7*t/10);
-	p[6]=cria_ponto(o.x+3*t/10,o.y+6*t/10);
-	p[7]=cria_ponto(o.x+2*t/5,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
-	desLinhaCor(img,p[6],p[7],cor);
+void fonte_escreve_v_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x += escala / 10;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y),
+		Ponto_cria(origem.x + escala / 5, origem.y + escala / 10),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + 3 * escala / 10),
+		Ponto_cria(origem.x + 6 * escala / 5, origem.y + 6 * escala / 10),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + 8 * escala / 10),
+		Ponto_cria(origem.x + escala / 10, origem.y + 7 * escala / 10),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + 6 * escala / 10),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
+    desenha_linha_cor(imagem, ponto[6], ponto[7], cor);
 }
 
-void escreve_xCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[11];
-	p[0]=cria_ponto(o.x+3*t/5,o.y);
-	p[1]=cria_ponto(o.x+t/10,o.y+2*t/7);
-	p[2]=cria_ponto(o.x+t/5,o.y+4*t/7);
-	p[3]=cria_ponto(o.x+3*t/10,o.y+9*t/14);
-	p[4]=cria_ponto(o.x+3*t/5,o.y+9*t/14);
-	p[5]=cria_ponto(o.x+t,o.y+t/2);
-	p[6]=cria_ponto(o.x+4*t/5,o.y+t/7);
-	p[7]=cria_ponto(o.x+3*t/10,o.y+5*t/7);
-	p[8]=cria_ponto(o.x+t/5,o.y+t);
-	p[9]=cria_ponto(o.x+9*t/10,o.y+5*t/7);
-	p[10]=cria_ponto(o.x+t,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
-	desCurvaCor(img,p[4],p[7],p[8],cor);
-	desCurvaCor(img,p[4],p[9],p[10],cor);
+void fonte_escreve_x_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y),
+		Ponto_cria(origem.x + escala / 10, origem.y + 2 * escala / 7),
+		Ponto_cria(origem.x + escala / 5, origem.y + 4 * escala / 7),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + 9 * escala / 14),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + 9 * escala / 14),
+		Ponto_cria(origem.x + escala, origem.y + escala / 2),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + escala / 7),
+		Ponto_cria(origem.x + 3 * escala / 10, origem.y + 5 * escala / 7),
+		Ponto_cria(origem.x + escala / 5, origem.y + escala),
+		Ponto_cria(origem.x + 9 * escala / 10, origem.y + 5 * escala / 7),
+		Ponto_cria(origem.x + escala, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[7], ponto[8], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[9], ponto[10], cor);
 }
 
-void escreve_zCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[9];
-	p[0]=cria_ponto(o.x+2*t/5,o.y+2*t/13);
-	p[1]=cria_ponto(o.x,o.y+8*t/13);
-	p[2]=cria_ponto(o.x+2*t/5,o.y+11*t/13);
-	p[3]=cria_ponto(o.x+t/2,o.y+8*t/13);
-	p[4]=cria_ponto(o.x+6*t/10,o.y+6*t/13);
-	p[5]=cria_ponto(o.x+6*t/5,o.y+11*t/13);
-	p[6]=cria_ponto(o.x+8*t/5,o.y+7*t/13);
-	p[7]=cria_ponto(o.x+4*t/5,o.y+7*t/13);
-	p[8]=cria_ponto(o.x+3*t/5,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
-	desCurvaCor(img,p[6],p[7],p[8],cor);
+void fonte_escreve_z_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 2 * escala / 13),
+		Ponto_cria(origem.x, origem.y + 8 * escala / 13),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 11 * escala / 13),
+		Ponto_cria(origem.x + escala / 2, origem.y + 8 * escala / 13),
+		Ponto_cria(origem.x + 6 * escala / 10, origem.y + 6 * escala / 13),
+		Ponto_cria(origem.x + 6 * escala / 5, origem.y + 11 * escala / 13),
+		Ponto_cria(origem.x + 8 * escala / 5, origem.y + 7 * escala / 13),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 7 * escala / 13),
+		Ponto_cria(origem.x + 3 * escala / 5, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
+    desenha_curva_cor(imagem, ponto[6], ponto[7], ponto[8], cor);
 }
 
 /*Maiusculas*/
 
-//cor
+// cor
 
-void escreve_SCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[9];
-	o.x-=t;
-	p[0]=cria_ponto(o.x+7*t/5,o.y);
-	p[1]=cria_ponto(o.x+2*t,o.y+3*t/7);
-	p[2]=cria_ponto(o.x+9*t/5,o.y+5*t/7);
-	p[3]=cria_ponto(o.x+8*t/5,o.y+t);
-	p[4]=cria_ponto(o.x+6*t/5,o.y+4*t/7);
-	p[5]=cria_ponto(o.x+4*t/5,o.y+5*t/14);
-	p[6]=cria_ponto(o.x+2*t/5,o.y+5*t/7);
-	p[7]=cria_ponto(o.x+t/5,o.y+6*t/7);
-	p[8]=cria_ponto(o.x+t/5,o.y+t);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
-	desCurvaCor(img,p[4],p[5],p[6],cor);
-	desCurvaCor(img,p[6],p[7],p[8],cor);
+void fonte_escreve_S_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + 7 * escala / 5, origem.y),
+		Ponto_cria(origem.x + 2 * escala, origem.y + 3 * escala / 7),
+		Ponto_cria(origem.x + 9 * escala / 5, origem.y + 5 * escala / 7),
+		Ponto_cria(origem.x + 8 * escala / 5, origem.y + escala),
+		Ponto_cria(origem.x + 6 * escala / 5, origem.y + 4 * escala / 7),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + 5 * escala / 14),
+		Ponto_cria(origem.x + 2 * escala / 5, origem.y + 5 * escala / 7),
+		Ponto_cria(origem.x + escala / 5, origem.y + 6 * escala / 7),
+		Ponto_cria(origem.x + escala / 5, origem.y + escala),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
+    desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
+    desenha_curva_cor(imagem, ponto[6], ponto[7], ponto[8], cor);
 }
 
-void escreve_VCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	ponto p[5];
-	o.x-=t;
-	p[0]=cria_ponto(o.x+t/5,o.y-t/5);
-	p[1]=cria_ponto(o.x+4*t/5,o.y+t/6);
-	p[2]=cria_ponto(o.x+2*t,o.y+t/3);
-	p[3]=cria_ponto(o.x+t,o.y+t/2);
-	p[4]=cria_ponto(o.x,o.y+13*t/15);
-	desCurvaCor(img,p[0],p[1],p[2],cor);
-	desCurvaCor(img,p[2],p[3],p[4],cor);
+void fonte_escreve_V_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    origem.x -= escala;
+    Ponto ponto[] = {
+		Ponto_cria(origem.x + escala / 5, origem.y - escala / 5),
+		Ponto_cria(origem.x + 4 * escala / 5, origem.y + escala / 6),
+		Ponto_cria(origem.x + 2 * escala, origem.y + escala / 3),
+		Ponto_cria(origem.x + escala, origem.y + escala / 2),
+		Ponto_cria(origem.x, origem.y + 13 * escala / 15),
+	};
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
+    desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
 }
 
-//Simbolos
+// Simbolos
 
-//cor
+// cor
 
-void escreve_hifenCor(ppm img, ponto o, int size, rgb cor){
-	int t=size*5;
-	desCurvaCor(img,cria_ponto(o.x+4*t/10,o.y+t/10),cria_ponto(o.x+6*t/10,o.y+4*t/10),cria_ponto(o.x+5*t/10,o.y+9*t/10),cor);
+void fonte_escreve_hifen_cor(PPM imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+    int escala = tamanho_fonte * 5;
+    Ponto ponto[] = {
+        Ponto_cria(origem.x + 4 * escala / 10, origem.y + escala / 10),
+        Ponto_cria(origem.x + 6 * escala / 10, origem.y + 4 * escala / 10),
+        Ponto_cria(origem.x + 5 * escala / 10, origem.y + 9 * escala / 10),
+    };
+    desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
 }

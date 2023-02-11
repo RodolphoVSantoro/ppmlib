@@ -5,7 +5,7 @@
 
 #include "ppmlib.h"
 
-static FILE *fopen_s(char fname[], char modo[]) {
+static FILE *fopen_or_crash(char fname[], char modo[]) {
     FILE *arquivo = fopen(fname, modo);
     if (arquivo == NULL) {
         printf("Falha ao abrir o arquivo %s\n", fname);
@@ -98,8 +98,27 @@ int rgb_to_int(rgb cor) {
     return cor.red + 256 * (cor.green + 256 * cor.blue);
 }
 
-PPMHeader PPMHeader_cria(int altura, int largura, int channelRange, BMPKey tipoBMP) {
-    PPMHeader cabecalho = (PPMHeader)malloc(sizeof(*cabecalho));
+Dimensao2D Dimensao2D_cria_estatico(int largura, int altura) {
+    Dimensao2D dimensao;
+    dimensao.largura = largura;
+    dimensao.altura = altura;
+    return dimensao;
+}
+
+Dimensao2D *Dimensao2D_cria(int largura, int altura) {
+    Dimensao2D *dimensao = (Dimensao2D *)malloc(sizeof(*dimensao));
+    dimensao->largura = largura;
+    dimensao->altura = altura;
+    return dimensao;
+}
+
+void Dimensao2D_libera(Dimensao2D *dimensao) {
+    free(dimensao);
+    dimensao = NULL;
+}
+
+PPMHeader *PPMHeader_cria(int altura, int largura, int channelRange, BMPKey tipoBMP) {
+    PPMHeader *cabecalho = (PPMHeader *)malloc(sizeof(*cabecalho));
     if (cabecalho == NULL) {
         printf("Erro ao alocar cabecalho\n");
         exit(1);
@@ -117,8 +136,8 @@ PPMHeader PPMHeader_cria(int altura, int largura, int channelRange, BMPKey tipoB
     return cabecalho;
 }
 
-PPMHeader PPMHeader_copia(PPMHeader cabecalho_original) {
-    PPMHeader cabecalho_novo = PPMHeader_cria(
+PPMHeader *PPMHeader_copia(PPMHeader *cabecalho_original) {
+    PPMHeader *cabecalho_novo = PPMHeader_cria(
         cabecalho_original->tamanho->altura,
         cabecalho_original->tamanho->largura,
         cabecalho_original->channelRange,
@@ -130,14 +149,14 @@ PPMHeader PPMHeader_copia(PPMHeader cabecalho_original) {
     return cabecalho_novo;
 }
 
-PPMHeader PPMHeader_libera(PPMHeader cabecalho) {
-    free(cabecalho->tamanho);
+PPMHeader *PPMHeader_libera(PPMHeader *cabecalho) {
+    Dimensao2D_libera(cabecalho->tamanho);
     cabecalho->tamanho = NULL;
     free(cabecalho);
     cabecalho = NULL;
 }
 
-BMPKey key_to_string(char *key) {
+BMPKey string_to_key(char *key) {
     if (string_compara(key, "P3") == 0) {
         return Key_PPM;
     } else if (string_compara(key, "P1") == 0) {
@@ -161,7 +180,7 @@ const char *key_to_string(BMPKey key) {
         case Key_BM:
             return "P1";
         case Key_BW:
-        	return "P2";
+            return "P2";
         case Key_BMP:
             return "BM";
         default:
@@ -170,14 +189,14 @@ const char *key_to_string(BMPKey key) {
     }
 }
 
-PPM ppm_cria() {
-    PPM imagem = (PPM)malloc(sizeof(*imagem));
+PPM *PPM_cria() {
+    PPM *imagem = (PPM *)malloc(sizeof(*imagem));
     if (imagem == NULL) {
         printf("Erro ao alocar imagem\n");
         exit(1);
     }
 
-    imagem->cabecalho = cab_malloc(0, 0, 255, Key_PPM);
+    imagem->cabecalho = PPMHeader_cria(0, 0, 255, Key_PPM);
     if (imagem->cabecalho == NULL) {
         printf("Erro ao alocar imagem\n");
         exit(1);
@@ -188,20 +207,12 @@ PPM ppm_cria() {
     return imagem;
 }
 
-PPM ppm_copia(PPM imagem_original) {
-    PPM imagem_nova = (PPM)malloc(sizeof(*imagem_nova));
+PPM *PPM_copia(PPM *imagem_original) {
+    PPM *imagem_nova = (PPM *)malloc(sizeof(*imagem_nova));
 
-    imagem_nova->cabecalho = (PPMHeader)malloc(sizeof(*imagem_nova->cabecalho));
+    imagem_nova->cabecalho = PPMHeader_copia(imagem_original->cabecalho);
 
-    imagem_nova->cabecalho->tamanho = (Dimensao2D *)malloc(sizeof(*imagem_nova->cabecalho->tamanho));
-    imagem_nova->cabecalho->tamanho->altura = imagem_original->cabecalho->tamanho->altura;
-    imagem_nova->cabecalho->tamanho->largura = imagem_original->cabecalho->tamanho->largura;
-
-    imagem_nova->cabecalho->channelRange = imagem_original->cabecalho->channelRange;
-
-    imagem_nova->cabecalho->tipoBMP = imagem_original->cabecalho->tipoBMP;
-
-    imagem_nova->pixel = rgb_malloc(imagem_nova->cabecalho);
+    imagem_nova->pixel = rgb2d_malloc(imagem_nova->cabecalho->tamanho);
 
     for (int i = 0; i < imagem_nova->cabecalho->tamanho->altura; i++) {
         memccpy(
@@ -214,8 +225,8 @@ PPM ppm_copia(PPM imagem_original) {
     return imagem_nova;
 }
 
-void libera_ppm(PPM imagem) {
-    rgb2d_libera(imagem);
+void libera_ppm(PPM *imagem) {
+    rgb2d_libera(imagem->pixel, imagem->cabecalho->tamanho);
     PPMHeader_libera(imagem->cabecalho);
     imagem->cabecalho = NULL;
     free(imagem);
@@ -238,16 +249,16 @@ rgb **rgb2d_malloc(Dimensao2D *tamanho) {
     return Pixel2D;
 }
 
-void rgb2d_libera(PPM imagem) {
-    if (imagem->pixel == NULL) {
+void rgb2d_libera(rgb **pixel, Dimensao2D *tamanho) {
+    if (pixel == NULL) {
         return;
     }
-    for (int i = 0; i < imagem->cabecalho->tamanho->altura; i++) {
-        free(imagem->pixel[i]);
-        imagem->pixel[i] = NULL;
+    for (int i = 0; i < tamanho->altura; i++) {
+        free(pixel[i]);
+        pixel[i] = NULL;
     }
-    free(imagem->pixel);
-    imagem->pixel = NULL;
+    free(pixel);
+    pixel = NULL;
 }
 
 int **int2d_malloc(int altura, int largura) {
@@ -274,41 +285,41 @@ void int2d_libera(int **int2d, int altura) {
     free(int2d);
 }
 
-ArvBin *ArvBin_cria() {
+ArvoreBinaria *ArvoreBinaria_cria() {
     return NULL;
 }
 
-ArvBin *folha_cria(int x) {
-    ArvBin *novo = (ArvBin *)malloc(sizeof(*novo));
+ArvoreBinaria *ArvoreBinaria_folha_cria(int x) {
+    ArvoreBinaria *novo = (ArvoreBinaria *)malloc(sizeof(*novo));
     novo->x = x;
     novo->direita = NULL;
     novo->esquerda = NULL;
     return novo;
 }
 
-ArvBin *ArvBin_insere_sem_repeticao(ArvBin *arvore, int x) {
+ArvoreBinaria *ArvoreBinaria_insere_sem_repeticao(ArvoreBinaria *arvore, int x) {
     if (arvore == NULL) {
         return folha_cria(x);
     }
     if (x > arvore->x) {
-        arvore->direita = ArvBin_insere_sem_repeticao(arvore->direita, x);
+        arvore->direita = ArvoreBinaria_insere_sem_repeticao(arvore->direita, x);
     }
     if (x < arvore->x) {
-        arvore->esquerda = ArvBin_insere_sem_repeticao(arvore->direita, x);
+        arvore->esquerda = ArvoreBinaria_insere_sem_repeticao(arvore->direita, x);
     }
     return arvore;
 }
 
-ArvBin *ArvBin_libera(ArvBin *arvore) {
+ArvoreBinaria *ArvoreBinaria_libera(ArvoreBinaria *arvore) {
     if (arvore != NULL) {
-        arvore->esquerda = ArvBin_libera(arvore->esquerda);
-        arvore->direita = ArvBin_libera(arvore->direita);
+        arvore->esquerda = ArvoreBinaria_libera(arvore->esquerda);
+        arvore->direita = ArvoreBinaria_libera(arvore->direita);
         free(arvore);
     }
     return NULL;
 }
 
-void arvore_imprime_pre_ordem(ArvBin *arvore) {
+void arvore_imprime_pre_ordem(ArvoreBinaria *arvore) {
     if (arvore != NULL) {
         printf("<%d ", arvore->x);
         arvore_imprime_pre_ordem(arvore->esquerda);
@@ -320,26 +331,14 @@ void arvore_imprime_pre_ordem(ArvBin *arvore) {
     }
 }
 
-int ArvBin_quantidade_nodes(ArvBin *arvore) {
+int ArvoreBinaria_quantidade_nodes(ArvoreBinaria *arvore) {
     if (arvore != NULL) {
-        return 1 + ArvBin_quantidade_nodes(arvore->esquerda) + ArvBin_quantidade_nodes(arvore->direita);
+        return 1 + ArvoreBinaria_quantidade_nodes(arvore->esquerda) + ArvoreBinaria_quantidade_nodes(arvore->direita);
     } else
         return 0;
 }
 
-PPM ppm_leitura(char fname[]) {
-    PPM imagem = ppm_cria();
-    FILE *arquivo = fopen_s(fname, "r");
-
-    const char *tipo = key_to_string(imagem->cabecalho->tipoBMP);
-    fscanf(arquivo, "%s", tipo);
-    if (string_compare(imagem->cabecalho->tipoBMP, "P3") != 0) {
-        printf("O arquivo nao e um ppm");
-        fclose(arquivo);
-        arquivo = NULL;
-        exit(1);
-    }
-
+void PPM_pula_comentarios(FILE *arquivo) {
     int c;
     while ((c = fgetc(arquivo)) == '#' || c == ' ' || c == '\n') {
         if (c == '#') {
@@ -352,15 +351,32 @@ PPM ppm_leitura(char fname[]) {
         }
     }
     ungetc(c, arquivo);
+}
 
-    fscanf(
-        arquivo,
-        "%d %d",
-        &imagem->cabecalho->tamanho->largura,
-        &imagem->cabecalho->tamanho->altura);
-    fscanf(arquivo, "%d", &imagem->cabecalho->channelRange);
+PPM *PPM_leitura(const char *fname) {
+    FILE *arquivo = fopen_or_crash(fname, "r");
 
-    imagem->pixel = rgb_malloc(imagem->cabecalho);
+    int largura;
+    int altura;
+    int channelRange;
+    char tipo[3];
+    fscanf(arquivo, "%s", tipo);
+    if (string_compare(tipo, "P3") != 0) {
+        printf("O arquivo nao e um ppm");
+        fclose(arquivo);
+        arquivo = NULL;
+        exit(1);
+    }
+    PPM_pula_comentarios(arquivo);
+
+    fscanf(arquivo, "%d %d", &largura, &altura);
+    fscanf(arquivo, "%d", &channelRange);
+    BMPKey key = Key_PPM;
+    Dimensao2D tamanho = Dimensao2D_cria_estatico(largura, altura);
+    PPM *imagem = PPM_cria();
+    imagem->cabecalho = PPMHeader_cria(altura, largura, channelRange, tipo);
+    imagem->pixel = rgb2d_malloc(imagem->cabecalho);
+
     int red, green, blue;
     for (int i = 0; i < imagem->cabecalho->tamanho->altura; i++) {
         for (int j = 0; j < imagem->cabecalho->tamanho->largura; j++) {
@@ -377,8 +393,8 @@ PPM ppm_leitura(char fname[]) {
     return imagem;
 }
 
-void ppm_grava(char fname[], PPM imagem) {
-    FILE *arquivo = fopen_s(fname, "w");
+void PPM_grava(char fname[], PPM *imagem) {
+    FILE *arquivo = fopen_or_crash(fname, "w");
     fprintf(
         arquivo,
         "P3\n#Created by ppmlib\n%d %d %d\n",
@@ -419,7 +435,7 @@ double ponto2d_distancia(Ponto a, Ponto b) {
         (float)int_quadrado(a.y - b.y));
 }
 
-Ponto ponto_vira(Ponto a, Ponto b, float graus) {
+Ponto Ponto_vira(Ponto a, Ponto b, float graus) {
     Ponto f;
     f.x = a.x + coseno(graus) * (b.x - a.x) + seno(graus) * (a.y - b.y);
     f.y = a.y + coseno(graus) * (b.y - a.y) + seno(graus) * (b.x - a.x);
@@ -438,7 +454,7 @@ Ponto linear_interpolation(Ponto a, Ponto b, double ratio) {
     return cria_ponto(a.x + (b.x - a.x) * ratio, a.y + (b.y - a.y) * ratio);
 }
 
-bool ponto_compara(Ponto p, Ponto q) {
+bool Ponto_compara(Ponto p, Ponto q) {
     return (p.x == q.x && p.y == q.y);
 }
 

@@ -4,7 +4,7 @@
 #include "arq.h"
 #include "ppmlib.h"
 
-static FILE *fopen_s(char fname[], char modo[]) {
+static FILE *fopen_or_crash(char fname[], char modo[]) {
     FILE *arq = fopen(fname, modo);
     if (arq == NULL) {
         printf("Falha ao abrir o arquivo %s\n", fname);
@@ -270,7 +270,7 @@ ppm overlay(ppm img, ppm img2) {
 }
 
 void grava_decomp(char fname[], ppm img, bool r, bool g, bool b) {
-    FILE *arq = fopen_s(fname, "w");
+    FILE *arq = fopen_or_crash(fname, "w");
     int i, j;
     fprintf(arq, "P3\n%d %d %d\n", img->cab->largura, img->cab->altura, img->cab->max);
     for (i = 0; i < img->cab->altura; i++) {
@@ -300,7 +300,7 @@ void grava_gira(char fname[], ppm img, int graus) {
 }
 
 void grava_negativo(char fname[], ppm img) {
-    FILE *arq = fopen_s(fname, "w");
+    FILE *arq = fopen_or_crash(fname, "w");
     int i, j;
     fprintf(arq, "P3\n%d %d %d\n", img->cab->largura, img->cab->altura, img->cab->max);
     for (i = 0; i < img->cab->altura; i++)
@@ -311,7 +311,7 @@ void grava_negativo(char fname[], ppm img) {
 }
 
 void grava_BW(char fname[], ppm img) {
-    FILE *arq = fopen_s(fname, "w");
+    FILE *arq = fopen_or_crash(fname, "w");
     int i, j;
     int val = 0;
     fprintf(arq, "P3\n%d %d %d\n", img->cab->largura, img->cab->altura, img->cab->max);
@@ -325,7 +325,7 @@ void grava_BW(char fname[], ppm img) {
 }
 
 void grava_BM(char fname[], ppm img) {
-    FILE *arq = fopen_s(fname, "w");
+    FILE *arq = fopen_or_crash(fname, "w");
     int i, j;
     int val = 0;
     fprintf(arq, "P3\n%d %d %d\n", img->cab->largura, img->cab->altura, img->cab->max);
@@ -340,7 +340,7 @@ void grava_BM(char fname[], ppm img) {
 }
 
 void grava_blur(char fname[], ppm img, int **ker, int tamanhokernel) {
-    FILE *arq = fopen_s(fname, "w");
+    FILE *arq = fopen_or_crash(fname, "w");
     int i, j, a, b, n, k;
     rgb c;
     float mediar, mediag, mediab;
@@ -381,7 +381,7 @@ void grava_blurmint(char fname[], ppm img, int tamanhokernel) {
 }
 
 void grava_espelhado(char fname[], ppm img) {
-    FILE *arq = fopen_s(fname, "w");
+    FILE *arq = fopen_or_crash(fname, "w");
     int i, j;
     rgb cor;
     fprintf(arq, "P3\n%d %d %d\n", img->cab->largura, img->cab->altura, img->cab->max);

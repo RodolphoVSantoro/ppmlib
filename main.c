@@ -4,7 +4,8 @@
 #include "lib/ppmlib.h"
 
 int main() {
-    PPM img = cria_ppm(100, 100, branco);
-    libera_ppm(img);
+    PPM* img = PPM_cria(100, 100, branco);
+    PPM_grava("imgs/teste.ppm", img);
+    PPM_libera(img);
     return 0;
 }

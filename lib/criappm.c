@@ -2,17 +2,18 @@
 
 #include "ppmlib.h"
 
-PPM ppm_cria(int altura, int largura, rgb cor) {
-    PPM imagem = ppm_malloc();
+PPM* PPM_cria_com_dimensoes(Dimensao2D tamanho, int channelRange, rgb cor) {
+    PPM *imagem = (PPM *)malloc(sizeof(*imagem));
     int i, j;
-    imagem->cab->altura = altura;
-    imagem->cab->largura = largura;
-    imagem->cab->max = 255;
-    strcop(imagem->cab->key, "P3");
-    imagem->cor = rgb_malloc(imagem->cab);
-    for (i = 0; i < altura; i++)
-        for (j = 0; j < largura; j++)
-            imagem->cor[i][j] = cor;
+    imagem->cabecalho->tamanho = Dimensao2D_cria(tamanho.altura, tamanho.largura);
+    imagem->cabecalho->channelRange = channelRange;
+    imagem->cabecalho->tipoBMP = Key_PPM;
+    imagem->pixel = rgb2d_malloc(imagem->cabecalho->tamanho);
+    for (i = 0; i < tamanho.altura; i++) {
+        for (j = 0; j < tamanho.largura; j++) {
+            imagem->pixel[i][j] = cor;
+        }
+    }
     return imagem;
 }
 
@@ -31,7 +32,7 @@ void desLinhaCor(PPM imagem, Ponto ponto_inicial, Ponto ponto_final, rgb cor) {
             troca(&ponto_inicial.y, &ponto_final.y);
         }
         for (i = ponto_inicial.y; i <= ponto_final.y; i++) {
-            ponto_cor_desenha(imagem, ponto_cria(ponto_inicial.x, i), cor);
+            ponto_cor_desenha(imagem, Ponto_cria_estatico(ponto_inicial.x, i), cor);
         }
     } else {
         int delta_x, delta_y, c;
@@ -42,7 +43,7 @@ void desLinhaCor(PPM imagem, Ponto ponto_inicial, Ponto ponto_final, rgb cor) {
             troca(&ponto_inicial.x, &ponto_final.x);
         }
         for (i = ponto_inicial.x; i <= ponto_final.x; i += 0.05) {
-            ponto_cor_desenha(imagem, ponto_cria(i, -(i * delta_y + c) / delta_x), cor);
+            ponto_cor_desenha(imagem, Ponto_cria_estatico(i, -(i * delta_y + c) / delta_x), cor);
         }
     }
 }

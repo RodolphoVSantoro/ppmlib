@@ -307,8 +307,8 @@ void pit(PPM img, Ponto c, int lado, float graus) {
     vetRotac(poligono, graus);
     desPoligono(img, poligono);
     libera_poligono(poligono);
-    Ponto e = ponto_cria(c.x - (lado * (2.236067977) / 2.0), c.y);
-    Ponto d = ponto_cria(c.x - (lado * (2.236067977) / 2.0), c.y);
+    Ponto e = Ponto_cria_estatico(c.x - (lado * (2.236067977) / 2.0), c.y);
+    Ponto d = Ponto_cria_estatico(c.x - (lado * (2.236067977) / 2.0), c.y);
     e = ponto_vira(c, e, graus - 26.5);
     d = ponto_vira(c, d, graus + 26.5);
     if (lado > 20) {
