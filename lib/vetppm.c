@@ -1,126 +1,113 @@
 #include "ppmlib.h"
 
-void vetRetangulo(poligon *pol, ponto centro, int altura, int largura)
-{
-	esvazia_poligono(pol);
-	*(pol->centro)=centro;
-	insere_poligono(pol, cria_ponto(centro.x - altura / 2, centro.y - largura / 2));
-	insere_poligono(pol, cria_ponto(centro.x - altura / 2, centro.y + largura / 2));
-	insere_poligono(pol, cria_ponto(centro.x + altura / 2, centro.y + largura / 2));
-	insere_poligono(pol, cria_ponto(centro.x + altura / 2, centro.y - largura / 2));
+void vetorial_retangulo(Poligono *poligono, Ponto centro, int altura, int largura) {
+    poligono_esvazia(poligono);
+    *(poligono->centro) = centro;
+    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y - largura / 2));
+    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y + largura / 2));
+    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y + largura / 2));
+    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y - largura / 2));
 }
 
-void vetTriangulo(poligon *pol, ponto centro, int altura, int base)
-{
-	esvazia_poligono(pol);
-	*(pol->centro)=centro;
-	insere_poligono(pol, cria_ponto(centro.x + altura / 2, centro.y - base / 2));
-	insere_poligono(pol, cria_ponto(centro.x - altura / 2, centro.y));
-	insere_poligono(pol, cria_ponto(centro.x + altura / 2, centro.y + base / 2));
+void vetorial_triangulo(Poligono *poligono, Ponto centro, int altura, int base) {
+    poligono_esvazia(poligono);
+    *(poligono->centro) = centro;
+    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y - base / 2));
+    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y));
+    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y + base / 2));
 }
 
-void vetLosango(poligon *pol, ponto centro, int altura, int largura)
-{
-	esvazia_poligono(pol);
-	*(pol->centro)=centro;
-	insere_poligono(pol, cria_ponto(centro.x, centro.y - largura / 2));
-	insere_poligono(pol, cria_ponto(centro.x - altura / 2, centro.y));
-	insere_poligono(pol, cria_ponto(centro.x, centro.y + largura / 2));
-	insere_poligono(pol, cria_ponto(centro.x + altura / 2, centro.y));
+void vetorial_losango(Poligono *poligono, Ponto centro, int altura, int largura) {
+    poligono_esvazia(poligono);
+    *(poligono->centro) = centro;
+    poligono_insere(poligono, ponto_cria(centro.x, centro.y - largura / 2));
+    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y));
+    poligono_insere(poligono, ponto_cria(centro.x, centro.y + largura / 2));
+    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y));
 }
 
-void vetTrapezio(poligon *pol, ponto centro, int b1, int b2, int altura)
-{
-	esvazia_poligono(pol);
-	*(pol->centro)=centro;
-	insere_poligono(pol, cria_ponto(centro.x - altura / 2, centro.y - b1 / 2));
-	insere_poligono(pol, cria_ponto(centro.x - altura / 2, centro.y + b1 / 2));
-	insere_poligono(pol, cria_ponto(centro.x + altura / 2, centro.y + b2 / 2));
-	insere_poligono(pol, cria_ponto(centro.x + altura / 2, centro.y - b2 / 2));
+void vetorial_trapezio(Poligono *poligono, Ponto centro, int base1, int base2, int altura) {
+    poligono_esvazia(poligono);
+    *(poligono->centro) = centro;
+    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y - base1 / 2));
+    poligono_insere(poligono, ponto_cria(centro.x - altura / 2, centro.y + base1 / 2));
+    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y + base2 / 2));
+    poligono_insere(poligono, ponto_cria(centro.x + altura / 2, centro.y - base2 / 2));
 }
 
-void vetEstrela(poligon *pol, ponto p, int x, int y)
-{
-	esvazia_poligono(pol);
-	*(pol->centro)=p;
-	insere_poligono(pol, cria_ponto(p.x - x, p.y));
-	insere_poligono(pol, cria_ponto(p.x - x / 2, p.y - y / 3));
-	insere_poligono(pol, cria_ponto(p.x - x / 2, p.y - y));
-	insere_poligono(pol, cria_ponto(p.x, p.y - 2 * y / 3));
-	insere_poligono(pol, cria_ponto(p.x + x / 2, p.y - y));
-	insere_poligono(pol, cria_ponto(p.x + x / 2, p.y - y / 3));
-	insere_poligono(pol, cria_ponto(p.x + x, p.y));
-	insere_poligono(pol, cria_ponto(p.x + x / 2, p.y + y / 3));
-	insere_poligono(pol, cria_ponto(p.x + x / 2, p.y + y));
-	insere_poligono(pol, cria_ponto(p.x, p.y + 2 * y / 3));
-	insere_poligono(pol, cria_ponto(p.x - x / 2, p.y + y));
-	insere_poligono(pol, cria_ponto(p.x - x / 2, p.y + y / 3));
+void vetorial_estrela(Poligono *poligono, Ponto ponto, int x, int y) {
+    poligono_esvazia(poligono);
+    *(poligono->centro) = ponto;
+    poligono_insere(poligono, ponto_cria(ponto.x - x, ponto.y));
+    poligono_insere(poligono, ponto_cria(ponto.x - x / 2, ponto.y - y / 3));
+    poligono_insere(poligono, ponto_cria(ponto.x - x / 2, ponto.y - y));
+    poligono_insere(poligono, ponto_cria(ponto.x, ponto.y - 2 * y / 3));
+    poligono_insere(poligono, ponto_cria(ponto.x + x / 2, ponto.y - y));
+    poligono_insere(poligono, ponto_cria(ponto.x + x / 2, ponto.y - y / 3));
+    poligono_insere(poligono, ponto_cria(ponto.x + x, ponto.y));
+    poligono_insere(poligono, ponto_cria(ponto.x + x / 2, ponto.y + y / 3));
+    poligono_insere(poligono, ponto_cria(ponto.x + x / 2, ponto.y + y));
+    poligono_insere(poligono, ponto_cria(ponto.x, ponto.y + 2 * y / 3));
+    poligono_insere(poligono, ponto_cria(ponto.x - x / 2, ponto.y + y));
+    poligono_insere(poligono, ponto_cria(ponto.x - x / 2, ponto.y + y / 3));
 }
 
-void vetTranslac(poligon *pol, int vertical, int horizontal)
-{
-	*(pol->centro)=cria_ponto(pol->centro->x+vertical,pol->centro->y+horizontal);
-	lista_p2 *per;
-	for(per=pol->prim;per!=NULL;per=per->prox)
-	{
-		per->p.x+=vertical;
-		per->p.y+=horizontal;
-	}
+void vetorial_translada(Poligono *poligono, int vertical, int horizontal) {
+    *(poligono->centro) = ponto_cria(poligono->centro->x + vertical, poligono->centro->y + horizontal);
+    ListaDuplaPonto *cursor = poligono->primeiro;
+    while (cursor != NULL) {
+        cursor->ponto.x += vertical;
+        cursor->ponto.y += horizontal;
+        cursor = cursor->proximo;
+    }
 }
 
-void vetRotac(poligon *pol, float graus)
-{
-	lista_p2 *per;
-	for(per=pol->prim;per!=NULL;per=per->prox)
-		per->p=vira(*(pol->centro),per->p,graus);
+void vetorial_rotacao(Poligono *poligono, float graus) {
+    ListaDuplaPonto *cursor;
+    for (cursor = poligono->primeiro; cursor != NULL; cursor = cursor->proximo)
+        cursor->ponto = ponto_vira(*(poligono->centro), cursor->ponto, graus);
 }
 
-void vetEscala(poligon *pol, double escala)
-{
-	escala-=1.0;
-	lista_p2 *per=pol->prim;
-	while(per!=NULL)
-	{
-		per->p.x=(per->p.x - pol->centro->x)*escala+per->p.x;
-		per->p.y=(per->p.y - pol->centro->y)*escala+per->p.y;
-		per=per->prox;
-	}
+void vetorial_escala(Poligono *poligono, double escala) {
+    escala -= 1.0;
+    ListaDuplaPonto *cursor = poligono->primeiro;
+    while (cursor != NULL) {
+        cursor->ponto.x = (cursor->ponto.x - poligono->centro->x) * escala + cursor->ponto.x;
+        cursor->ponto.y = (cursor->ponto.y - poligono->centro->y) * escala + cursor->ponto.y;
+        cursor = cursor->proximo;
+    }
 }
 
-void desPoligono(ppm img, poligon *pol)
-{
-	lista_p2 *per=pol->prim->prox;
-	desLinha(img,pol->prim->p,per->p);
-	while(per->prox!=NULL)
-	{
-		desLinha(img,per->p,per->prox->p);
-		per=per->prox;
-		per->ant->ant=per->ant->prox=NULL;
-		libera_lista_p2(per->ant);
-		per->ant=NULL;
-	}
-	desLinha(img,per->p,pol->prim->p);
-	libera_lista_p2(per);
-	pol->prim->prox=NULL;
-	libera_lista_p2(pol->prim);
-	pol->prim=NULL;
+void desenha_poligono(PPM imagem, Poligono *poligono) {
+    ListaDuplaPonto *cursor = poligono->primeiro->proximo;
+    desenha_linha(imagem, poligono->primeiro->ponto, cursor->ponto);
+    while (cursor->proximo != NULL) {
+        desenha_linha(imagem, cursor->ponto, cursor->proximo->ponto);
+        cursor = cursor->proximo;
+        cursor->anterior->anterior = cursor->anterior->proximo = NULL;
+        libera_lista_p2(cursor->anterior);
+        cursor->anterior = NULL;
+    }
+    desLinha(imagem, cursor->ponto, poligono->primeiro->ponto);
+    libera_lista_p2(cursor);
+    poligono->primeiro->proximo = NULL;
+    libera_lista_p2(poligono->primeiro);
+    poligono->primeiro = NULL;
 }
 
-void desPoligonoCor(ppm img, poligon *pol, rgb cor)
-{
-	lista_p2 *per=pol->prim->prox;
-	desLinhaCor(img,pol->prim->p,per->p, cor);
-	while(per->prox!=NULL)
-	{
-		desLinhaCor(img,per->p,per->prox->p, cor);
-		per=per->prox;
-		per->ant->ant=per->ant->prox=NULL;
-		libera_lista_p2(per->ant);
-		per->ant=NULL;
-	}
-	desLinhaCor(img,per->p,pol->prim->p, cor);
-	libera_lista_p2(per);
-	pol->prim->prox=NULL;
-	libera_lista_p2(pol->prim);
-	pol->prim=NULL;
+void desenha_poligono_cor(PPM img, Poligono *poligono, rgb cor) {
+    ListaDuplaPonto *cursor = poligono->primeiro->proximo;
+    desLinhaCor(img, poligono->primeiro->ponto, cursor->ponto, cor);
+    while (cursor->proximo != NULL) {
+        desLinhaCor(img, cursor->ponto, cursor->proximo->ponto, cor);
+        cursor = cursor->proximo;
+        cursor->anterior->anterior = cursor->anterior->proximo = NULL;
+        libera_lista_p2(cursor->anterior);
+        cursor->anterior = NULL;
+    }
+    desLinhaCor(img, cursor->ponto, poligono->primeiro->ponto, cor);
+    libera_lista_p2(cursor);
+    poligono->primeiro->proximo = NULL;
+    libera_lista_p2(poligono->primeiro);
+    poligono->primeiro = NULL;
 }
