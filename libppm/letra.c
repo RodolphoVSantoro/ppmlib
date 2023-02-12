@@ -1,4 +1,5 @@
-#include "ppmlib.h"
+#include "internal_libppm.h"
+#include "libppm.h"
 
 void fonte_escreve_string_cor(PPM* imagem, char string[], Ponto origem, int tamanho_fonte, rgb cor) {
     Ponto cursor = origem;
@@ -168,18 +169,18 @@ void fonte_escreve_d_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     origem.x -= escala / 10;
     origem.y -= escala / 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 5),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + escala / 10),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 4 * escala / 10),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 8 * escala / 10),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 15 * escala / 20),
-		Ponto_cria_estatico(origem.x, origem.y + 9 * escala / 10),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 7 * escala / 10),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 8 * escala / 10),
-	};
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 5),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + escala / 10),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 4 * escala / 10),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 8 * escala / 10),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 15 * escala / 20),
+        Ponto_cria_estatico(origem.x, origem.y + 9 * escala / 10),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 7 * escala / 10),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 8 * escala / 10),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -190,15 +191,15 @@ void fonte_escreve_d_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 void fonte_escreve_e_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala / 5),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 9 * escala / 10),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 7 * escala / 10),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 3 * escala / 10),
-		Ponto_cria_estatico(origem.x + 11 * escala / 10, origem.y + 4 * escala / 5),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala / 5),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 9 * escala / 10),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 7 * escala / 10),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 3 * escala / 10),
+        Ponto_cria_estatico(origem.x + 11 * escala / 10, origem.y + 4 * escala / 5),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[2], cor);
@@ -209,18 +210,18 @@ void fonte_escreve_f_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y),
-		Ponto_cria_estatico(origem.x + 17 * escala / 20, origem.y + 5 * escala / 18),
-		Ponto_cria_estatico(origem.x + 6 * escala / 10, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 7 * escala / 9),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 2 * escala / 3),
-		Ponto_cria_estatico(origem.x + 2 * escala / 10, origem.y + 4 * escala / 9),
-		Ponto_cria_estatico(origem.x + 11 * escala / 10, origem.y + 7 * escala / 18),
-		Ponto_cria_estatico(origem.x + 15 * escala / 10, origem.y + 2 * escala / 3),
-		Ponto_cria_estatico(origem.x + 10 * escala / 10, origem.y + 8 * escala / 9),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 5 * escala / 9),
-		Ponto_cria_estatico(origem.x + 5 * escala / 10, origem.y + 4 * escala / 5),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y),
+        Ponto_cria_estatico(origem.x + 17 * escala / 20, origem.y + 5 * escala / 18),
+        Ponto_cria_estatico(origem.x + 6 * escala / 10, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 7 * escala / 9),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 2 * escala / 3),
+        Ponto_cria_estatico(origem.x + 2 * escala / 10, origem.y + 4 * escala / 9),
+        Ponto_cria_estatico(origem.x + 11 * escala / 10, origem.y + 7 * escala / 18),
+        Ponto_cria_estatico(origem.x + 15 * escala / 10, origem.y + 2 * escala / 3),
+        Ponto_cria_estatico(origem.x + 10 * escala / 10, origem.y + 8 * escala / 9),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 5 * escala / 9),
+        Ponto_cria_estatico(origem.x + 5 * escala / 10, origem.y + 4 * escala / 5),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[2], cor);
@@ -233,15 +234,15 @@ void fonte_escreve_g_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 7 * escala / 9),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 3 * escala / 9),
-		Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y + 2 * escala / 9),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 5 * escala / 9),
-		Ponto_cria_estatico(origem.x + 13 * escala / 10, origem.y + 6 * escala / 9),
-		Ponto_cria_estatico(origem.x + 14 * escala / 10, origem.y + 3 * escala / 9),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 4 * escala / 9),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 7 * escala / 9),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 3 * escala / 9),
+        Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y + 2 * escala / 9),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 5 * escala / 9),
+        Ponto_cria_estatico(origem.x + 13 * escala / 10, origem.y + 6 * escala / 9),
+        Ponto_cria_estatico(origem.x + 14 * escala / 10, origem.y + 3 * escala / 9),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 4 * escala / 9),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[0], cor);
     desenha_curva_cor(imagem, ponto[0], ponto[4], ponto[5], cor);
@@ -252,17 +253,17 @@ void fonte_escreve_h_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 19 * escala / 20, origem.y),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala / 8),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 2 * escala / 8),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 3 * escala / 16),
-		Ponto_cria_estatico(origem.x + escala / 2, origem.y + 3 * escala / 8),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 6 * escala / 8),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 5 * escala / 8),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 6 * escala / 8),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 7 * escala / 8),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 19 * escala / 20, origem.y),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala / 8),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 2 * escala / 8),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 3 * escala / 16),
+        Ponto_cria_estatico(origem.x + escala / 2, origem.y + 3 * escala / 8),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 6 * escala / 8),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 5 * escala / 8),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 6 * escala / 8),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 7 * escala / 8),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[3], ponto[4], ponto[5], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[6], ponto[7], cor);
@@ -273,13 +274,13 @@ void fonte_escreve_i_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= 3 * escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala / 5),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 3 * escala / 5),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 9 * escala / 10),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala / 2),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala / 5),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 3 * escala / 5),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 9 * escala / 10),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala / 2),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_circulo_cor_preenchido(imagem, ponto[5], tamanho_fonte / 100 + 1, cor);
@@ -289,36 +290,36 @@ void fonte_escreve_j_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 3 * escala / 8),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 9 * escala / 16),
-		Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 4 * escala / 8),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 5 * escala / 8),
-		Ponto_cria_estatico(origem.x + 7 * escala / 5, origem.y + 11 * escala / 16),
-		Ponto_cria_estatico(origem.x + 8 * escala / 5, origem.y + 4 * escala / 8),
-		Ponto_cria_estatico(origem.x + 13 * escala / 10, origem.y + escala / 6),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 7 * escala / 8),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 9 * escala / 16),
-	};
+        Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 3 * escala / 8),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 9 * escala / 16),
+        Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y + 4 * escala / 8),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 5 * escala / 8),
+        Ponto_cria_estatico(origem.x + 7 * escala / 5, origem.y + 11 * escala / 16),
+        Ponto_cria_estatico(origem.x + 8 * escala / 5, origem.y + 4 * escala / 8),
+        Ponto_cria_estatico(origem.x + 13 * escala / 10, origem.y + escala / 6),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 7 * escala / 8),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 9 * escala / 16),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
     desenha_curva_cor(imagem, ponto[6], ponto[7], ponto[3], cor);
-    desenha_linha_Cor(imagem, ponto[3], ponto[8], cor);
+    desenha_linha_cor(imagem, ponto[3], ponto[8], cor);
     desenha_circulo_cor_preenchido(imagem, ponto[9], tamanho_fonte / 100 + 1, cor);
 }
 
 void fonte_escreve_k_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 4;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala / 5),
-		Ponto_cria_estatico(origem.x, origem.y),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 7 * escala / 10),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + 2 * escala / 5),
-		Ponto_cria_estatico(origem.x, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala / 5),
+        Ponto_cria_estatico(origem.x, origem.y),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 7 * escala / 10),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + 2 * escala / 5),
+        Ponto_cria_estatico(origem.x, origem.y + escala),
+    };
     Ponto l = Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala / 10);
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, l, ponto[3], ponto[4], cor);
@@ -329,15 +330,15 @@ void fonte_escreve_l_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 20;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala / 5),
-		Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 8 * escala / 10),
-		Ponto_cria_estatico(origem.x - escala / 10, origem.y + 6 * escala / 10),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 2 * escala / 10),
-		Ponto_cria_estatico(origem.x + 12 * escala / 10, origem.y + 4 * escala / 5),
-		Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala / 5),
+        Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 8 * escala / 10),
+        Ponto_cria_estatico(origem.x - escala / 10, origem.y + 6 * escala / 10),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 2 * escala / 10),
+        Ponto_cria_estatico(origem.x + 12 * escala / 10, origem.y + 4 * escala / 5),
+        Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[2], cor);
@@ -348,14 +349,14 @@ void fonte_escreve_m_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= 3 * escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y - escala / 10),
-		Ponto_cria_estatico(origem.x, origem.y + escala / 6),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 2 * escala / 6),
-		Ponto_cria_estatico(origem.x, origem.y + 3 * escala / 6 + escala / 10),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 4 * escala / 6),
-		Ponto_cria_estatico(origem.x, origem.y + 5 * escala / 6 + escala / 10),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 9 * escala / 10),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y - escala / 10),
+        Ponto_cria_estatico(origem.x, origem.y + escala / 6),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 2 * escala / 6),
+        Ponto_cria_estatico(origem.x, origem.y + 3 * escala / 6 + escala / 10),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 4 * escala / 6),
+        Ponto_cria_estatico(origem.x, origem.y + 5 * escala / 6 + escala / 10),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 9 * escala / 10),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -365,12 +366,12 @@ void fonte_escreve_n_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= 3 * escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y),
-		Ponto_cria_estatico(origem.x + escala / 4, origem.y + 7 * escala / 20),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 9 * escala / 20),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 8 * escala / 10),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y),
+        Ponto_cria_estatico(origem.x + escala / 4, origem.y + 7 * escala / 20),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 9 * escala / 20),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 8 * escala / 10),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
 }
@@ -380,15 +381,15 @@ void fonte_escreve_o_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     origem.x += escala / 10;
     origem.y += escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x, origem.y + 4 * escala / 5),
-		Ponto_cria_estatico(origem.x, origem.y),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 10),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 4 * escala / 5),
-		Ponto_cria_estatico(origem.x - escala / 14, origem.y + escala / 5),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + escala / 2, origem.y + 4 * escala / 5),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala + escala / 10),
-	};
+        Ponto_cria_estatico(origem.x, origem.y + 4 * escala / 5),
+        Ponto_cria_estatico(origem.x, origem.y),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 10),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 4 * escala / 5),
+        Ponto_cria_estatico(origem.x - escala / 14, origem.y + escala / 5),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + escala / 2, origem.y + 4 * escala / 5),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala + escala / 10),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[0], cor);
     desenha_curva_cor(imagem, ponto[0], ponto[4], ponto[5], cor);
@@ -398,16 +399,16 @@ void fonte_escreve_o_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 void fonte_escreve_p_or(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 13 * escala / 20, origem.y + 2 * escala / 13),
-		Ponto_cria_estatico(origem.x + 5 * escala / 10, origem.y + 5 * escala / 13),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 7 * escala / 13),
-		Ponto_cria_estatico(origem.x + 7 * escala / 5, origem.y + escala / 13),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 6 * escala / 13),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + 11 * escala / 13),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 5 * escala / 13),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 10 * escala / 13),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 13 * escala / 20, origem.y + 2 * escala / 13),
+        Ponto_cria_estatico(origem.x + 5 * escala / 10, origem.y + 5 * escala / 13),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 7 * escala / 13),
+        Ponto_cria_estatico(origem.x + 7 * escala / 5, origem.y + escala / 13),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 6 * escala / 13),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + 11 * escala / 13),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 5 * escala / 13),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 10 * escala / 13),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_linha_cor(imagem, ponto[2], ponto[3], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[6], ponto[3], cor);
@@ -419,16 +420,16 @@ void fonte_escreve_q_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= 3 * escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 6 * escala / 8),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala / 8),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 4 * escala / 8),
-		Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + 2 * escala / 8),
-		Ponto_cria_estatico(origem.x + 8 * escala / 5, origem.y + 5 * escala / 8),
-		Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + escala),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 9 * escala / 16),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 7 * escala / 8),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 6 * escala / 8),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala / 8),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 4 * escala / 8),
+        Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + 2 * escala / 8),
+        Ponto_cria_estatico(origem.x + 8 * escala / 5, origem.y + 5 * escala / 8),
+        Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + escala),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 9 * escala / 16),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 7 * escala / 8),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[0], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -438,14 +439,14 @@ void fonte_escreve_q_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 void fonte_escreve_r_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala / 4),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + escala / 4),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 7 * escala / 8),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + 5 * escala / 8),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala / 4),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + escala / 4),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 7 * escala / 8),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + 5 * escala / 8),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -455,12 +456,12 @@ void fonte_escreve_s_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 2 * escala / 5),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala),
-		Ponto_cria_estatico(origem.x + escala, origem.y + 3 * escala / 5),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 2 * escala / 5),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala),
+        Ponto_cria_estatico(origem.x + escala, origem.y + 3 * escala / 5),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
 }
@@ -468,15 +469,15 @@ void fonte_escreve_s_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 void fonte_escreve_t_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 4 * escala / 7),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 5 * escala / 14),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 3 * escala / 14),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + escala / 14),
-		Ponto_cria_estatico(origem.x + 5 * escala / 10, origem.y + 4 * escala / 7),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 6 * escala / 7),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 4 * escala / 7),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 5 * escala / 14),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 3 * escala / 14),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + escala / 14),
+        Ponto_cria_estatico(origem.x + 5 * escala / 10, origem.y + 4 * escala / 7),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 6 * escala / 7),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[5], ponto[6], ponto[7], cor);
@@ -485,14 +486,14 @@ void fonte_escreve_t_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 void fonte_escreve_u_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala, origem.y),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala / 7),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 5 * escala / 14),
-		Ponto_cria_estatico(origem.x + 3 * escala / 2, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 5 * escala / 7),
-		Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y + 6 * escala / 7),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + escala, origem.y),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala / 7),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 5 * escala / 14),
+        Ponto_cria_estatico(origem.x + 3 * escala / 2, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 5 * escala / 7),
+        Ponto_cria_estatico(origem.x + 8 * escala / 10, origem.y + 6 * escala / 7),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -502,15 +503,15 @@ void fonte_escreve_v_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x += escala / 10;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala / 10),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 3 * escala / 10),
-		Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + 6 * escala / 10),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 8 * escala / 10),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 7 * escala / 10),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 6 * escala / 10),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala / 10),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 3 * escala / 10),
+        Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + 6 * escala / 10),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 8 * escala / 10),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 7 * escala / 10),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 6 * escala / 10),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -520,18 +521,18 @@ void fonte_escreve_v_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 void fonte_escreve_x_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y),
-		Ponto_cria_estatico(origem.x + escala / 10, origem.y + 2 * escala / 7),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 4 * escala / 7),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 9 * escala / 14),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + 9 * escala / 14),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 7),
-		Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 5 * escala / 7),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala),
-		Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 5 * escala / 7),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y),
+        Ponto_cria_estatico(origem.x + escala / 10, origem.y + 2 * escala / 7),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 4 * escala / 7),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 9 * escala / 14),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + 9 * escala / 14),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 7),
+        Ponto_cria_estatico(origem.x + 3 * escala / 10, origem.y + 5 * escala / 7),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala),
+        Ponto_cria_estatico(origem.x + 9 * escala / 10, origem.y + 5 * escala / 7),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -542,16 +543,16 @@ void fonte_escreve_x_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 void fonte_escreve_z_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 2 * escala / 13),
-		Ponto_cria_estatico(origem.x, origem.y + 8 * escala / 13),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 11 * escala / 13),
-		Ponto_cria_estatico(origem.x + escala / 2, origem.y + 8 * escala / 13),
-		Ponto_cria_estatico(origem.x + 6 * escala / 10, origem.y + 6 * escala / 13),
-		Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + 11 * escala / 13),
-		Ponto_cria_estatico(origem.x + 8 * escala / 5, origem.y + 7 * escala / 13),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 7 * escala / 13),
-		Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 2 * escala / 13),
+        Ponto_cria_estatico(origem.x, origem.y + 8 * escala / 13),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 11 * escala / 13),
+        Ponto_cria_estatico(origem.x + escala / 2, origem.y + 8 * escala / 13),
+        Ponto_cria_estatico(origem.x + 6 * escala / 10, origem.y + 6 * escala / 13),
+        Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + 11 * escala / 13),
+        Ponto_cria_estatico(origem.x + 8 * escala / 5, origem.y + 7 * escala / 13),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 7 * escala / 13),
+        Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -566,16 +567,16 @@ void fonte_escreve_S_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= escala;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + 7 * escala / 5, origem.y),
-		Ponto_cria_estatico(origem.x + 2 * escala, origem.y + 3 * escala / 7),
-		Ponto_cria_estatico(origem.x + 9 * escala / 5, origem.y + 5 * escala / 7),
-		Ponto_cria_estatico(origem.x + 8 * escala / 5, origem.y + escala),
-		Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + 4 * escala / 7),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 5 * escala / 14),
-		Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 5 * escala / 7),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + 6 * escala / 7),
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala),
-	};
+        Ponto_cria_estatico(origem.x + 7 * escala / 5, origem.y),
+        Ponto_cria_estatico(origem.x + 2 * escala, origem.y + 3 * escala / 7),
+        Ponto_cria_estatico(origem.x + 9 * escala / 5, origem.y + 5 * escala / 7),
+        Ponto_cria_estatico(origem.x + 8 * escala / 5, origem.y + escala),
+        Ponto_cria_estatico(origem.x + 6 * escala / 5, origem.y + 4 * escala / 7),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + 5 * escala / 14),
+        Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 5 * escala / 7),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + 6 * escala / 7),
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y + escala),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
     desenha_curva_cor(imagem, ponto[4], ponto[5], ponto[6], cor);
@@ -586,12 +587,12 @@ void fonte_escreve_V_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     int escala = tamanho_fonte * 5;
     origem.x -= escala;
     Ponto ponto[] = {
-		Ponto_cria_estatico(origem.x + escala / 5, origem.y - escala / 5),
-		Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 6),
-		Ponto_cria_estatico(origem.x + 2 * escala, origem.y + escala / 3),
-		Ponto_cria_estatico(origem.x + escala, origem.y + escala / 2),
-		Ponto_cria_estatico(origem.x, origem.y + 13 * escala / 15),
-	};
+        Ponto_cria_estatico(origem.x + escala / 5, origem.y - escala / 5),
+        Ponto_cria_estatico(origem.x + 4 * escala / 5, origem.y + escala / 6),
+        Ponto_cria_estatico(origem.x + 2 * escala, origem.y + escala / 3),
+        Ponto_cria_estatico(origem.x + escala, origem.y + escala / 2),
+        Ponto_cria_estatico(origem.x, origem.y + 13 * escala / 15),
+    };
     desenha_curva_cor(imagem, ponto[0], ponto[1], ponto[2], cor);
     desenha_curva_cor(imagem, ponto[2], ponto[3], ponto[4], cor);
 }

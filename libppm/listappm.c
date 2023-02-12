@@ -1,22 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "ppmlib.h"
+#include "internal.h"
+#include "libppm.h"
+#include "types.h"
 
 void ListaDuplaPonto_libera(ListaDuplaPonto *lista) {
     free(lista);
 }
 
 // Lista de Cor
-ListaCor ListaCor_cria() {
-    ListaCor lista = (ListaCor)malloc(sizeof(*lista));
+ListaCor *ListaCor_cria() {
+    ListaCor *lista = (ListaCor *)malloc(sizeof(*lista));
     lista->fim = NULL;
     lista->inicio = NULL;
     lista->tamanho = 0;
     return lista;
 }
 
-void ListaCor_insere_sem_repeticao(ListaCor lista, rgb cor) {
+void ListaCor_insere_sem_repeticao(ListaCor *lista, rgb cor) {
     NodeCor *cursor = lista->inicio;
     while (cursor != NULL) {
         if (cor_compare(cursor->cor, cor)) {
@@ -27,12 +29,12 @@ void ListaCor_insere_sem_repeticao(ListaCor lista, rgb cor) {
     ListaCor_insere_fim(lista, cor);
 }
 
-void ListaCor_insere_inicio(ListaCor lista, rgb cor) {
+void ListaCor_insere_inicio(ListaCor *lista, rgb cor) {
     NodeCor *novo = (NodeCor *)malloc(sizeof(NodeCor));
     novo->cor = cor;
     if (lista->inicio != NULL) {
         lista->inicio->anterior = novo;
-        novo->proximo = l->inicio;
+        novo->proximo = lista->inicio;
         novo->anterior = NULL;
         lista->inicio = novo;
     } else {
@@ -44,29 +46,29 @@ void ListaCor_insere_inicio(ListaCor lista, rgb cor) {
     lista->tamanho++;
 }
 
-void ListaCor_insere_fim(ListaCor lista, rgb cor) {
+void ListaCor_insere_fim(ListaCor *lista, rgb cor) {
     NodeCor *novo = (NodeCor *)malloc(sizeof(NodeCor));
     novo->cor = cor;
     if (lista->fim != NULL) {
-        lista->fim->prox = novo;
+        lista->fim->proximo = novo;
         novo->anterior = lista->fim;
-        novo->prox = NULL;
+        novo->proximo = NULL;
         lista->fim = novo;
     } else {
         lista->inicio = lista->fim = novo;
-        novo->prox = NULL;
-        novo->anterior = novo->prox;
+        novo->proximo = NULL;
+        novo->anterior = novo->proximo;
     }
     lista->tamanho++;
 }
 
 void ListaCor_remove_inicio(ListaCor lista) {
-    nocor *per = l->ini;
-    if (per != NULL) {
-        l->ini = per->prox;
+    NodeCor *cursor = lista->ini;
+    if (cursor != NULL) {
+        l->ini = cursor->proximo;
         if (l->ini == NULL)
             l->fim = NULL;
-        free(per);
+        free(cursor);
         l->n--;
     }
 }
@@ -125,7 +127,7 @@ void put_linha(linha l, ponto p) {
     lista_p *lp = (lista_p *)malloc(sizeof(lista_p));
     if (lp == NULL) {
         printf("Sem memoria\n");
-        libera_linha(l);
+        Linha_libera(l);
         exit(1);
     }
     lp->p = p;
@@ -183,7 +185,7 @@ void rmv_linha(linha l, ponto p) {
     }
 }
 
-void libera_linha(linha l) {
+void Linha_libera(linha l) {
     lista_p *a, *p = l->prim;
     while (p != NULL) {
         a = p;
@@ -291,19 +293,19 @@ void libera_poligono(poligon *pol) {
     free(pol);
 }
 
-static void escreve_arvb_preord(FILE *arq, ArvoreBinaria *arvore){
-	if(a!=NULL){
-		fprintf(arq, "%d ", a->x);
-		escreve_arvb_preord(arq, arvore->esquerda);
-		escreve_arvb_preord(arq, arvore->direita);
-	}
+static void escreve_arvb_preord(FILE *arq, ArvoreBinaria *arvore) {
+    if (a != NULL) {
+        fprintf(arq, "%d ", a->x);
+        escreve_arvb_preord(arq, arvore->esquerda);
+        escreve_arvb_preord(arq, arvore->direita);
+    }
 }
 
-static void arv_buscaIndice_preord(arvb *a, int x, int *ind){
-	if(a!=NULL){
-		(*ind)++;
-		if(a->x==x)return;
-		arv_buscaIndice_preord(a->e,x,ind);
-		arv_buscaIndice_preord(a->d,x,ind);
-	}
+static void arv_buscaIndice_preord(arvb *a, int x, int *ind) {
+    if (a != NULL) {
+        (*ind)++;
+        if (a->x == x) return;
+        arv_buscaIndice_preord(a->e, x, ind);
+        arv_buscaIndice_preord(a->d, x, ind);
+    }
 }

@@ -1,3 +1,4 @@
+#include "internal_libppm.h"
 #include "ppmlib.h"
 
 void vetorial_retangulo(Poligono *poligono, Ponto centro, int altura, int largura) {
@@ -65,7 +66,7 @@ void vetorial_translada(Poligono *poligono, int vertical, int horizontal) {
 void vetorial_rotacao(Poligono *poligono, float graus) {
     ListaDuplaPonto *cursor;
     for (cursor = poligono->primeiro; cursor != NULL; cursor = cursor->proximo)
-        cursor->ponto = ponto_vira(*(poligono->centro), cursor->ponto, graus);
+        cursor->ponto = Ponto_vira(*(poligono->centro), cursor->ponto, graus);
 }
 
 void vetorial_escala(Poligono *poligono, double escala) {
@@ -95,17 +96,17 @@ void desenha_poligono(PPM imagem, Poligono *poligono) {
     poligono->primeiro = NULL;
 }
 
-void desenha_poligono_cor(PPM img, Poligono *poligono, rgb cor) {
+void desenha_poligono_cor(PPM *imagem, Poligono *poligono, rgb cor) {
     ListaDuplaPonto *cursor = poligono->primeiro->proximo;
-    desLinhaCor(img, poligono->primeiro->ponto, cursor->ponto, cor);
+    desenha_linha_cor(imagem, poligono->primeiro->ponto, cursor->ponto, cor);
     while (cursor->proximo != NULL) {
-        desLinhaCor(img, cursor->ponto, cursor->proximo->ponto, cor);
+        desenha_linha_cor(imagem, cursor->ponto, cursor->proximo->ponto, cor);
         cursor = cursor->proximo;
         cursor->anterior->anterior = cursor->anterior->proximo = NULL;
         libera_lista_p2(cursor->anterior);
         cursor->anterior = NULL;
     }
-    desLinhaCor(img, cursor->ponto, poligono->primeiro->ponto, cor);
+    desenha_linha_cor(imagem, cursor->ponto, poligono->primeiro->ponto, cor);
     libera_lista_p2(cursor);
     poligono->primeiro->proximo = NULL;
     libera_lista_p2(poligono->primeiro);
