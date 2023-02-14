@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "../libppm/libdesenho.h"
 #include "../libppm/libppm.h"
 
 bool celula_contida_na_imagem(PPM* imagem, Ponto p) {
@@ -14,7 +15,7 @@ bool celula_tem_automata(PPM* imagem, Ponto p) {
 
 void incrementa_se_vizinho_tem_automata(PPM* imagem, Ponto celula, int* a) {
     if (celula_contida_na_imagem(imagem, celula) && celula_tem_automata(imagem, celula)) {
-        *a++;
+        (*a)++;
     }
 }
 
@@ -82,48 +83,48 @@ void setup_Conway_Game_of_Life(PPM* imagem) {
                 imagem->pixel[i][j] = _cor_preto;
                 switch (random_number) {
                     case 1:
-                        desenha_ponto(imagem, Ponto_cria_estatico(i - 1, j));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j - 1));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j - 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 1));
                         break;
                     case 2:
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j + 1));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 1));
                         break;
                     case 3:
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j + 1));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j + 1));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 2, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 2, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 2, j + 3));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 3, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 3, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 3, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 3, j + 3));
                         break;
                     case 4:
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j + 1));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 2, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 3, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 4, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 4, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 3, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 4, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 4, j + 3));
                         break;
                     case 5:
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j + 3));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j + 5));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j + 1));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i - 1, j + 1));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 2, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i - 2, j + 2));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 2, j + 3));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i - 2, j + 3));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i + 1, j + 4));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i - 1, j + 4));
-                        desenha_ponto(imagem, Ponto_cria_estatico(i, j + 5));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 5));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 1, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 2, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 4));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 1, j + 4));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 5));
                         break;
                 }
             }
@@ -146,6 +147,6 @@ int main() {
     }
     PPM_grava("img/CGoL.ppm", imagem);
     PPM_libera(imagem);
-    printf("%d\n", (clock() - i) / CLOCKS_PER_SEC);
+    printf("%ld\n", (clock() - i) / CLOCKS_PER_SEC);
     return 0;
 }

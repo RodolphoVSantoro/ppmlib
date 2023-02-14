@@ -1,12 +1,12 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "internal.h"
+#include "libdesenho.h"
 
 PPM* PPM_cria_com_dimensoes(Dimensao2D tamanho, int channelRange, rgb cor) {
     PPM* imagem = (PPM*)malloc(sizeof(*imagem));
-    imagem->cabecalho->tamanho = Dimensao2D_cria(tamanho.altura, tamanho.largura);
-    imagem->cabecalho->channelRange = channelRange;
-    imagem->cabecalho->tipoBMP = Key_PPM;
+    imagem->cabecalho = PPMHeader_cria(tamanho.altura, tamanho.largura, channelRange, Key_PPM);
     imagem->pixel = rgb2d_malloc(*imagem->cabecalho->tamanho);
     for (int i = 0; i < tamanho.altura; i++) {
         for (int j = 0; j < tamanho.largura; j++) {
@@ -50,13 +50,13 @@ void curva_cor_desenha(PPM* imagem, Ponto ponto_inicial, Ponto ponto_medio, Pont
     int limite = Ponto_distancia(ponto_inicial, ponto_medio) + Ponto_distancia(ponto_final, ponto_medio);
     for (int i = 0; i < limite; i++) {
         double d_contador = (double)i;
-        Ponto ab = linear_interpolation(ponto_inicial, ponto_medio, d_contador / limite);
-        Ponto bc = linear_interpolation(ponto_medio, ponto_final, d_contador / limite);
-        Ponto ab2 = linear_interpolation(ponto_inicial, ponto_medio, (d_contador + 1) / limite);
-        Ponto bc2 = linear_interpolation(ponto_medio, ponto_final, (d_contador + 1) / limite);
+        Ponto ab = Ponto_interpolacao_linear(ponto_inicial, ponto_medio, d_contador / limite);
+        Ponto bc = Ponto_interpolacao_linear(ponto_medio, ponto_final, d_contador / limite);
+        Ponto ab2 = Ponto_interpolacao_linear(ponto_inicial, ponto_medio, (d_contador + 1) / limite);
+        Ponto bc2 = Ponto_interpolacao_linear(ponto_medio, ponto_final, (d_contador + 1) / limite);
 
-        Ponto interpolado1 = linear_interpolation(ab, bc, d_contador / limite);
-        Ponto interpolado2 = linear_interpolation(ab2, bc2, (d_contador + 1) / limite);
+        Ponto interpolado1 = Ponto_interpolacao_linear(ab, bc, d_contador / limite);
+        Ponto interpolado2 = Ponto_interpolacao_linear(ab2, bc2, (d_contador + 1) / limite);
 
         linha_cor_desenha(imagem, interpolado1, interpolado2, cor);
     }
@@ -221,7 +221,7 @@ void elipse_cor_desenha(PPM* imagem, Ponto centro, int altura, int largura, rgb 
 void curva_cor_preenchido_desenha(PPM* imagem, Ponto ponto_inicial, Ponto ponto_medio, Ponto ponto_final, rgb cor) {
     double lim = Ponto_distancia(ponto_inicial, ponto_medio) + Ponto_distancia(ponto_final, ponto_medio);
     for (int i = 0; i <= (int)lim; i++) {
-        Ponto interpolado = linear_interpolation(ponto_medio, midpoint(ponto_inicial, ponto_final), (double)i / lim);
+        Ponto interpolado = Ponto_interpolacao_linear(ponto_medio, Ponto_medio(ponto_inicial, ponto_final), (double)i / lim);
         curva_cor_desenha(
             imagem,
             ponto_inicial,

@@ -1,8 +1,8 @@
 #ifndef _DESENHO_LIB_H_
 #define _DESENHO_LIB_H_
 
-#include "types.h"
 #include "internal.h"
+#include "types.h"
 
 // Cria uma imagem com dimensoes e cor de fundo
 /*
@@ -11,7 +11,7 @@
  * @param channelRange Valor máximo de cada canal de cor
  * @param corFundo Cor de fundo da imagem
  * @return Imagem criada
-*/
+ */
 PPM* PPM_cria_com_dimensoes(Dimensao2D tamanho, int channelRange, rgb corFundo);
 
 // sem cor
@@ -54,27 +54,23 @@ void retangulo_cor_preenchido_desenha(PPM* imagem, Ponto centro, int altura, int
 void losango_cor_preenchido_desenha(PPM* imagem, Ponto centro, int altura, int largura, rgb cor);
 void circulo_cor_preenchido_desenha(PPM* imagem, Ponto centro, int raio, rgb cor);
 
-// Minha Fonte
-#define fonte_escreve_string(imagem, s, o, font_size) fonte_escreve_string_cor(imagem, s, o, font_size, _cor_preto)
-#define fonte_escreve_char(imagem, c, o, size) fonte_escreve_char_cor(imagem, c, o, size, _cor_preto)
-void fonte_escreve_string_cor(PPM* imagem, char string[], Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_char_cor(PPM* imagem, char c, Ponto o, int size, rgb cor);
-
 // Fractais
-void fractal_espiral_desenha(PPM* imagem, Ponto ponto1, Ponto ponto2);
+void fractal_espiral_desenha(PPM* imagem, Ponto ponto_1, Ponto ponto_2);
 void fractal_arvore_binaria_desenha(PPM* imagem, Ponto ponto, int tamanho);
 void fractal_arvore_ternaria_desenha(PPM* imagem, Ponto ponto, int tamanho);
 void fractal_circulo_recursivo_desenha(PPM* imagem, Ponto ponto, int raio);
 void fractal_estrela_recursiva_desenha(PPM* imagem, Ponto ponto, int raio);
 void fractal_cantor_desenha(PPM* imagem, Ponto ponto, int tamanho);
 void fractal_koch_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
-void fractal_knuth_dragon_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
-void fractal_drag_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
-void fractal_dragcima_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
-void fractal_dragbaixo_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
-void fractal_pit_desenha(PPM* imagem, Ponto centro, int lado, float graus);
+void fractal_koch_2_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
+void fractal_dragon_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
+void fractal_dragon_cima_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
+void fractal_dragon_baixo_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
+void fractal_levy_dragon_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
 
 // Fractais sem nome
+void fractal_fc_desenha(PPM* imagem, Ponto a, Ponto b);
+void fractal_pit_desenha(PPM* imagem, Ponto centro, int lado, float graus);
 void fractal_rec_desenha(PPM* imagem, Ponto ponto, int tamanho);
 void fractal_rec2_desenha(PPM* imagem, Ponto ponto, int tamanho);
 void fractal_rec3baixo_desenha(PPM* imagem, Ponto ponto, int tamanho);

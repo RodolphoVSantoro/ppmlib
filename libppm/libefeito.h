@@ -33,13 +33,13 @@ void efeito_grava_blur_mint(char fname[], PPM* imagem, int tamanhoKernel);
 // void grava_espelhado(char fname[], PPM* imagem);
 
 // Aplica efeito in-place na imagem(sem criar nova imagem em memória)
-void efeito_aplica_decomposicao(PPM* imagem, bool r, bool g, bool b);
-void efeito_aplica_rotacao(PPM* imagem, int graus);
-void efeito_aplica_negativo(PPM* imagem);
-void efeito_aplica_preto_e_branco(PPM* imagem);
-void efeito_aplica_bitmap(PPM* imagem);
-void efeito_aplica_blur_gaussiano(PPM* imagem, int tamanhoKernel);
-void efeito_aplica_blur_mint(PPM* imagem, int tamanhoKernel);
-// void efeito_aplica_espelha(PPM* imagem);
+void efeito_aplica_decomposicao(PPM** imagem, bool r, bool g, bool b);
+void efeito_aplica_rotacao(PPM** imagem, int graus);
+void efeito_aplica_negativo(PPM** imagem);
+void efeito_aplica_preto_e_branco(PPM** imagem);
+void efeito_aplica_bitmap(PPM** imagem);
+void efeito_aplica_blur_gaussiano(PPM** imagem, int tamanhoKernel);
+void efeito_aplica_blur_mint(PPM** imagem, int tamanhoKernel);
+// void efeito_aplica_espelha(PPM** imagem);
 
 #endif

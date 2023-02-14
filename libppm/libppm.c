@@ -42,7 +42,7 @@ int string_compara(char *string1, char *string2) {
     }
 }
 
-int aproximacao(float valor) {
+int float_aproximacao(float valor) {
     int valorTruncado = valor;
     float diferenca = valor - (float)valorTruncado;
     if (valor >= 0) {
@@ -156,7 +156,7 @@ PPMHeader *PPMHeader_copia(PPMHeader *cabecalho_original) {
     return cabecalho_novo;
 }
 
-PPMHeader *PPMHeader_libera(PPMHeader *cabecalho) {
+void PPMHeader_libera(PPMHeader *cabecalho) {
     Dimensao2D_libera(cabecalho->tamanho);
     cabecalho->tamanho = NULL;
     free(cabecalho);
@@ -235,7 +235,7 @@ PPM *PPM_temporaria_cria(PPM *imagem_original) {
     return imagem_temporaria;
 }
 
-void libera_ppm(PPM *imagem) {
+void PPM_libera(PPM *imagem) {
     rgb2d_libera(imagem->pixel, *imagem->cabecalho->tamanho);
     PPMHeader_libera(imagem->cabecalho);
     imagem->cabecalho = NULL;
@@ -382,7 +382,6 @@ PPM *PPM_leitura(const char *fname) {
     fscanf(arquivo, "%d %d", &largura, &altura);
     fscanf(arquivo, "%d", &channelRange);
     BMPKey key = Key_PPM;
-    Dimensao2D tamanho = Dimensao2D_cria_estatico(largura, altura);
     PPM *imagem = PPM_cria();
     imagem->cabecalho = PPMHeader_cria(altura, largura, channelRange, key);
     imagem->pixel = rgb2d_malloc(*imagem->cabecalho->tamanho);
@@ -428,7 +427,7 @@ void PPM_grava(char fname[], PPM *imagem) {
 // Manipulacao Vetorial Basica
 
 // pontos
-Ponto cria_ponto(int x, int y) {
+Ponto Ponto_cria_estatico(int x, int y) {
     Ponto p;
     p.x = x;
     p.y = y;
@@ -445,27 +444,27 @@ double Ponto_distancia(Ponto a, Ponto b) {
         (float)int_quadrado(a.y - b.y));
 }
 
-Ponto Ponto_vira(Ponto a, Ponto b, float graus) {
-    Ponto f;
-    f.x = a.x + graus_coseno(graus) * (b.x - a.x) + graus_seno(graus) * (a.y - b.y);
-    f.y = a.y + graus_coseno(graus) * (b.y - a.y) + graus_seno(graus) * (b.x - a.x);
-    return f;
+Ponto Ponto_vira(Ponto ponto, Ponto ponto_referente, float graus) {
+    int x = ponto.x + graus_coseno(graus) * (ponto_referente.x - ponto.x) + graus_seno(graus) * (ponto.y - ponto_referente.y);
+    int y = ponto.y + graus_coseno(graus) * (ponto_referente.y - ponto.y) + graus_seno(graus) * (ponto_referente.x - ponto.x);
+    Ponto ponto_virado = Ponto_cria_estatico(x, y);
+    return ponto_virado;
 }
 
-Ponto midpoint(Ponto a, Ponto b) {
-    return cria_ponto((a.x + b.x) / 2, (a.y + b.y) / 2);
+Ponto Ponto_medio(Ponto ponto_1, Ponto ponto_2) {
+    return Ponto_cria_estatico((ponto_1.x + ponto_2.x) / 2, (ponto_1.y + ponto_2.y) / 2);
 }
 
 /*
 interpolacao linear
 acha o Ponto que divide a linha a->b em 1/ratio vezes
 */
-Ponto linear_interpolation(Ponto a, Ponto b, double ratio) {
-    return cria_ponto(a.x + (b.x - a.x) * ratio, a.y + (b.y - a.y) * ratio);
+Ponto Ponto_interpolacao_linear(Ponto ponto_1, Ponto ponto_2, double razao) {
+    return Ponto_cria_estatico(ponto_1.x + (ponto_2.x - ponto_1.x) * razao, ponto_1.y + (ponto_2.y - ponto_1.y) * razao);
 }
 
-bool Ponto_compara(Ponto p, Ponto q) {
-    return (p.x == q.x && p.y == q.y);
+bool Ponto_compara(Ponto ponto_1, Ponto ponto_2) {
+    return (ponto_1.x == ponto_2.x && ponto_1.y == ponto_2.y);
 }
 
 bool cor_compara(rgb cor_1, rgb cor_2) {
@@ -499,6 +498,6 @@ rgb cor_aleatoria() {
     return cor;
 }
 
-bool imagem_contem_Ponto(PPM *imagem, Ponto p) {
-    return (p.x >= 0 && p.x < imagem->cabecalho->tamanho->largura && p.y >= 0 && p.y < imagem->cabecalho->tamanho->altura);
+bool imagem_contem_Ponto(PPM *imagem, Ponto ponto) {
+    return (ponto.x >= 0 && ponto.x < imagem->cabecalho->tamanho->largura && ponto.y >= 0 && ponto.y < imagem->cabecalho->tamanho->altura);
 }

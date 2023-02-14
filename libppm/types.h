@@ -51,12 +51,12 @@ struct LISTA_Ponto {
 };
 typedef struct LISTA_Ponto ListaPonto;
 
-struct LISTA_PONTO_DUPLA {
+struct NO_PONTO_DUPLO {
     Ponto ponto;
-    struct LISTA_PONTO_DUPLA* proximo;
-    struct LISTA_PONTO_DUPLA* anterior;
+    struct NO_PONTO_DUPLO* proximo;
+    struct NO_PONTO_DUPLO* anterior;
 };
-typedef struct LISTA_PONTO_DUPLA ListaDuplaPonto;
+typedef struct NO_PONTO_DUPLO NoDuploPonto;
 
 struct LINHA {
     ListaPonto* primeiro;
@@ -108,7 +108,7 @@ struct PPM {
 typedef struct PPM PPM;
 
 struct poligono {
-    ListaDuplaPonto* primeiro;
+    NoDuploPonto* primeiro;
     Ponto* centro;
 };
 typedef struct poligono Poligono;

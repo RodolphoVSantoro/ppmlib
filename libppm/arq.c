@@ -4,7 +4,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int pot(int b, int e) {
+static FILE *fopen_or_crash(char fname[], char modo[]) {
+    FILE *arquivo = fopen(fname, modo);
+    if (arquivo == NULL) {
+        printf("Falha ao abrir o arquivo %s\n", fname);
+        exit(1);
+    }
+    return arquivo;
+}
+
+static int int_potencia(int b, int e) {
     int i, r = 1;
     for (i = 0; i < e; i++)
         r *= b;
@@ -22,10 +31,10 @@ arquivo cria_arq(int numero_linhas) {
 }
 
 arquivo leitura_arq(char nome[]) {
-    int c, linhas = 1, carac = 1, linha, x = 0;
+    int c = 1, linhas = 1, carac = 1, linha, x = 0;
     arquivo f;
     fchar fc;
-    FILE *arq = s_fopen(nome, "r");
+    FILE *arq = fopen_or_crash(nome, "r");
     while (c != EOF) {
         c = fgetc(arq);
         if (c == '\n')
@@ -35,7 +44,7 @@ arquivo leitura_arq(char nome[]) {
     c = 0;
     f.linhas = linhas;
     f.linha = (char **)malloc(sizeof(char *) * linhas);
-    arq = s_fopen(nome, "r");
+    arq = fopen_or_crash(nome, "r");
     for (linha = 0; linha < linhas; linha++) {
         fc = aloca_fchar();
         c = fgetc(arq);
@@ -61,9 +70,10 @@ arquivo leitura_arq(char nome[]) {
 
 void escrita(char fname[], arquivo f) {
     int x;
-    FILE *arq = s_fopen(fname, "w");
-    for (x = 0; x < f.linhas - 1; x++)
+    FILE *arq = fopen_or_crash(fname, "w");
+    for (x = 0; x < f.linhas - 1; x++) {
         fprintf(arq, "%s\n", f.linha[x]);
+    }
     fprintf(arq, "%s", f.linha[f.linhas - 1]);
     fclose(arq);
 }
@@ -91,8 +101,8 @@ int str2int(char n[]) {
     int i = 0, x = 0, p = strlen(n) - 1;
     for (; n[i] == '-' && n[i] != 0; i++) neg = !neg;
     for (; n[i] != 0; i++) {
-        if (n[i] < 48 || n[i] > 57) return neg == 0 ? x / pot(10, p + 1) : (x / pot(10, p + 1)) * -1;
-        x += ((int)(n[i] - 48)) * pot(10, p);
+        if (n[i] < 48 || n[i] > 57) return neg == 0 ? x / int_potencia(10, p + 1) : (x / int_potencia(10, p + 1)) * -1;
+        x += ((int)(n[i] - 48)) * int_potencia(10, p);
         p--;
     }
     return neg == 0 ? x : -x / 10;

@@ -14,4 +14,4 @@ target
 *.so
 *.o
 *.a
-
+*.ppm

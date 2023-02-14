@@ -75,9 +75,9 @@ PPM* efeito_cria_imagem_preto_e_branco(PPM* imagem) {
     for (int i = 0; i < imagem_preto_e_branco->cabecalho->tamanho->altura; i++) {
         for (int j = 0; j < imagem_preto_e_branco->cabecalho->tamanho->largura; j++) {
             int tom_de_cinza = (imagem->pixel[i][j].red + imagem->pixel[i][j].green + imagem->pixel[i][j].blue) / 3;
-            imagem_preto_e_branco->pixel[i][j].red = aproximacao(tom_de_cinza);
-            imagem_preto_e_branco->pixel[i][j].green = aproximacao(tom_de_cinza);
-            imagem_preto_e_branco->pixel[i][j].blue = aproximacao(tom_de_cinza);
+            imagem_preto_e_branco->pixel[i][j].red = float_aproximacao(tom_de_cinza);
+            imagem_preto_e_branco->pixel[i][j].green = float_aproximacao(tom_de_cinza);
+            imagem_preto_e_branco->pixel[i][j].blue = float_aproximacao(tom_de_cinza);
         }
     }
     return imagem_preto_e_branco;
@@ -97,9 +97,6 @@ PPM* efeito_cria_imagem_bitmap(PPM* imagem) {
 }
 
 static rgb efeito_blur_pixel(PPM* imagem, int i, int j, int tamanho_kernel, int** blur_kernel) {
-    if (!imagem_contem_Ponto(imagem, Ponto_cria_estatico(i, j))) {
-        return;
-    }
     float total_red = 0.0;
     float total_green = 0.0;
     float total_blue = 0.0;
@@ -141,7 +138,7 @@ int** efeito_kernel_blur_gaussiano_cria(int tamanho_kernel) {
     int** kernel = int2d_malloc(tamanho);
     for (int i = 0; i < tamanho_kernel; i++) {
         for (int j = 0; j < tamanho_kernel; j++) {
-            kernel[i][j] = int_quadrado((tamanho_kernel / 2) + 1 - (modulo(i - (tamanho_kernel / 2)) + modulo(j - (tamanho_kernel / 2))));
+            kernel[i][j] = int_quadrado((tamanho_kernel / 2) + 1 - (int_valor_absoluto(i - (tamanho_kernel / 2)) + int_valor_absoluto(j - (tamanho_kernel / 2))));
         }
     }
     return kernel;
@@ -167,9 +164,9 @@ int** efeito_kernel_blur_mint_cria(int tamanho_kernel) {
 
 PPM* efeito_cria_imagem_blur_mint(PPM* img, int tamanho_kernel) {
     int** kernel = efeito_kernel_blur_mint_cria(tamanho_kernel);
-    PPM* r = blur(img, kernel, tamanho_kernel);
+    PPM* imagem_blur_mint = efeito_cria_imagem_blur(img, kernel, tamanho_kernel);
     int2d_libera(kernel, tamanho_kernel);
-    return r;
+    return imagem_blur_mint;
 }
 
 PPM* efeito_cria_imagem_ampliado(PPM* imagem, int zoom) {
@@ -315,7 +312,7 @@ void efeito_grava_decomposto(char fname[], PPM* imagem, bool red_mantem, bool gr
 void efeito_grava_rotacionado(char fname[], PPM* imagem, int graus) {
     PPM* imagem_rotacionada = efeito_cria_imagem_rotacao(imagem, graus);
     PPM_grava(fname, imagem_rotacionada);
-    libera_ppm(imagem_rotacionada);
+    PPM_libera(imagem_rotacionada);
 }
 
 void efeito_grava_negativo(char fname[], PPM* img) {
@@ -335,7 +332,7 @@ void efeito_grava_preto_e_branco(char fname[], PPM* img) {
     fprintf(arquivo, "P3\n%d %d %d\n", img->cabecalho->tamanho->largura, img->cabecalho->tamanho->altura, img->cabecalho->channelRange);
     for (int i = 0; i < img->cabecalho->tamanho->altura; i++)
         for (int j = 0; j < img->cabecalho->tamanho->largura; j++) {
-            int val = aproximacao((img->pixel[i][j].red + img->pixel[i][j].green + img->pixel[i][j].blue) / 3);
+            int val = float_aproximacao((img->pixel[i][j].red + img->pixel[i][j].green + img->pixel[i][j].blue) / 3);
             fprintf(arquivo, "%d %d %d\n ", val, val, val);
         }
     fclose(arquivo);
@@ -357,46 +354,29 @@ void efeito_grava_bitmap(char fname[], PPM* img) {
     arquivo = NULL;
 }
 
-void efeito_grava_blur(char fname[], PPM* imagem, int** ker, int tamanho_kernel) {
+void efeito_grava_blur(char fname[], PPM* imagem, int** kernel, int tamanho_kernel) {
     FILE* arquivo = fopen_or_crash(fname, "w");
-    int i, j, a, b, n, k;
-    rgb c;
-    float media_red, media_green, media_blue;
+
     fprintf(arquivo, "P3\n%d %d %d\n", imagem->cabecalho->tamanho->largura, imagem->cabecalho->tamanho->altura, imagem->cabecalho->channelRange);
-    for (i = 0; i < imagem->cabecalho->tamanho->altura; i++) {
-        for (j = 0; j < imagem->cabecalho->tamanho->largura; j++) {
-            media_red = 0;
-            media_green = 0;
-            media_blue = 0;
-            n = 0;
-            for (a = -tamanho_kernel / 2; a < tamanho_kernel / 2; a++) {
-                for (b = -tamanho_kernel / 2; b < tamanho_kernel / 2; b++) {
-                    if (i + a >= 0 && i + a < imagem->cabecalho->tamanho->altura && j + b >= 0 && j + b < imagem->cabecalho->tamanho->largura) {
-                        c = imagem->pixel[i + a][j + b];
-                        k = ker[a + (tamanho_kernel / 2)][b + (tamanho_kernel / 2)];
-                        n += k;
-                        media_red += c.red * k;
-                        media_green += c.green * k;
-                        media_blue += c.blue * k;
-                    }
-                }
-            }
-            rgb pixel_com_blur = efeito_blur_pixel(imagem, i, j, ker, tamanho_kernel);
+
+    for (int i = 0; i < imagem->cabecalho->tamanho->altura; i++) {
+        for (int j = 0; j < imagem->cabecalho->tamanho->largura; j++) {
+            rgb pixel_com_blur = efeito_blur_pixel(imagem, i, j, tamanho_kernel, kernel);
             fprintf(arquivo, " %d %d %d\n", pixel_com_blur.red, pixel_com_blur.blue, pixel_com_blur.green);
         }
     }
 }
 
 void efeito_grava_blur_gaussiano(char fname[], PPM* imagem, int tamanho_kernel) {
-    int** ker = gaussian(tamanho_kernel);
-    efeito_grava_blur(fname, imagem, ker, tamanho_kernel);
-    libera_int2d(ker, tamanho_kernel);
+    int** kernel = efeito_kernel_blur_gaussiano_cria(tamanho_kernel);
+    efeito_grava_blur(fname, imagem, kernel, tamanho_kernel);
+    int2d_libera(kernel, tamanho_kernel);
 }
 
 void efeito_grava_blur_mint(char fname[], PPM* imagem, int tamanho_kernel) {
-    int** ker = mint(tamanho_kernel);
-    efeito_grava_blur(fname, imagem, ker, tamanho_kernel);
-    libera_int2d(ker, tamanho_kernel);
+    int** kernel = efeito_kernel_blur_mint_cria(tamanho_kernel);
+    efeito_grava_blur(fname, imagem, kernel, tamanho_kernel);
+    int2d_libera(kernel, tamanho_kernel);
 }
 
 void efeito_grava_espelhado(char fname[], PPM* imagem) {
@@ -412,21 +392,21 @@ void efeito_grava_espelhado(char fname[], PPM* imagem) {
     arquivo = NULL;
 }
 
-void efeito_aplica_decomposicao(PPM** imagem, bool r, bool g, bool b) {
+void efeito_aplica_decomposicao(PPM** imagem, bool red_mantem, bool green_mantem, bool blue_mantem) {
     for (int i = 0; i < (*imagem)->cabecalho->tamanho->altura; i++)
         for (int j = 0; j < (*imagem)->cabecalho->tamanho->largura; j++) {
-            if (r == false)
+            if (red_mantem == false)
                 (*imagem)->pixel[i][j].red = 0;
-            if (g == false)
+            if (green_mantem == false)
                 (*imagem)->pixel[i][j].green = 0;
-            if (b == false)
+            if (blue_mantem == false)
                 (*imagem)->pixel[i][j].blue = 0;
         }
 }
 
 void efeito_aplica_rotacao(PPM** imagem, int graus) {
     PPM* imagem_temporaria = efeito_cria_imagem_rotacao((*imagem), graus);
-    libera_ppm((*imagem));
+    PPM_libera((*imagem));
     *imagem = imagem_temporaria;
 }
 
@@ -443,9 +423,9 @@ void efeito_aplica_preto_e_branco(PPM** imagem) {
     for (int i = 0; i < (*imagem)->cabecalho->tamanho->altura; i++)
         for (int j = 0; j < (*imagem)->cabecalho->tamanho->largura; j++) {
             double tom_de_cinza = ((*imagem)->pixel[i][j].red + (*imagem)->pixel[i][j].green + (*imagem)->pixel[i][j].blue) / 3;
-            (*imagem)->pixel[i][j].red = aproximacao(tom_de_cinza);
-            (*imagem)->pixel[i][j].green = aproximacao(tom_de_cinza);
-            (*imagem)->pixel[i][j].blue = aproximacao(tom_de_cinza);
+            (*imagem)->pixel[i][j].red = float_aproximacao(tom_de_cinza);
+            (*imagem)->pixel[i][j].green = float_aproximacao(tom_de_cinza);
+            (*imagem)->pixel[i][j].blue = float_aproximacao(tom_de_cinza);
         }
 }
 
@@ -461,20 +441,20 @@ void efeito_aplica_bitmap(PPM** imagem) {
 
 void efeito_aplica_blur_gaussiano(PPM** imagem, int tamanho_kernel) {
     int** kernel = efeito_kernel_blur_gaussiano_cria(tamanho_kernel);
-    PPM* imagem_temporaria = blur(*imagem, kernel, tamanho_kernel);
-    libera_ppm(*imagem);
+    PPM* imagem_temporaria = efeito_cria_imagem_blur(*imagem, kernel, tamanho_kernel);
+    PPM_libera(*imagem);
     *imagem = imagem_temporaria;
 }
 
 void efeito_aplica_blur_mint(PPM** imagem, int tamanho_kernel) {
     int** kernel = efeito_kernel_blur_mint_cria(tamanho_kernel);
-    PPM* imagem_temporaria = blur(*imagem, kernel, tamanho_kernel);
-    libera_ppm(*imagem);
+    PPM* imagem_temporaria = efeito_cria_imagem_blur(*imagem, kernel, tamanho_kernel);
+    PPM_libera(*imagem);
     *imagem = imagem_temporaria;
 }
 
-// void efeito_aplica_espelha(PPM* imagem) {
+// void efeito_aplica_espelha(PPM** imagem) {
 // 	PPM* imagem_temporaria = espelhar(*imagem);
-// 	libera_ppm(*imagem);
+// 	PPM_libera(*imagem);
 // 	*imagem = imagem_temporaria;
 // }
