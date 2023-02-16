@@ -16,3 +16,5 @@ target
 *.a
 *.ppm
 programas/imgs/*
+.idea/
+.vs/
