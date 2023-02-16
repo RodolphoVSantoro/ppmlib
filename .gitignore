@@ -14,4 +14,8 @@ target
 *.so
 *.o
 *.a
-
+*.ppm
+programas/imgs/*
+.idea/
+.vs/
+tmp/

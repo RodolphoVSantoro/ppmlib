@@ -1,19 +1,11 @@
-#include "lib/ppmlib.h"
-#include "lib/arq.h"
 #include <stdio.h>
-// #include <time.h>
 
-int main()
-{
-		// ppm img = cria_ppm(100, 100, verde2);
+#include "lib/arq.h"
+#include "lib/ppmlib.h"
 
-        ppm img = leitura("imgs/orig.ppm");
-        // grava("imgs/backup.ppm", img);
-
-        libera_ppm(img);
-
-        // grava("imgs/descomp.ppm", teste);
-        // libera_ppm(teste);
-
-        return 0;
+int main() {
+    PPM* img = PPM_cria(100, 100, branco);
+    PPM_grava("imgs/teste.ppm", img);
+    PPM_libera(img);
+    return 0;
 }

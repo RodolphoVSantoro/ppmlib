@@ -1,143 +1,152 @@
-#include "ppmlib.h"
-#include <time.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-bool lim(ppm img, ponto p)
-{
-        return (p.x > 0 && p.x < img.cab.altura && p.y > 0
-                        && p.y < img.cab.largura);
+#include "../libppm/libdesenho.h"
+#include "../libppm/libppm.h"
+
+bool celula_contida_na_imagem(PPM* imagem, Ponto p) {
+    return (p.x > 0 && p.x < imagem->cabecalho->tamanho->altura && p.y > 0 && p.y < imagem->cabecalho->tamanho->largura);
 }
 
-bool rgbcmp(rgb c1, rgb c2)
-{
-        return (c1.r == c2.r && c1.g == c2.g && c1.b == c2.b);
+bool celula_tem_automata(PPM* imagem, Ponto p) {
+    return cor_compara(imagem->pixel[p.x][p.y], _cor_preto);
 }
 
-void conG_o_L(ppm img)
-{
-        int i, j;
-        int a;
-        for (i = 0; i < img.cab.altura; i++)
-        {
-                for (j = 0; j < img.cab.largura; j++)
-                {
-                        a = 0;
-                        if (lim(img, cria_ponto(i - 1, j)))
-                                if (rgbcmp(img.cor[i - 1][j], preto))
-                                        a++;
-                        if (lim(img, cria_ponto(i - 1, j + 1)))
-                                if (rgbcmp(img.cor[i - 1][j + 1], preto))
-                                        a++;
-                        if (lim(img, cria_ponto(i - 1, j - 1)))
-                                if (rgbcmp(img.cor[i - 1][j - 1], preto))
-                                        a++;
-                        if (lim(img, cria_ponto(i + 1, j)))
-                                if (rgbcmp(img.cor[i + 1][j], preto))
-                                        a++;
-                        if (lim(img, cria_ponto(i + 1, j + 1)))
-                                if (rgbcmp(img.cor[i + 1][j + 1], preto))
-                                        a++;
-                        if (lim(img, cria_ponto(i + 1, j - 1)))
-                                if (rgbcmp(img.cor[i + 1][j - 1], preto))
-                                        a++;
-                        if (lim(img, cria_ponto(i, j + 1)))
-                                if (rgbcmp(img.cor[i][j + 1], preto))
-                                        a++;
-                        if (lim(img, cria_ponto(i, j - 1)))
-                                if (rgbcmp(img.cor[i][j - 1], preto))
-                                        a++;
-                        if (rgbcmp(img.cor[i][j], preto))
-                        {
-                                if (a < 2)
-                                        img.cor[i][j] = branco;
-                                else if (a > 3)
-                                        img.cor[i][j] = branco;
-                        }
-                        else if (a == 3)
-                                img.cor[i][j] = preto;
-                }
+void incrementa_se_vizinho_tem_automata(PPM* imagem, Ponto celula, int* a) {
+    if (celula_contida_na_imagem(imagem, celula) && celula_tem_automata(imagem, celula)) {
+        (*a)++;
+    }
+}
+
+rgb nova_cor_celula_atual(PPM* imagem, Ponto celula, int automatas_vizinhos) {
+    if (celula_tem_automata(imagem, celula)) {
+        if (automatas_vizinhos < 2) {
+            return _cor_branco;
+        } else if (automatas_vizinhos > 3) {
+            return _cor_branco;
         }
+    } else if (automatas_vizinhos == 3) {
+        return _cor_preto;
+    }
+    return imagem->pixel[celula.x][celula.y];
 }
 
-void setup_G_o_L(ppm img)
-{
-        int i, j, r, x = 0;
-        for (i = 0; i < img.cab.altura; i++)
-                for (j = 0; j < img.cab.largura; j++)
-                {
-                        r = rand() % (int)(img.cab.altura * img.cab.largura / 30 + 1);
-                        if (r < 6)
-                        {
-                                x++;
-                                img.cor[i][j] = preto;
-                                switch (r)
-                                {
-                                case 1:
-                                        desPonto(img, cria_ponto(i - 1, j));
-                                        desPonto(img, cria_ponto(i + 1, j));
-                                        desPonto(img, cria_ponto(i, j - 1));
-                                        desPonto(img, cria_ponto(i, j + 1));
-                                        break;
-                                case 2:
-                                        desPonto(img, cria_ponto(i + 1, j));
-                                        desPonto(img, cria_ponto(i + 1, j + 1));
-                                        desPonto(img, cria_ponto(i, j + 1));
-                                        break;
-                                case 3:
-                                        desPonto(img, cria_ponto(i + 1, j));
-                                        desPonto(img, cria_ponto(i + 1, j + 1));
-                                        desPonto(img, cria_ponto(i, j + 1));
-                                        desPonto(img, cria_ponto(i + 2, j + 2));
-                                        desPonto(img, cria_ponto(i + 2, j + 2));
-                                        desPonto(img, cria_ponto(i + 2, j + 3));
-                                        desPonto(img, cria_ponto(i + 3, j + 2));
-                                        desPonto(img, cria_ponto(i + 3, j + 3));
-                                        break;
-                                case 4:
-                                        desPonto(img, cria_ponto(i + 1, j));
-                                        desPonto(img, cria_ponto(i, j + 1));
-                                        desPonto(img, cria_ponto(i + 1, j + 2));
-                                        desPonto(img, cria_ponto(i + 2, j + 2));
-                                        desPonto(img, cria_ponto(i + 3, j + 2));
-                                        desPonto(img, cria_ponto(i + 4, j + 2));
-                                        desPonto(img, cria_ponto(i + 4, j + 3));
-                                        break;
-                                case 5:
-                                        desPonto(img, cria_ponto(i, j + 2));
-                                        desPonto(img, cria_ponto(i, j + 3));
-                                        desPonto(img, cria_ponto(i, j + 5));
-                                        desPonto(img, cria_ponto(i + 1, j + 1));
-                                        desPonto(img, cria_ponto(i - 1, j + 1));
-                                        desPonto(img, cria_ponto(i + 2, j + 2));
-                                        desPonto(img, cria_ponto(i - 2, j + 2));
-                                        desPonto(img, cria_ponto(i + 2, j + 3));
-                                        desPonto(img, cria_ponto(i - 2, j + 3));
-                                        desPonto(img, cria_ponto(i + 1, j + 4));
-                                        desPonto(img, cria_ponto(i - 1, j + 4));
-                                        desPonto(img, cria_ponto(i, j + 5));
-                                        break;
-                                }
-                        }
-                }
-        printf("%d grupos\n", x);
-}
+void conwayGame_of_Life(PPM* imagem) {
+    int i, j;
+    int automatas_vizinhos;
+    for (i = 0; i < imagem->cabecalho->tamanho->altura; i++) {
+        for (j = 0; j < imagem->cabecalho->tamanho->largura; j++) {
+            automatas_vizinhos = 0;
+            Ponto ponto_a_esquerda = Ponto_cria_estatico(i - 1, j);
+            incrementa_se_vizinho_tem_automata(imagem, ponto_a_esquerda, &automatas_vizinhos);
 
-int main()
-{
-        srand((unsigned)time(NULL));
-        ppm img = cria_ppm(1080, 1920, branco);
-        setup_G_o_L(img);
-        grava("imgs/init.ppm", img);
-        int i = clock();
-        int x;
-        for (x = 0; x < 6000; x++)
-        {
-                // printf("%d\n", x+1);
-                conG_o_L(img);
-                // sleep(1);
+            Ponto ponto_esquerda_baixo = Ponto_cria_estatico(i - 1, j + 1);
+            incrementa_se_vizinho_tem_automata(imagem, ponto_esquerda_baixo, &automatas_vizinhos);
+
+            Ponto ponto_esquerda_cima = Ponto_cria_estatico(i - 1, j - 1);
+            incrementa_se_vizinho_tem_automata(imagem, ponto_esquerda_cima, &automatas_vizinhos);
+
+            Ponto ponto_a_direita = Ponto_cria_estatico(i + 1, j);
+            incrementa_se_vizinho_tem_automata(imagem, ponto_a_direita, &automatas_vizinhos);
+
+            Ponto ponto_direita_baixo = Ponto_cria_estatico(i + 1, j + 1);
+            incrementa_se_vizinho_tem_automata(imagem, ponto_direita_baixo, &automatas_vizinhos);
+
+            Ponto ponto_direita_cima = Ponto_cria_estatico(i + 1, j - 1);
+            incrementa_se_vizinho_tem_automata(imagem, ponto_direita_cima, &automatas_vizinhos);
+
+            Ponto ponto_abaixo = Ponto_cria_estatico(i, j + 1);
+            incrementa_se_vizinho_tem_automata(imagem, ponto_abaixo, &automatas_vizinhos);
+
+            Ponto ponto_acima = Ponto_cria_estatico(i, j - 1);
+            incrementa_se_vizinho_tem_automata(imagem, ponto_acima, &automatas_vizinhos);
+
+            Ponto ponto_atual = Ponto_cria_estatico(i, j);
+            imagem->pixel[i][j] = nova_cor_celula_atual(imagem, ponto_atual, automatas_vizinhos);
         }
-        grava("imgs/CGOL.ppm", img);
-        libera_ppm(img);
-        printf("%d\n", (clock() - i) / CLOCKS_PER_SEC);
-        return 0;
+    }
+}
+
+int random_com_range(int min, int max) {
+    return rand() % (max - min + 1) + min;
+}
+
+void setup_Conway_Game_of_Life(PPM* imagem) {
+    int grupos = 0;
+    for (int i = 0; i < imagem->cabecalho->tamanho->altura; i++)
+        for (int j = 0; j < imagem->cabecalho->tamanho->largura; j++) {
+            int max_random = imagem->cabecalho->tamanho->altura * imagem->cabecalho->tamanho->largura / 30;
+            int random_number = random_com_range(0, max_random);
+            if (random_number < 6) {
+                grupos++;
+                imagem->pixel[i][j] = _cor_preto;
+                switch (random_number) {
+                    case 1:
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j - 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 1));
+                        break;
+                    case 2:
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 1));
+                        break;
+                    case 3:
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 3, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 3, j + 3));
+                        break;
+                    case 4:
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 3, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 4, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 4, j + 3));
+                        break;
+                    case 5:
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 5));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 1, j + 1));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 2, j + 2));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 2, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 2, j + 3));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i + 1, j + 4));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i - 1, j + 4));
+                        ponto_desenha(imagem, Ponto_cria_estatico(i, j + 5));
+                        break;
+                }
+            }
+        }
+    printf("%d grupos\n", grupos);
+}
+
+int main() {
+    srand((unsigned)time(NULL));
+    Dimensao2D tamanho = Dimensao2D_cria_estatico(1000, 1000);
+    int canal = 255;
+    PPM* imagem = PPM_cria_com_dimensoes(tamanho, canal, _cor_branco);
+    setup_Conway_Game_of_Life(imagem);
+    PPM_grava("img/init.ppm", imagem);
+    int i = clock();
+    for (int x = 0; x < 6000; x++) {
+        // printf("%d\n", x+1);
+        conwayGame_of_Life(imagem);
+        // sleep(1);
+    }
+    PPM_grava("img/CGoL.ppm", imagem);
+    PPM_libera(imagem);
+    printf("%ld\n", (clock() - i) / CLOCKS_PER_SEC);
+    return 0;
 }
