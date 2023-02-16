@@ -5,4 +5,7 @@ CC=gcc
 CFLAGS=-Wall -Wextra -Werror -pedantic -ansi -lm -std=c2x
 
 default:
-	$(CC) -o main main.c lib/arq.c lib/libppm.c lib/manipppm.c lib/criappm.c lib/listappm.c $(CFLAGS)
+	$(CC) -o main main.c libppm/*.c $(CFLAGS)
+
+run: default
+	./main
