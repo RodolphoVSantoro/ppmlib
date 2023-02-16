@@ -91,8 +91,8 @@ void retangulo_cor_desenha(PPM* imagem, Ponto centro, int altura, int largura, r
         Ponto_cria_estatico(centro.x + altura / 2, centro.y - largura / 2),
     };
     linha_cor_desenha(imagem, ponto[0], ponto[1], cor);
-    linha_cor_desenha(imagem, ponto[0], ponto[2], cor);
     linha_cor_desenha(imagem, ponto[1], ponto[2], cor);
+    linha_cor_desenha(imagem, ponto[2], ponto[3], cor);
     linha_cor_desenha(imagem, ponto[3], ponto[0], cor);
 }
 

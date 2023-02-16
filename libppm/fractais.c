@@ -138,6 +138,48 @@ void fractal_koch_2_desenha(PPM* imagem, Ponto ponto_inicial, Ponto ponto_final)
     }
 }
 
+void fractal_dragon_cor_desenha(PPM* imagem, Ponto ponto_inicial, Ponto ponto_final, rgb cor) {
+    const double raiz5 = 1.732050808;
+    int x = float_aproximacao((ponto_final.x * ((2 * raiz5 - 1) / 2) + 3 * ponto_inicial.x) / (3 + ((2 * raiz5 - 1) / 2)));
+    int y = float_aproximacao((ponto_final.y * ((2 * raiz5 - 1) / 2) + 3 * ponto_inicial.y) / (3 + ((2 * raiz5 - 1) / 2)));
+    Ponto c = Ponto_cria_estatico(x, y);
+    if (Ponto_distancia(ponto_inicial, ponto_final) > 10) {
+        c = Ponto_vira(ponto_final, c, 45);
+        fractal_dragon_cor_cima_desenha(imagem, ponto_inicial, c, cor);
+        fractal_dragon_cor_baixo_desenha(imagem, c, ponto_final, cor);
+    }
+}
+
+void fractal_dragon_cor_cima_desenha(PPM* imagem, Ponto ponto_inicial, Ponto ponto_final, rgb cor) {
+    const double raiz5 = 1.732050808;
+    int x = float_aproximacao((ponto_final.x * ((2 * raiz5 - 1) / 2) + 3 * ponto_inicial.x) / (3 + ((2 * raiz5 - 1) / 2)));
+    int y = float_aproximacao((ponto_final.y * ((2 * raiz5 - 1) / 2) + 3 * ponto_inicial.y) / (3 + ((2 * raiz5 - 1) / 2)));
+    Ponto c = Ponto_cria_estatico(x, y);
+    if (Ponto_distancia(ponto_inicial, ponto_final) > 10) {
+        c = Ponto_vira(ponto_final, c, 45);
+        fractal_dragon_cor_cima_desenha(imagem, ponto_inicial, c, cor);
+        fractal_dragon_cor_baixo_desenha(imagem, c, ponto_final, cor);
+    } else {
+        linha_cor_desenha(imagem, ponto_inicial, c, cor);
+        linha_cor_desenha(imagem, c, ponto_final, cor);
+    }
+}
+
+void fractal_dragon_cor_baixo_desenha(PPM* imagem, Ponto ponto_inicial, Ponto ponto_final, rgb cor) {
+    const double raiz5 = 1.732050808;
+    int x = float_aproximacao((ponto_final.x * ((2 * raiz5 - 1) / 2) + 3 * ponto_inicial.x) / (3 + ((2 * raiz5 - 1) / 2)));
+    int y = float_aproximacao((ponto_final.y * ((2 * raiz5 - 1) / 2) + 3 * ponto_inicial.y) / (3 + ((2 * raiz5 - 1) / 2)));
+    Ponto c = Ponto_cria_estatico(x, y);
+    if (Ponto_distancia(ponto_inicial, ponto_final) > 10) {
+        c = Ponto_vira(ponto_final, c, 315);
+        fractal_dragon_cor_cima_desenha(imagem, ponto_inicial, c, cor);
+        fractal_dragon_cor_baixo_desenha(imagem, c, ponto_final, cor);
+    } else {
+        linha_cor_desenha(imagem, ponto_inicial, c, cor);
+        linha_cor_desenha(imagem, c, ponto_final, cor);
+    }
+}
+
 void fractal_dragon_desenha(PPM* imagem, Ponto ponto_inicial, Ponto ponto_final) {
     const double raiz5 = 1.732050808;
     int x = float_aproximacao((ponto_final.x * ((2 * raiz5 - 1) / 2) + 3 * ponto_inicial.x) / (3 + ((2 * raiz5 - 1) / 2)));
