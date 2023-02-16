@@ -64,72 +64,72 @@ void Linha_libera(Linha* linha);                                     /*remove to
 
 // minusculas
 // preto
-#define escreve_a(imagem, origem, tamanho_fonte) escreve_a_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_b(imagem, origem, tamanho_fonte) escreve_b_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_c(imagem, origem, tamanho_fonte) escreve_c_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_d(imagem, origem, tamanho_fonte) escreve_d_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_e(imagem, origem, tamanho_fonte) escreve_e_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_f(imagem, origem, tamanho_fonte) escreve_f_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_g(imagem, origem, tamanho_fonte) escreve_g_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_h(imagem, origem, tamanho_fonte) escreve_h_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_i(imagem, origem, tamanho_fonte) escreve_i_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_j(imagem, origem, tamanho_fonte) escreve_j_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_k(imagem, origem, tamanho_fonte) escreve_k_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_l(imagem, origem, tamanho_fonte) escreve_l_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_m(imagem, origem, tamanho_fonte) escreve_m_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_n(imagem, origem, tamanho_fonte) escreve_n_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_o(imagem, origem, tamanho_fonte) escreve_o_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_p(imagem, origem, tamanho_fonte) escreve_p_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_q(imagem, origem, tamanho_fonte) escreve_q_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_r(imagem, origem, tamanho_fonte) escreve_r_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_s(imagem, origem, tamanho_fonte) escreve_s_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_t(imagem, origem, tamanho_fonte) escreve_t_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_u(imagem, origem, tamanho_fonte) escreve_u_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_v(imagem, origem, tamanho_fonte) escreve_v_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_x(imagem, origem, tamanho_fonte) escreve_x_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_z(imagem, origem, tamanho_fonte) escreve_z_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_a(imagem, origem, tamanho_fonte) fonte_escreve_a_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_b(imagem, origem, tamanho_fonte) fonte_escreve_b_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_c(imagem, origem, tamanho_fonte) fonte_escreve_c_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_d(imagem, origem, tamanho_fonte) fonte_escreve_d_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_e(imagem, origem, tamanho_fonte) fonte_escreve_e_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_f(imagem, origem, tamanho_fonte) fonte_escreve_f_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_g(imagem, origem, tamanho_fonte) fonte_escreve_g_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_h(imagem, origem, tamanho_fonte) fonte_escreve_h_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_i(imagem, origem, tamanho_fonte) fonte_escreve_i_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_j(imagem, origem, tamanho_fonte) fonte_escreve_j_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_k(imagem, origem, tamanho_fonte) fonte_escreve_k_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_l(imagem, origem, tamanho_fonte) fonte_escreve_l_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_m(imagem, origem, tamanho_fonte) fonte_escreve_m_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_n(imagem, origem, tamanho_fonte) fonte_escreve_n_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_o(imagem, origem, tamanho_fonte) fonte_escreve_o_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_p(imagem, origem, tamanho_fonte) fonte_escreve_p_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_q(imagem, origem, tamanho_fonte) fonte_escreve_q_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_r(imagem, origem, tamanho_fonte) fonte_escreve_r_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_s(imagem, origem, tamanho_fonte) fonte_escreve_s_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_t(imagem, origem, tamanho_fonte) fonte_escreve_t_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_u(imagem, origem, tamanho_fonte) fonte_escreve_u_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_v(imagem, origem, tamanho_fonte) fonte_escreve_v_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_x(imagem, origem, tamanho_fonte) fonte_escreve_x_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_z(imagem, origem, tamanho_fonte) fonte_escreve_z_cor(imagem, origem, tamanho_fonte, _cor_preto)
 
 // cor
-void escreve_a_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_b_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_c_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_d_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_e_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_f_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_g_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_h_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_i_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_j_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_k_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_l_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_m_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_n_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_o_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_p_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_q_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_r_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_s_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_t_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_u_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_v_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_x_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_z_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_a_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_b_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_c_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_d_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_e_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_f_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_g_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_h_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_i_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_j_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_k_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_l_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_m_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_n_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_o_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_p_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_q_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_r_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_s_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_t_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_u_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_v_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_x_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_z_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
 
 // maiusculas
 // preto
-#define escreve_S(imagem, origem, tamanho_fonte) escreve_S_cor(imagem, origem, tamanho_fonte, _cor_preto)
-#define escreve_V(imagem, origem, tamanho_fonte) escreve_V_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_S(imagem, origem, tamanho_fonte) fonte_escreve_S_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_V(imagem, origem, tamanho_fonte) fonte_escreve_V_cor(imagem, origem, tamanho_fonte, _cor_preto)
 
 // cor
-void escreve_S_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void escreve_V_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_S_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_V_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
 
 // Simbolos
 
 // preto
-#define escreve_hifen(imagem, origem, tamanho_fonte) escreve_hifen_cor(imagem, origem, tamanho_fonte, _cor_preto)
+#define fonte_escreve_hifen(imagem, origem, tamanho_fonte) fonte_escreve_hifen_cor(imagem, origem, tamanho_fonte, _cor_preto)
 
 // cor
-void escreve_hifen_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_hifen_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
 
 #endif

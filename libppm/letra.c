@@ -13,7 +13,7 @@ void fonte_escreve_string_cor(PPM* imagem, char string[], Ponto origem, int tama
         if (cursor.y + tamanho_fonte * 10 > imagem->cabecalho->tamanho->largura) {
             if (string[i + 1] != 0 && string[i + 1] != ' ') {
                 cursor.y += tamanho_fonte * 4;
-                escreve_hifen_cor(imagem, cursor, tamanho_fonte, cor);
+                fonte_escreve_hifen_cor(imagem, cursor, tamanho_fonte, cor);
             }
             cursor.y = origem.y;
             cursor.x += tamanho_fonte * 8;
@@ -27,82 +27,82 @@ void fonte_escreve_string_cor(PPM* imagem, char string[], Ponto origem, int tama
 void fonte_escreve_char_cor(PPM* imagem, char c, Ponto origem, int tamanho_fonte, rgb cor) {
     switch (c) {
         case 'a':
-            escreve_a_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_a_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'b':
-            escreve_b_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_b_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'c':
-            escreve_c_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_c_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'd':
-            escreve_d_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_d_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'e':
-            escreve_e_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_e_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'f':
-            escreve_f_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_f_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'g':
-            escreve_g_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_g_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'h':
-            escreve_h_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_h_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'i':
-            escreve_i_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_i_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'j':
-            escreve_j_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_j_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'k':
-            escreve_k_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_k_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'l':
-            escreve_l_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_l_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'm':
-            escreve_m_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_m_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'n':
-            escreve_n_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_n_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'o':
-            escreve_o_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_o_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'p':
-            escreve_p_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_p_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'q':
-            escreve_q_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_q_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'r':
-            escreve_r_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_r_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 's':
-            escreve_s_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_s_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 't':
-            escreve_t_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_t_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'u':
-            escreve_u_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_u_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'v':
-            escreve_v_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_v_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'x':
-            escreve_x_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_x_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'z':
-            escreve_z_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_z_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'S':
-            escreve_S_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_S_cor(imagem, origem, tamanho_fonte, cor);
             break;
         case 'V':
-            escreve_V_cor(imagem, origem, tamanho_fonte, cor);
+            fonte_escreve_V_cor(imagem, origem, tamanho_fonte, cor);
             break;
     }
 }
@@ -400,7 +400,7 @@ void fonte_escreve_o_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-void fonte_escreve_p_or(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_p_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + 13 * escala / 20, origem.y + 2 * escala / 13),

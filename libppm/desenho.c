@@ -72,7 +72,7 @@ void lista_linha_cor_desenha(PPM* imagem, Linha* linha, rgb cor) {
     }
 }
 
-void desTrianguloCor(PPM* imagem, Ponto centro, int altura, int base, rgb cor) {
+void triangulo_cor_desenha(PPM* imagem, Ponto centro, int altura, int base, rgb cor) {
     Ponto ponto[] = {
         Ponto_cria_estatico(centro.x + altura / 2, centro.y - base / 2),
         Ponto_cria_estatico(centro.x - altura / 2, centro.y),
@@ -83,7 +83,7 @@ void desTrianguloCor(PPM* imagem, Ponto centro, int altura, int base, rgb cor) {
     linha_cor_desenha(imagem, ponto[2], ponto[0], cor);
 }
 
-void desRetanguloCor(PPM* imagem, Ponto centro, int altura, int largura, rgb cor) {
+void retangulo_cor_desenha(PPM* imagem, Ponto centro, int altura, int largura, rgb cor) {
     Ponto ponto[] = {
         Ponto_cria_estatico(centro.x - altura / 2, centro.y - largura / 2),
         Ponto_cria_estatico(centro.x - altura / 2, centro.y + largura / 2),
@@ -96,7 +96,7 @@ void desRetanguloCor(PPM* imagem, Ponto centro, int altura, int largura, rgb cor
     linha_cor_desenha(imagem, ponto[3], ponto[0], cor);
 }
 
-void desLosangoCor(PPM* imagem, Ponto centro, int altura, int largura, rgb cor) {
+void losango_cor_desenha(PPM* imagem, Ponto centro, int altura, int largura, rgb cor) {
     Ponto ponto[] = {
         Ponto_cria_estatico(centro.x, centro.y - largura / 2),
         Ponto_cria_estatico(centro.x - altura / 2, centro.y),
@@ -109,7 +109,7 @@ void desLosangoCor(PPM* imagem, Ponto centro, int altura, int largura, rgb cor) 
     linha_cor_desenha(imagem, ponto[3], ponto[0], cor);
 }
 
-void desTrapezioCor(PPM* imagem, Ponto centro, int b1, int b2, int altura, rgb cor) {
+void trapezio_cor_desenha(PPM* imagem, Ponto centro, int b1, int b2, int altura, rgb cor) {
     Ponto ponto[] = {
         Ponto_cria_estatico(centro.x - altura / 2, centro.y - b1 / 2),
         Ponto_cria_estatico(centro.x - altura / 2, centro.y + b1 / 2),
@@ -122,7 +122,7 @@ void desTrapezioCor(PPM* imagem, Ponto centro, int b1, int b2, int altura, rgb c
     linha_cor_desenha(imagem, ponto[3], ponto[0], cor);
 }
 
-void desEstrelaCor(PPM* imagem, Ponto p, int x, int y, rgb cor) {
+void estrela_cor_desenha(PPM* imagem, Ponto p, int x, int y, rgb cor) {
     int i;
     Ponto ponto[] = {
         Ponto_cria_estatico(p.x - x, p.y),

@@ -25,8 +25,8 @@ rgb int_to_rgb(int numero);
 int rgb_to_int(rgb cor);
 rgb cor_aleatoria();
 
-Dimensao2D* Dimensao2D_cria(int largura, int altura);
-Dimensao2D Dimensao2D_cria_estatico(int largura, int altura);
+Dimensao2D* Dimensao2D_cria(int altura, int largura);
+Dimensao2D Dimensao2D_cria_estatico(int altura, int largura);
 Dimensao2D* Dimensao2D_copia(Dimensao2D* dimensao_original);
 void Dimensao2D_libera(Dimensao2D* dimensao);
 const char* key_to_string(BMPKey key);

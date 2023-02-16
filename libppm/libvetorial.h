@@ -28,8 +28,8 @@ void vetorial_rotaciona(Poligono* poligono, float graus);
 void vetorial_escala(Poligono* poligono, double escala);
 
 // Minha Fonte
-#define fonte_escreve_string(imagem, s, o, font_size) fonte_escreve_string_cor(imagem, s, o, font_size, _cor_preto)
-#define fonte_escreve_char(imagem, c, o, size) fonte_escreve_char_cor(imagem, c, o, size, _cor_preto)
+#define fonte_escreve_string(imagem, string, origem, tamanho) fonte_escreve_string_cor(imagem, string, origem, tamanho, _cor_preto)
+#define fonte_escreve_char(imagem, caracter, origem, tamanho) fonte_escreve_char_cor(imagem, caracter, origem, tamanho, _cor_preto)
 void fonte_escreve_string_cor(PPM* imagem, char string[], Ponto origem, int tamanho_fonte, rgb cor);
 void fonte_escreve_char_cor(PPM* imagem, char c, Ponto o, int size, rgb cor);
 

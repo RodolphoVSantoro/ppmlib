@@ -100,22 +100,22 @@ int rgb_to_int(rgb cor) {
     return cor.red + 256 * (cor.green + 256 * cor.blue);
 }
 
-Dimensao2D Dimensao2D_cria_estatico(int largura, int altura) {
+Dimensao2D Dimensao2D_cria_estatico(int altura, int largura) {
     Dimensao2D dimensao;
     dimensao.largura = largura;
     dimensao.altura = altura;
     return dimensao;
 }
 
-Dimensao2D *Dimensao2D_cria(int largura, int altura) {
+Dimensao2D *Dimensao2D_cria(int altura, int largura) {
     Dimensao2D *dimensao = (Dimensao2D *)malloc(sizeof(*dimensao));
-    dimensao->largura = largura;
     dimensao->altura = altura;
+    dimensao->largura = largura;
     return dimensao;
 }
 
 Dimensao2D *Dimensao2D_copia(Dimensao2D *dimensao_original) {
-    Dimensao2D *dimensao_nova = Dimensao2D_cria(dimensao_original->largura, dimensao_original->altura);
+    Dimensao2D *dimensao_nova = Dimensao2D_cria(dimensao_original->altura, dimensao_original->largura);
     return dimensao_nova;
 }
 

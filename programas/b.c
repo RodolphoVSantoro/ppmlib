@@ -4,7 +4,7 @@
 
 int main() {
     int altura = 1080, largura = 1920;
-    Dimensao2D tamanho = Dimensao2D_cria_estatico(largura, altura);
+    Dimensao2D tamanho = Dimensao2D_cria_estatico(altura, largura);
     int canal = 255;
     PPM* imagem = PPM_cria_com_dimensoes(tamanho, canal, _cor_verde_livre_discurso);
     Ponto c = Ponto_cria_estatico(altura / 2, largura / 2);
