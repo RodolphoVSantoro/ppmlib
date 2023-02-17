@@ -2,6 +2,10 @@
 CC=gcc
 # Flags
 CFLAGS=-Wall -Wextra -Werror -pedantic -ansi -lm -std=c2x
+#output folder
+OUTPUT=output
+EXAMPLES=examples
+LIB=libppm
 
 default:
 	@echo "Makefile for libppm"
@@ -20,45 +24,45 @@ default:
 	@echo "make flor"
 
 blue_waves:
-	$(CC) -o output/blue_waves examples/blue_waves.c libppm/*.c $(CFLAGS)
-	./output/blue_waves
+	$(CC) -o $(OUTPUT)/blue_waves $(EXAMPLES)/blue_waves.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/blue_waves
 
 aplica_bitmap_blur:
-	$(CC) -o output/aplica_bitmap_blur examples/aplica_bitmap_blur.c libppm/*.c $(CFLAGS)
-		./output/blue_waves
+	$(CC) -o $(OUTPUT)/aplica_bitmap_blur $(EXAMPLES)/aplica_bitmap_blur.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/aplica_bitmap_blur
 
 fractal_dragon_cor_random_gaussian_blur:
-	$(CC) -o output/fractal_dragon_cor_random_gaussian_blur examples/fractal_dragon_cor_random_gaussian_blur.c libppm/*.c $(CFLAGS)
-	./output/fractal_dragon_cor_random_gaussian_blur
+	$(CC) -o $(OUTPUT)/fractal_dragon_cor_random_gaussian_blur $(EXAMPLES)/fractal_dragon_cor_random_gaussian_blur.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/fractal_dragon_cor_random_gaussian_blur
 
 fractal_dragon_cor_random:
-	$(CC) -o output/fractal_dragon_cor_random examples/fractal_dragon_cor_random.c libppm/*.c $(CFLAGS)
-	./output/fractal_dragon_cor_random
+	$(CC) -o $(OUTPUT)/fractal_dragon_cor_random $(EXAMPLES)/fractal_dragon_cor_random.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/fractal_dragon_cor_random
 
 losango:
-	$(CC) -o output/losango examples/losango.c libppm/*.c $(CFLAGS)
-	./output/losango
+	$(CC) -o $(OUTPUT)/losango $(EXAMPLES)/losango.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/losango
 
 bandeira_brasil:
-	$(CC) -o output/bandeira_brasil examples/bandeira_brasil.c libppm/*.c $(CFLAGS)
-	./output/bandeira_brasil
+	$(CC) -o $(OUTPUT)/bandeira_brasil $(EXAMPLES)/bandeira_brasil.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/bandeira_brasil
 
 conway_game_of_life:
-	$(CC) -o output/conway_game_of_life examples/conway_game_of_life.c libppm/*.c $(CFLAGS)
-	./output/conway_game_of_life
+	$(CC) -o $(OUTPUT)/conway_game_of_life $(EXAMPLES)/conway_game_of_life.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/conway_game_of_life
 
 escreve_texto:
-	$(CC) -o output/escreve_texto examples/escreve_texto.c libppm/*.c $(CFLAGS)
-	./output/escreve_texto
+	$(CC) -o $(OUTPUT)/escreve_texto $(EXAMPLES)/escreve_texto.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/escreve_texto
 
 fractal_estrela:
-	$(CC) -o output/fractal_estrela examples/fractal_estrela.c libppm/*.c $(CFLAGS)
-	./output/fractal_estrela
+	$(CC) -o $(OUTPUT)/fractal_estrela $(EXAMPLES)/fractal_estrela.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/fractal_estrela
 
 media_vermelho:
-	$(CC) -o output/media_vermelho examples/media_vermelho.c libppm/*.c $(CFLAGS)
-	./output/media_vermelho
+	$(CC) -o $(OUTPUT)/media_vermelho $(EXAMPLES)/media_vermelho.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/media_vermelho
 
 flor:
-	$(CC) -o output/flor examples/flor.c libppm/*.c $(CFLAGS)
-	./output/flor
+	$(CC) -o $(OUTPUT)/flor $(EXAMPLES)/flor.c $(LIB)/*.c $(CFLAGS)
+	./$(OUTPUT)/flor
