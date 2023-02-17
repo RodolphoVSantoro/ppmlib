@@ -13,6 +13,11 @@ default:
 	@echo "make bandeira_brasil"
 	@echo "make blue_waves"
 	@echo "make aplica_bitmap_blur"
+	@echo "make conway_game_of_life"
+	@echo "make escreve_texto"
+	@echo "make fractal_estrela"
+	@echo "make media_vermelho"
+	@echo "make flor"
 
 blue_waves:
 	$(CC) -o output/blue_waves examples/blue_waves.c libppm/*.c $(CFLAGS)
