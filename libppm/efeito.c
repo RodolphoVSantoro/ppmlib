@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "arq.h"
 #include "internal.h"
 #include "libefeito.h"
 
@@ -362,7 +361,7 @@ void efeito_grava_blur(char fname[], PPM* imagem, int** kernel, int tamanho_kern
     for (int i = 0; i < imagem->cabecalho->tamanho->altura; i++) {
         for (int j = 0; j < imagem->cabecalho->tamanho->largura; j++) {
             rgb pixel_com_blur = efeito_blur_pixel(imagem, i, j, tamanho_kernel, kernel);
-            fprintf(arquivo, " %d %d %d\n", pixel_com_blur.red, pixel_com_blur.blue, pixel_com_blur.green);
+            fprintf(arquivo, " %d %d %d\n", pixel_com_blur.red, pixel_com_blur.green, pixel_com_blur.blue);
         }
     }
 }
