@@ -4,16 +4,16 @@
 #include "../libppm/libppm.h"
 
 int main() {
-    Dimensao2D dimensoes = Dimensao2D_cria_estatico(1000, 1000);
+    Dimensao2D dimensoes = Dimensao2D_cria_estatico(1080, 1920);
     PPM* img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
 
-    Ponto ponto_inicial = Ponto_cria_estatico(500, 500);
-    Ponto ponto_meio_baixo = Ponto_cria_estatico(400, 400);
-    Ponto ponto_meio_cima = Ponto_cria_estatico(600, 600);
-    Ponto ponto_final = Ponto_cria_estatico(500, 800);
+    Ponto ponto_inicial = Ponto_cria_estatico(500, 1000);
+    Ponto ponto_meio_baixo = Ponto_cria_estatico(400, 900);
+    Ponto ponto_meio_cima = Ponto_cria_estatico(600, 1100);
+    Ponto ponto_final = Ponto_cria_estatico(500, 1300);
 
     double rotacao = 360;
-    int iteracoes = 4;
+    int iteracoes = 8;
 
     for (int i = 0; i < iteracoes; i++) {
         double angulo = rotacao / iteracoes;
