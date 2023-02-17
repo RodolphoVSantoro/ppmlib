@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "libppm/libppm.h"
-#include "libppm/libdesenho.h"
+
+#include "../libppm/libdesenho.h"
+#include "../libppm/libppm.h"
 
 int main() {
-    srand (time(NULL));
+    srand(time(NULL));
     Dimensao2D dimensoes = Dimensao2D_cria_estatico(1000, 1000);
     PPM* img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
 
@@ -18,7 +19,7 @@ int main() {
         ponto_i.x -= i * 30;
         ponto_i.y += i * 30;
     }
-    
+
     PPM_grava("imgs/teste.ppm", img);
     PPM_libera(img);
     return 0;

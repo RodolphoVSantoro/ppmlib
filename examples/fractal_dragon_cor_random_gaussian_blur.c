@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "libppm/libppm.h"
-#include "libppm/libdesenho.h"
-#include "libppm/libefeito.h"
+
+#include "../libppm/libdesenho.h"
+#include "../libppm/libefeito.h"
+#include "../libppm/libppm.h"
 
 int main() {
-    srand (time(NULL));
+    srand(time(NULL));
     Dimensao2D dimensoes = Dimensao2D_cria_estatico(1000, 1000);
     PPM* img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
 
@@ -21,7 +22,7 @@ int main() {
     }
 
     efeito_aplica_blur_gaussiano(&img, 20);
-    
+
     PPM_grava("imgs/teste.ppm", img);
     PPM_libera(img);
     return 0;

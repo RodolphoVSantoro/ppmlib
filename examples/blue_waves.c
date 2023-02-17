@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "libppm/libppm.h"
-#include "libppm/libdesenho.h"
+#include "../libppm/libdesenho.h"
+#include "../libppm/libppm.h"
 
 int main() {
     Dimensao2D dimensoes = Dimensao2D_cria_estatico(1000, 1000);
@@ -15,8 +15,8 @@ int main() {
             circulo_cor_desenha(img, ponto, i * 4, rgb_cria(0, i, 255));
         }
     }
-    
-    PPM_grava("imgs/teste.ppm", img);
+
+    PPM_grava("imgs/blue_waves.ppm", img);
     PPM_libera(img);
     return 0;
 }
