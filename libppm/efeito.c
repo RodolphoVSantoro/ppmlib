@@ -168,11 +168,7 @@ PPM* efeito_cria_imagem_blur_mint(PPM* img, int tamanho_kernel) {
     return imagem_blur_mint;
 }
 
-PPM* efeito_cria_imagem_ampliado(PPM* imagem, int zoom) {
-    PPM* imagem_ampliada = PPM_temporaria_cria(imagem);
-    imagem_ampliada->cabecalho->tamanho->altura *= zoom;
-    imagem_ampliada->cabecalho->tamanho->largura *= zoom;
-
+void aplica_aumenta_imagem(PPM* imagem, PPM* imagem_ampliada, float zoom) {
     for (int i = 0; i < imagem->cabecalho->tamanho->altura; i++) {
         for (int j = 0; j < imagem->cabecalho->tamanho->largura; j++) {
             for (int copia_i = i * zoom; copia_i < i * zoom + zoom; copia_i++) {
@@ -182,6 +178,55 @@ PPM* efeito_cria_imagem_ampliado(PPM* imagem, int zoom) {
             }
         }
     }
+}
+
+void aplica_diminui_imagem(PPM* imagem, PPM* imagem_ampliada) {
+    int fator_zoom_altura = imagem->cabecalho->tamanho->altura / imagem_ampliada->cabecalho->tamanho->altura;
+    int fator_zoom_largura = imagem->cabecalho->tamanho->largura / imagem_ampliada->cabecalho->tamanho->largura;
+    for (int i = 0; i < imagem_ampliada->cabecalho->tamanho->altura; i++) {
+        for (int j = 0; j < imagem_ampliada->cabecalho->tamanho->largura; j++) {
+            int total_red = 0;
+            int total_green = 0;
+            int total_blue = 0;
+            int n_pixels = 0;
+            for (int copia_i = i * fator_zoom_altura; copia_i < i * fator_zoom_altura + fator_zoom_altura; copia_i++) {
+                for (int copia_j = j * fator_zoom_largura; copia_j < j * fator_zoom_largura + fator_zoom_largura; copia_j++) {
+                    if (copia_j >= imagem->cabecalho->tamanho->largura) {
+                        break;
+                    }
+                    total_red += imagem->pixel[copia_i][copia_j].red;
+                    total_green += imagem->pixel[copia_i][copia_j].green;
+                    total_blue += imagem->pixel[copia_i][copia_j].blue;
+                    n_pixels++;
+                }
+                if (copia_i >= imagem->cabecalho->tamanho->altura) {
+                    break;
+                }
+            }
+            imagem_ampliada->pixel[i][j].red = total_red / n_pixels;
+            imagem_ampliada->pixel[i][j].green = total_green / n_pixels;
+            imagem_ampliada->pixel[i][j].blue = total_blue / n_pixels;
+        }
+    }
+}
+
+PPM* efeito_cria_imagem_ampliado(PPM* imagem, float zoom) {
+    PPM* imagem_ampliada = PPM_cria();
+    imagem_ampliada->cabecalho->tamanho->altura = imagem->cabecalho->tamanho->altura * zoom;
+    imagem_ampliada->cabecalho->tamanho->largura = imagem->cabecalho->tamanho->largura * zoom;
+    imagem_ampliada->pixel = rgb2d_malloc(*imagem_ampliada->cabecalho->tamanho);
+
+    if (zoom < 0) {
+        printf("O zoom deve ser maior que 0");
+        exit(1);
+    }
+
+    if (zoom >= 1.0) {
+        aplica_aumenta_imagem(imagem, imagem_ampliada, zoom);
+    } else {
+        aplica_diminui_imagem(imagem, imagem_ampliada);
+    }
+
     return imagem_ampliada;
 }
 

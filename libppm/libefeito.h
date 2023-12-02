@@ -15,7 +15,7 @@ int** efeito_kernel_blur_gaussiano_cria(int tamanhoKernel);
 PPM* efeito_cria_imagem_blur_gaussiano(PPM* imagem, int tamanhoKernel);
 int** efeito_kernel_blur_mint_cria(int tamanhoKernel);
 PPM* efeito_cria_imagem_blur_mint(PPM* imagem, int tamanhoKernel);
-PPM* efeito_cria_imagem_ampliado(PPM* imagem, int zoom);
+PPM* efeito_cria_imagem_ampliado(PPM* imagem, float zoom);
 // PPM* efeito_cria_imagem_espelhado(PPM* imagem);
 PPM* efeito_cria_imagem_join(PPM* imagem, PPM* imagem2);
 PPM* efeito_cria_imagem_merge(PPM* imagem, PPM* imagem2);
