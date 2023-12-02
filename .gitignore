@@ -19,3 +19,5 @@ programas/imgs/*
 .idea/
 .vs/
 tmp/
+output/*
+!output

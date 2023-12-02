@@ -66,6 +66,9 @@ void fractal_koch_2_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
 void fractal_dragon_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
 void fractal_dragon_cima_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
 void fractal_dragon_baixo_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
+void fractal_dragon_cor_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal, rgb cor);
+void fractal_dragon_cor_cima_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal, rgb cor);
+void fractal_dragon_cor_baixo_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal, rgb cor);
 void fractal_levy_dragon_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
 
 // Fractais sem nome
