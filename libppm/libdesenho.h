@@ -60,6 +60,7 @@ void fractal_arvore_binaria_desenha(PPM* imagem, Ponto ponto, int tamanho);
 void fractal_arvore_ternaria_desenha(PPM* imagem, Ponto ponto, int tamanho);
 void fractal_circulo_recursivo_desenha(PPM* imagem, Ponto ponto, int raio);
 void fractal_estrela_recursiva_desenha(PPM* imagem, Ponto ponto, int raio);
+void fractal_estrela_recursiva_cor_desenha(PPM* imagem, Ponto ponto, int raio, rgb cor);
 void fractal_cantor_desenha(PPM* imagem, Ponto ponto, int tamanho);
 void fractal_koch_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);
 void fractal_koch_2_desenha(PPM* imagem, Ponto pontoInicial, Ponto pontoFinal);

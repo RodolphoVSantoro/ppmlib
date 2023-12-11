@@ -7,8 +7,11 @@
 
 int main() {
     srand(time(NULL));
-    Dimensao2D dimensoes = Dimensao2D_cria_estatico(1000, 1000);
+    Dimensao2D dimensoes = Dimensao2D_cria_estatico(2000, 2000);
     PPM* img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
+    Ponto centro = Ponto_cria_estatico(1000, 1000);
+    rgb cor = cor_aleatoria();
+    fractal_estrela_recursiva_cor_desenha(img, centro, 850, cor);
 
     Ponto ponto_i = Ponto_cria_estatico(500, 500);
     Ponto ponto_f = Ponto_cria_estatico(900, 900);
@@ -20,7 +23,7 @@ int main() {
         ponto_i.y += i * 30;
     }
 
-    PPM_grava("imgs/teste.ppm", img);
+    PPM_grava("imgs/dragon.ppm", img);
     PPM_libera(img);
     return 0;
 }

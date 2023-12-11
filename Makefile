@@ -12,7 +12,6 @@ LIB=libppm
 default:
 	@echo "Makefile for libppm"
 	@echo "Run examples:"
-	@echo "make fractal_dragon"
 	@echo "make fractal_dragon_cor_random"
 	@echo "make fractal_dragon_cor_random_gaussian_blur"
 	@echo "make losango"

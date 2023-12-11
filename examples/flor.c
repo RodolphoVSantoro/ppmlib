@@ -28,7 +28,7 @@ int main() {
 
     circulo_cor_preenchido_desenha(img, ponto_inicial, 75, _cor_amarelo);
 
-    PPM_grava("imgs/girando.ppm", img);
+    PPM_grava("imgs/flor.ppm", img);
     PPM_libera(img);
     return 0;
 }

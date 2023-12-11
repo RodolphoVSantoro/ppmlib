@@ -1,7 +1,7 @@
 #ifndef _PPM_LIB_
 #define _PPM_LIB_
 
-#include "types.h"
+#include <types.h>
 
 #define _cor_branco rgb_cria(255, 255, 255)
 #define _cor_preto rgb_cria(0, 0, 0)

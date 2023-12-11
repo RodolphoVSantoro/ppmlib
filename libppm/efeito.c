@@ -100,24 +100,38 @@ static rgb efeito_blur_pixel(PPM* imagem, int i, int j, int tamanho_kernel, int*
     float total_green = 0.0;
     float total_blue = 0.0;
     int n = 0;
+
     for (int a = -tamanho_kernel / 2; a < tamanho_kernel / 2; a++) {
         for (int b = -tamanho_kernel / 2; b < tamanho_kernel / 2; b++) {
-            bool contido_esquerda = i + a >= 0;
-            bool contido_direita = i + a < imagem->cabecalho->tamanho->altura;
             bool contido_cima = j + b >= 0;
             bool contido_baixo = j + b < imagem->cabecalho->tamanho->largura;
+
+            bool contido_esquerda = i + a >= 0;
+            bool contido_direita = i + a < imagem->cabecalho->tamanho->altura;
+
             bool ponto_a_b_contido_na_imagem = contido_esquerda && contido_direita && contido_cima && contido_baixo;
+
             if (ponto_a_b_contido_na_imagem) {
-                n += blur_kernel[a + (tamanho_kernel / 2)][b + (tamanho_kernel / 2)];
-                total_red += imagem->pixel[i + a][j + b].red * blur_kernel[a + (tamanho_kernel / 2)][b + (tamanho_kernel / 2)];
-                total_green += imagem->pixel[i + a][j + b].green * blur_kernel[a + (tamanho_kernel / 2)][b + (tamanho_kernel / 2)];
-                total_blue += imagem->pixel[i + a][j + b].blue * blur_kernel[a + (tamanho_kernel / 2)][b + (tamanho_kernel / 2)];
+                int raio_kernel = tamanho_kernel / 2;
+                int kernel_ponto = blur_kernel[a + raio_kernel][b + raio_kernel];
+                n += kernel_ponto;
+
+                rgb cor = imagem->pixel[i + a][j + b];
+
+                int red = cor.red;
+                int green = cor.green;
+                int blue = cor.blue;
+
+                total_red += red * kernel_ponto;
+                total_green += green * kernel_ponto;
+                total_blue += blue * kernel_ponto;
             }
         }
     }
     int media_red = (int)(total_red / n);
     int media_green = (int)(total_green / n);
     int media_blue = (int)(total_blue / n);
+
     return rgb_cria(media_red, media_green, media_blue);
 }
 
@@ -126,7 +140,8 @@ PPM* efeito_cria_imagem_blur(PPM* imagem, int** blur_kernel, int tamanho_kernel)
 
     for (int i = 0; i < imagem_com_blur->cabecalho->tamanho->altura; i++) {
         for (int j = 0; j < imagem_com_blur->cabecalho->tamanho->largura; j++) {
-            imagem_com_blur->pixel[i][j] = efeito_blur_pixel(imagem, i, j, tamanho_kernel, blur_kernel);
+            rgb cor_com_blur = efeito_blur_pixel(imagem, i, j, tamanho_kernel, blur_kernel);
+            imagem_com_blur->pixel[i][j] = cor_com_blur;
         }
     }
     return imagem_com_blur;

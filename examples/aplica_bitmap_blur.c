@@ -7,13 +7,13 @@
 #include "../libppm/libppm.h"
 
 int main() {
-    PPM* img = PPM_leitura("imgs/robot.ppm");
+    PPM* img = PPM_leitura("imgs/blue_waves.ppm");
 
     efeito_aplica_negativo(&img);
     efeito_aplica_bitmap(&img);
     efeito_aplica_blur_gaussiano(&img, 10);
 
-    PPM_grava("imgs/teste.ppm", img);
+    PPM_grava("imgs/bitmap_blur.ppm", img);
     PPM_libera(img);
     return 0;
 }

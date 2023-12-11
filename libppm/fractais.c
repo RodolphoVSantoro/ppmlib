@@ -83,6 +83,16 @@ void fractal_estrela_recursiva_desenha(PPM* imagem, Ponto ponto, int raio) {
     }
 }
 
+void fractal_estrela_recursiva_cor_desenha(PPM* imagem, Ponto ponto, int raio, rgb cor) {
+    elipse_cor_desenha(imagem, ponto, raio, 16 * raio / 9, cor);
+    if (raio > 6) {
+        fractal_estrela_recursiva_cor_desenha(imagem, Ponto_cria_estatico(ponto.x + raio, ponto.y), raio / 2, cor);
+        fractal_estrela_recursiva_cor_desenha(imagem, Ponto_cria_estatico(ponto.x - raio, ponto.y), raio / 2, cor);
+        fractal_estrela_recursiva_cor_desenha(imagem, Ponto_cria_estatico(ponto.x, ponto.y + raio), raio / 2, cor);
+        fractal_estrela_recursiva_cor_desenha(imagem, Ponto_cria_estatico(ponto.x, ponto.y - raio), raio / 2, cor);
+    }
+}
+
 void fractal_cantor_desenha(PPM* imagem, Ponto ponto, int tamanho) {
     linha_desenha(imagem, ponto, Ponto_cria_estatico(ponto.x, ponto.y + tamanho));
     if (tamanho > 9) {

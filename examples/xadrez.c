@@ -1,5 +1,5 @@
-#include "libdesenho.h"
-#include "libppm.h"
+#include <libdesenho.h>
+#include <libppm.h>
 #define TAMANHO_CASA 100
 
 int main() {
