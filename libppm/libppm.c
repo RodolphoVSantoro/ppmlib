@@ -218,11 +218,10 @@ PPM *PPM_copia(PPM *imagem_original) {
     PPM *imagem_nova = PPM_temporaria_cria(imagem_original);
 
     for (int i = 0; i < imagem_nova->cabecalho->tamanho->altura; i++) {
-        memccpy(
+        memcpy(
             imagem_nova->pixel[i],
             imagem_original->pixel[i],
-            imagem_nova->cabecalho->tamanho->largura,
-            sizeof(**imagem_nova->pixel));
+            imagem_nova->cabecalho->tamanho->largura * sizeof(**imagem_nova->pixel));
     }
 
     return imagem_nova;

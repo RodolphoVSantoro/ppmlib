@@ -1,7 +1,7 @@
 # Compiler
 CC=gcc
 # Flags
-CFLAGS=-Wall -Wextra -Werror -pedantic -ansi -lm -std=c2x
+CFLAGS=-Wall -Wextra -Werror -pedantic -ansi -lm -std=c99
 # include folder
 INCLUDE=-Ilibppm
 #output folder
