@@ -3,9 +3,10 @@
 #include "../libppm/libdesenho.h"
 #include "../libppm/libppm.h"
 
-int main() {
+int main()
+{
     Dimensao2D dimensoes = Dimensao2D_cria_estatico(1080, 1920);
-    PPM* img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
+    PPM *img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
 
     Ponto ponto_inicial = Ponto_cria_estatico(500, 1000);
     Ponto ponto_meio_baixo = Ponto_cria_estatico(400, 900);
@@ -15,7 +16,8 @@ int main() {
     double rotacao = 360;
     int iteracoes = 8;
 
-    for (int i = 0; i < iteracoes; i++) {
+    for (int i = 0; i < iteracoes; i++)
+    {
         double angulo = rotacao / iteracoes;
         ponto_final = Ponto_vira(ponto_inicial, ponto_final, angulo);
 

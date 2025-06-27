@@ -5,10 +5,11 @@
 #include "../libppm/libdesenho.h"
 #include "../libppm/libppm.h"
 
-int main() {
+int main()
+{
     srand(time(NULL));
     Dimensao2D dimensoes = Dimensao2D_cria_estatico(2000, 2000);
-    PPM* img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
+    PPM *img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
     Ponto centro = Ponto_cria_estatico(1000, 1000);
     rgb cor = cor_aleatoria();
     fractal_estrela_recursiva_cor_desenha(img, centro, 850, cor);
@@ -16,7 +17,8 @@ int main() {
     Ponto ponto_i = Ponto_cria_estatico(500, 500);
     Ponto ponto_f = Ponto_cria_estatico(900, 900);
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         rgb cor = cor_aleatoria();
         fractal_dragon_cor_desenha(img, ponto_i, ponto_f, cor);
         ponto_i.x -= i * 30;

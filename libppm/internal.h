@@ -22,45 +22,45 @@
 #include "types.h"
 
 // Arquivos
-FILE* fopen_or_crash(char fname[], char modo[]);
+FILE *fopen_or_crash(char fname[], char modo[]);
 
 // Matematica
 int int_quadrado(int numero);
 int int_potencia(int base, int expoente);
-void string_copia(char* destino, char* origem);
-int string_compara(char* string1, char* string2);
+void string_copia(char *destino, char *origem);
+int string_compara(char *string1, char *string2);
 int float_aproximacao(float val);
 int int_valor_absoluto(int n);
-void int_troca(int* a, int* b);
+void int_troca(int *a, int *b);
 float graus_seno(float graus);
 float graus_coseno(float graus);
 
 // Árvores Binarias
-ArvoreBinaria* ArvoreBinaria_cria();
-ArvoreBinaria* ArvoreBinaria_folha_cria(int x);
-ArvoreBinaria* ArvoreBinaria_insere_sem_repeticao(ArvoreBinaria* raiz, int x);
-ArvoreBinaria* ArvoreBinaria_libera(ArvoreBinaria* raiz);
-void ArvoreBinaria_imprime_pre_ordem(ArvoreBinaria* raiz);
-int ArvoreBinaria_quantidade_nodes(ArvoreBinaria* raiz);
+ArvoreBinaria *ArvoreBinaria_cria();
+ArvoreBinaria *ArvoreBinaria_folha_cria(int x);
+ArvoreBinaria *ArvoreBinaria_insere_sem_repeticao(ArvoreBinaria *raiz, int x);
+ArvoreBinaria *ArvoreBinaria_libera(ArvoreBinaria *raiz);
+void ArvoreBinaria_imprime_pre_ordem(ArvoreBinaria *raiz);
+int ArvoreBinaria_quantidade_nodes(ArvoreBinaria *raiz);
 
 // Listas
-void NoDuploPonto_libera(NoDuploPonto* lista);
+void NoDuploPonto_libera(NoDuploPonto *lista);
 // Lista de Cor
-ListaCor* ListaCor_cria();
-void ListaCor_insere_inicio(ListaCor* lista, rgb cor);
-void ListaCor_insere_fim(ListaCor* lista, rgb cor);
-void ListaCor_insere_sem_repeticao(ListaCor* lista, rgb cor);
-void ListaCor_remove_inicio(ListaCor* lista);
-void ListaCor_remove_fim(ListaCor* lista);
-int ListaCor_busca_indice(ListaCor* lista, rgb cor);
-void ListaCor_libera(ListaCor* lista);
+ListaCor *ListaCor_cria();
+void ListaCor_insere_inicio(ListaCor *lista, rgb cor);
+void ListaCor_insere_fim(ListaCor *lista, rgb cor);
+void ListaCor_insere_sem_repeticao(ListaCor *lista, rgb cor);
+void ListaCor_remove_inicio(ListaCor *lista);
+void ListaCor_remove_fim(ListaCor *lista);
+int ListaCor_busca_indice(ListaCor *lista, rgb cor);
+void ListaCor_libera(ListaCor *lista);
 
-Linha* Linha_aloca();                                                /*aloca lista de pontos vazia*/
-bool Linha_vazia(Linha* linha);                                      /*verifica se a lista está vazia*/
-void Linha_adiciona(Linha* linha, Ponto ponto);                      /*insere Ponto na lista*/
-void Linha_cria(Linha* linha, Ponto pontoInicial, Ponto pontoFinal); /*insere pontos pertencentes a linha de ponto inicial até ponto final*/
-void Linha_remove(Linha* linha, Ponto ponto);                        /*remove um Ponto da lista*/
-void Linha_libera(Linha* linha);                                     /*remove todos os pontos*/
+Linha *Linha_aloca();                                                /*aloca lista de pontos vazia*/
+bool Linha_vazia(Linha *linha);                                      /*verifica se a lista está vazia*/
+void Linha_adiciona(Linha *linha, Ponto ponto);                      /*insere Ponto na lista*/
+void Linha_cria(Linha *linha, Ponto pontoInicial, Ponto pontoFinal); /*insere pontos pertencentes a linha de ponto inicial até ponto final*/
+void Linha_remove(Linha *linha, Ponto ponto);                        /*remove um Ponto da lista*/
+void Linha_libera(Linha *linha);                                     /*remove todos os pontos*/
 
 // minusculas
 // preto
@@ -90,30 +90,30 @@ void Linha_libera(Linha* linha);                                     /*remove to
 #define fonte_escreve_z(imagem, origem, tamanho_fonte) fonte_escreve_z_cor(imagem, origem, tamanho_fonte, _cor_preto)
 
 // cor
-void fonte_escreve_a_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_b_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_c_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_d_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_e_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_f_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_g_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_h_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_i_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_j_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_k_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_l_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_m_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_n_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_o_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_p_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_q_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_r_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_s_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_t_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_u_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_v_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_x_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_z_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_a_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_b_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_c_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_d_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_e_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_f_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_g_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_h_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_i_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_j_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_k_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_l_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_m_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_n_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_o_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_p_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_q_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_r_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_s_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_t_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_u_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_v_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_x_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_z_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
 
 // maiusculas
 // preto
@@ -121,8 +121,8 @@ void fonte_escreve_z_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
 #define fonte_escreve_V(imagem, origem, tamanho_fonte) fonte_escreve_V_cor(imagem, origem, tamanho_fonte, _cor_preto)
 
 // cor
-void fonte_escreve_S_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
-void fonte_escreve_V_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_S_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_V_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
 
 // Simbolos
 
@@ -130,6 +130,6 @@ void fonte_escreve_V_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
 #define fonte_escreve_hifen(imagem, origem, tamanho_fonte) fonte_escreve_hifen_cor(imagem, origem, tamanho_fonte, _cor_preto)
 
 // cor
-void fonte_escreve_hifen_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor);
+void fonte_escreve_hifen_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor);
 
 #endif

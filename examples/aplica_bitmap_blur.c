@@ -6,8 +6,9 @@
 #include "../libppm/libefeito.h"
 #include "../libppm/libppm.h"
 
-int main() {
-    PPM* img = PPM_leitura("imgs/blue_waves.ppm");
+int main()
+{
+    PPM *img = PPM_leitura("imgs/blue_waves.ppm");
 
     efeito_aplica_negativo(&img);
     efeito_aplica_bitmap(&img);

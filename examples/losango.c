@@ -3,9 +3,10 @@
 #include "../libppm/libdesenho.h"
 #include "../libppm/libppm.h"
 
-int main() {
+int main()
+{
     Dimensao2D dimensoes = Dimensao2D_cria_estatico(1000, 1200);
-    PPM* img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
+    PPM *img = PPM_cria_com_dimensoes(dimensoes, 255, _cor_branco);
 
     Ponto ponto = Ponto_cria_estatico(500, 600);
 

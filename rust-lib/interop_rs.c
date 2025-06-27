@@ -4,24 +4,27 @@
 typedef unsigned char u8;
 typedef unsigned int u32;
 
-struct RGB {
+struct RGB
+{
     u8 red;
     u8 green;
     u8 blue;
 };
 typedef struct RGB rgb;
 
-struct IMAGE {
-    rgb** pixels;
+struct IMAGE
+{
+    rgb **pixels;
     u32 width;
     u32 height;
 };
 typedef struct IMAGE Image;
 
 void drop_image(Image image);
-Image load_image(const char* path);
+Image load_image(const char *path);
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     Image image = load_image("./red.png");
 
     printf("%d", image.pixels[0][0].red);

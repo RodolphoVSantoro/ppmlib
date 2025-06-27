@@ -3,7 +3,8 @@
 #include "../libppm/libppm.h"
 #include "../libppm/libvetorial.h"
 
-int main() {
+int main()
+{
     // int altura = 480, largura = 740;
     // Dimensao2D tamanho = Dimensao2D_cria_estatico(altura, largura);
     //  PPM *imagem = PPM_cria_com_dimensoes(tamanho, 255, _cor_branco);

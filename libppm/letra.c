@@ -5,105 +5,112 @@
 #include "libppm.h"
 #include "libvetorial.h"
 
-void fonte_escreve_string_cor(PPM* imagem, char string[], Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_string_cor(PPM *imagem, char string[], Ponto origem, int tamanho_fonte, rgb cor)
+{
     Ponto cursor = origem;
-    for (int i = 0; string[i] != 0; i++) {
+    for (int i = 0; string[i] != 0; i++)
+    {
         fonte_escreve_char_cor(imagem, string[i], cursor, tamanho_fonte, cor);
 
-        if (cursor.y + tamanho_fonte * 10 > imagem->cabecalho->tamanho->largura) {
-            if (string[i + 1] != 0 && string[i + 1] != ' ') {
+        if (cursor.y + tamanho_fonte * 10 > imagem->cabecalho->tamanho->largura)
+        {
+            if (string[i + 1] != 0 && string[i + 1] != ' ')
+            {
                 cursor.y += tamanho_fonte * 4;
                 fonte_escreve_hifen_cor(imagem, cursor, tamanho_fonte, cor);
             }
             cursor.y = origem.y;
             cursor.x += tamanho_fonte * 8;
-
-        } else {
+        }
+        else
+        {
             cursor.y += tamanho_fonte * 4;
         }
     }
 }
 
-void fonte_escreve_char_cor(PPM* imagem, char c, Ponto origem, int tamanho_fonte, rgb cor) {
-    switch (c) {
-        case 'a':
-            fonte_escreve_a_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'b':
-            fonte_escreve_b_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'c':
-            fonte_escreve_c_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'd':
-            fonte_escreve_d_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'e':
-            fonte_escreve_e_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'f':
-            fonte_escreve_f_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'g':
-            fonte_escreve_g_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'h':
-            fonte_escreve_h_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'i':
-            fonte_escreve_i_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'j':
-            fonte_escreve_j_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'k':
-            fonte_escreve_k_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'l':
-            fonte_escreve_l_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'm':
-            fonte_escreve_m_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'n':
-            fonte_escreve_n_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'o':
-            fonte_escreve_o_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'p':
-            fonte_escreve_p_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'q':
-            fonte_escreve_q_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'r':
-            fonte_escreve_r_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 's':
-            fonte_escreve_s_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 't':
-            fonte_escreve_t_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'u':
-            fonte_escreve_u_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'v':
-            fonte_escreve_v_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'x':
-            fonte_escreve_x_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'z':
-            fonte_escreve_z_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'S':
-            fonte_escreve_S_cor(imagem, origem, tamanho_fonte, cor);
-            break;
-        case 'V':
-            fonte_escreve_V_cor(imagem, origem, tamanho_fonte, cor);
-            break;
+void fonte_escreve_char_cor(PPM *imagem, char c, Ponto origem, int tamanho_fonte, rgb cor)
+{
+    switch (c)
+    {
+    case 'a':
+        fonte_escreve_a_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'b':
+        fonte_escreve_b_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'c':
+        fonte_escreve_c_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'd':
+        fonte_escreve_d_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'e':
+        fonte_escreve_e_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'f':
+        fonte_escreve_f_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'g':
+        fonte_escreve_g_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'h':
+        fonte_escreve_h_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'i':
+        fonte_escreve_i_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'j':
+        fonte_escreve_j_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'k':
+        fonte_escreve_k_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'l':
+        fonte_escreve_l_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'm':
+        fonte_escreve_m_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'n':
+        fonte_escreve_n_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'o':
+        fonte_escreve_o_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'p':
+        fonte_escreve_p_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'q':
+        fonte_escreve_q_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'r':
+        fonte_escreve_r_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 's':
+        fonte_escreve_s_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 't':
+        fonte_escreve_t_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'u':
+        fonte_escreve_u_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'v':
+        fonte_escreve_v_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'x':
+        fonte_escreve_x_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'z':
+        fonte_escreve_z_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'S':
+        fonte_escreve_S_cor(imagem, origem, tamanho_fonte, cor);
+        break;
+    case 'V':
+        fonte_escreve_V_cor(imagem, origem, tamanho_fonte, cor);
+        break;
     }
 }
 
@@ -111,7 +118,8 @@ void fonte_escreve_char_cor(PPM* imagem, char c, Ponto origem, int tamanho_fonte
 
 // cor
 
-void fonte_escreve_a_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_a_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = 5 * tamanho_fonte;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x, origem.y + 2 * escala / 5),
@@ -126,7 +134,8 @@ void fonte_escreve_a_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[3], ponto[4], ponto[5], cor);
 }
 
-void fonte_escreve_b_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_b_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = 4 * tamanho_fonte;
     origem.y += escala / 5;
     Ponto ponto[] = {
@@ -150,7 +159,8 @@ void fonte_escreve_b_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[9], ponto[8], ponto[10], cor);
 }
 
-void fonte_escreve_c_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_c_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y - escala / 20),
@@ -168,7 +178,8 @@ void fonte_escreve_c_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-void fonte_escreve_d_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_d_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     origem.y -= escala / 5;
@@ -192,7 +203,8 @@ void fonte_escreve_d_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[2], ponto[9], ponto[10], cor);
 }
 
-void fonte_escreve_e_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_e_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + 7 * escala / 10, origem.y),
@@ -210,7 +222,8 @@ void fonte_escreve_e_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[2], ponto[6], ponto[7], cor);
 }
 
-void fonte_escreve_f_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_f_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     Ponto ponto[] = {
@@ -234,7 +247,8 @@ void fonte_escreve_f_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[2], ponto[9], ponto[10], cor);
 }
 
-void fonte_escreve_g_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_g_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     Ponto ponto[] = {
@@ -253,7 +267,8 @@ void fonte_escreve_g_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-void fonte_escreve_h_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_h_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     Ponto ponto[] = {
@@ -274,7 +289,8 @@ void fonte_escreve_h_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[7], ponto[8], ponto[9], cor);
 }
 
-void fonte_escreve_i_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_i_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= 3 * escala / 10;
     Ponto ponto[] = {
@@ -290,7 +306,8 @@ void fonte_escreve_i_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     circulo_cor_preenchido_desenha(imagem, ponto[5], tamanho_fonte / 100 + 1, cor);
 }
 
-void fonte_escreve_j_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_j_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 10;
     Ponto ponto[] = {
@@ -313,7 +330,8 @@ void fonte_escreve_j_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     circulo_cor_preenchido_desenha(imagem, ponto[9], tamanho_fonte / 100 + 1, cor);
 }
 
-void fonte_escreve_k_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_k_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 4;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + escala, origem.y),
@@ -330,7 +348,8 @@ void fonte_escreve_k_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, l, ponto[5], ponto[6], cor);
 }
 
-void fonte_escreve_l_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_l_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 20;
     Ponto ponto[] = {
@@ -349,7 +368,8 @@ void fonte_escreve_l_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[2], ponto[6], ponto[7], cor);
 }
 
-void fonte_escreve_m_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_m_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= 3 * escala / 10;
     Ponto ponto[] = {
@@ -366,7 +386,8 @@ void fonte_escreve_m_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[4], ponto[5], ponto[6], cor);
 }
 
-void fonte_escreve_n_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_n_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= 3 * escala / 10;
     Ponto ponto[] = {
@@ -380,7 +401,8 @@ void fonte_escreve_n_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[2], ponto[3], ponto[4], cor);
 }
 
-void fonte_escreve_o_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_o_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 4;
     origem.x += escala / 10;
     origem.y += escala / 10;
@@ -400,7 +422,8 @@ void fonte_escreve_o_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-void fonte_escreve_p_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_p_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + 13 * escala / 20, origem.y + 2 * escala / 13),
@@ -420,7 +443,8 @@ void fonte_escreve_p_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[6], ponto[7], ponto[8], cor);
 }
 
-void fonte_escreve_q_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_q_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= 3 * escala / 10;
     Ponto ponto[] = {
@@ -440,7 +464,8 @@ void fonte_escreve_q_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[2], ponto[7], ponto[8], cor);
 }
 
-void fonte_escreve_r_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_r_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + escala, origem.y),
@@ -456,7 +481,8 @@ void fonte_escreve_r_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[4], ponto[5], ponto[6], cor);
 }
 
-void fonte_escreve_s_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_s_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala / 5;
     Ponto ponto[] = {
@@ -470,7 +496,8 @@ void fonte_escreve_s_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[2], ponto[3], ponto[4], cor);
 }
 
-void fonte_escreve_t_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_t_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + escala, origem.y),
@@ -487,7 +514,8 @@ void fonte_escreve_t_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[5], ponto[6], ponto[7], cor);
 }
 
-void fonte_escreve_u_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_u_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + escala, origem.y),
@@ -503,7 +531,8 @@ void fonte_escreve_u_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[4], ponto[5], ponto[6], cor);
 }
 
-void fonte_escreve_v_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_v_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x += escala / 10;
     Ponto ponto[] = {
@@ -522,7 +551,8 @@ void fonte_escreve_v_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     linha_cor_desenha(imagem, ponto[6], ponto[7], cor);
 }
 
-void fonte_escreve_x_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_x_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + 3 * escala / 5, origem.y),
@@ -544,7 +574,8 @@ void fonte_escreve_x_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[4], ponto[9], ponto[10], cor);
 }
 
-void fonte_escreve_z_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_z_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + 2 * escala / 5, origem.y + 2 * escala / 13),
@@ -567,7 +598,8 @@ void fonte_escreve_z_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 
 // cor
 
-void fonte_escreve_S_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_S_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala;
     Ponto ponto[] = {
@@ -587,7 +619,8 @@ void fonte_escreve_S_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
     curva_cor_desenha(imagem, ponto[6], ponto[7], ponto[8], cor);
 }
 
-void fonte_escreve_V_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_V_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     origem.x -= escala;
     Ponto ponto[] = {
@@ -605,7 +638,8 @@ void fonte_escreve_V_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) 
 
 // cor
 
-void fonte_escreve_hifen_cor(PPM* imagem, Ponto origem, int tamanho_fonte, rgb cor) {
+void fonte_escreve_hifen_cor(PPM *imagem, Ponto origem, int tamanho_fonte, rgb cor)
+{
     int escala = tamanho_fonte * 5;
     Ponto ponto[] = {
         Ponto_cria_estatico(origem.x + 4 * escala / 10, origem.y + escala / 10),
